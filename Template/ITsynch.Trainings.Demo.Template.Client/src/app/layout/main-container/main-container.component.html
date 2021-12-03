@@ -1,0 +1,8 @@
+<div class="itsynch-content-container" fxLayout="column">
+  <its-navbar fxFlex="64px" (clicked)="onNavbarButtonClicked()" [leftItem]="leftToolbarItemTemplate">
+  </its-navbar>
+  <its-sidebar class="itsynch-sidebar" fxFlex [(opened)]="sidebarState">
+    <ng-content></ng-content>
+  </its-sidebar>
+</div>
+

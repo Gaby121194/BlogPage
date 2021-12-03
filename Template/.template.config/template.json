@@ -1,0 +1,14 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "ITsynch",
+  "classifications": [ "Web" ], 
+  "name": "ITsynch Trainings Demo template",
+  "identity": "ITsynch.Trainings.Demo.Template",         
+  "shortName": "its-trainings-demo",
+  "tags": {
+    "language": "C#",
+    "type":"project"
+  },
+  "sourceName": "ITsynch.Trainings.Demo.Template",
+  "preferNameDirectory": true
+}
