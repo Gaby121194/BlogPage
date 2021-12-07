@@ -1,0 +1,18 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row fxLayout="row">
+
+    <button mat-icon-button (click)="onButtonClick()">
+      <mat-icon class="mat-24">menu</mat-icon>
+    </button>
+
+    <span fxFlex>ITsynch Trainings Demo</span>
+
+    <ng-container *ngIf="leftItem" [ngTemplateOutlet]="leftItem">
+    </ng-container>
+
+    <button mat-icon-button routerLink="home">
+      <mat-icon class="mat-24">home</mat-icon>
+    </button>
+
+  </mat-toolbar-row>
+</mat-toolbar>

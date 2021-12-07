@@ -15,7 +15,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "ITsynch.Trainings.Demo.Template": {
+    "ITsynch.Trainings.LBGC.Demo": {
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {

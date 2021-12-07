@@ -1,0 +1,13 @@
+<span *ngIf="!(currentUser$ | async); else usersLoaded">
+  Loading users...
+</span>
+
+<ng-template #usersLoaded>
+  <button mat-button [matMenuTriggerFor]="menu">User: {{ (currentUser$ | async).username }}</button>
+
+  <mat-menu #menu="matMenu">
+    <button *ngFor="let user of users$ | async" mat-menu-item (click)="onUserClicked(user)">
+      {{ user.username }}
+    </button>
+  </mat-menu>
+</ng-template>

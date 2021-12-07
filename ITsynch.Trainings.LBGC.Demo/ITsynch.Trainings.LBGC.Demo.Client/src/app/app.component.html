@@ -1,0 +1,11 @@
+<div class="container">
+  <its-main-container [leftToolbarItemTemplate]="usersSelectorTemplate">
+    <!-- <router-outlet></router-outlet> -->
+    <its-users-home></its-users-home>
+  </its-main-container>
+</div>
+
+
+<ng-template #usersSelectorTemplate>
+  <its-users-selector></its-users-selector>
+</ng-template>

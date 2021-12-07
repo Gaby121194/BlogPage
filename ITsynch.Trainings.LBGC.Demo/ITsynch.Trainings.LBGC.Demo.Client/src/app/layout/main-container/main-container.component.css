@@ -1,0 +1,9 @@
+.itsynch-sidebar {
+  position: relative;
+  overflow-y: auto;
+}
+
+.itsynch-content-container {
+  height: 100vh;
+  width: 100%;
+}

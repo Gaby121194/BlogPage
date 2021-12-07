@@ -1,0 +1,26 @@
+<mat-sidenav-container fxFlexFill class="mat-typography">
+  <mat-sidenav [opened]="opened" fxLayout="column" color="primary" mode="side">
+    <mat-nav-list>
+
+      <ng-container *ngIf="sidebarItems; else noSidebarItems">
+        <ng-container *ngFor="let item of sidebarItems">
+          <a (click)="toggle()" mat-list-item [routerLinkActive]="item.routerLinkActive" [routerLink]="item.routerPath">
+            <mat-icon class="sidebar--icon" matListIcon> {{ item.iconName }} </mat-icon>
+            {{ item.title }}
+          </a>
+        </ng-container>
+      </ng-container>
+
+      <ng-template #noSidebarItems>
+        NO SIDEBAR ITEMS PROVIDED, PLEASE FIX ME :)
+      </ng-template>
+
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content fxFlex>
+    <div fxFlexFill>
+      <ng-content></ng-content>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
