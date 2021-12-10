@@ -34,7 +34,6 @@ export class CreateArticleComponent implements OnInit {
 
    submitArticle()
   {
-    console.log(this.currentUser.username)
     this.article = this.articleForm.value;
     this.article.username = this.currentUser.username;
     this.store.dispatch(createArticle({ article: this.article }));

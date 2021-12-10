@@ -10,7 +10,8 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
 import { environment } from '../environments/environment';
-import { ITSYNCH_TRAININGS_DEMO_BASE_API_URL } from './app.tokens';
+import { sidebarItems } from './tokens/sidebaritems'
+import { ITSYNCH_TRAININGS_DEMO_BASE_API_URL, ITSYNCH_TRAININGS_DEMO_SIDEBAR_ITEMS } from './app.tokens';
 import { UsersModule } from './users/users.module';
 import { appRoutes } from './app.routes';
 import { ArticlesModule } from './articles/articles.module';
@@ -30,7 +31,9 @@ import { ArticlesModule } from './articles/articles.module';
     UsersModule,
     ArticlesModule
   ],
-  providers: [{ provide: ITSYNCH_TRAININGS_DEMO_BASE_API_URL, useValue: environment.baseApiUrl }],
+  providers: [{ provide: ITSYNCH_TRAININGS_DEMO_BASE_API_URL, useValue: environment.baseApiUrl },
+              { provide: ITSYNCH_TRAININGS_DEMO_SIDEBAR_ITEMS, useValue: sidebarItems }
+            ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

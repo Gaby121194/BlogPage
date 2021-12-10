@@ -5,12 +5,16 @@ import { UsersHomeComponent } from './users/users-home/users-home.component';
 
 export const appRoutes: Routes = [
   {
-    path: 'articles',
+    path: 'articles/create',
     component: CreateArticleComponent,
   },
   {
+    path: 'users',
+    component: UsersHomeComponent
+  },
+  {
     path: '',
-    redirectTo: 'articles',
+    redirectTo: 'articles/create',
     pathMatch: 'full',
   },
   {
