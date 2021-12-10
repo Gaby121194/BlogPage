@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using ITsynch.Trainings.LBGC.Demo.DataTransfer;
+using ITsynch.Trainings.LBGC.Demo.Models;
 using ITsynch.Trainings.LBGC.Demo.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -32,6 +33,14 @@ namespace ITsynch.Trainings.LBGC.Demo.Controllers
         {
             var users = await this.usersService.GetAllUsersAsync();
             return mapper.Map<IEnumerable<UserDto>>(users);
+        }
+
+        [HttpPost]
+
+        public async Task<UserDto> PostUserAsync([FromBody] User user)
+        {
+            var _user = await this.usersService.CreateUser(user);
+            return mapper.Map<UserDto>(user);
         }
 
 

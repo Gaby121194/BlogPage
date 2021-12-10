@@ -1,0 +1,15 @@
+<form class="example-form" [formGroup]="articleForm" (ngSubmit)="submitArticle()" >
+
+    <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Title blog</mat-label>
+        <input matInput placeholder="Input a new blog" formControlName="title">
+      </mat-form-field>
+  
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Content Blog</mat-label>
+          <textarea matInput placeholder="Input a new blog" formControlName="content"></textarea>
+        </mat-form-field>
+    
+    
+    <button type="submit" mat-raised-button color="primary">Cargar</button>
+</form>

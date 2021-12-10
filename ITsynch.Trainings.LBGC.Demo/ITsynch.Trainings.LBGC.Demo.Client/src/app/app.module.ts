@@ -13,6 +13,7 @@ import { environment } from '../environments/environment';
 import { ITSYNCH_TRAININGS_DEMO_BASE_API_URL } from './app.tokens';
 import { UsersModule } from './users/users.module';
 import { appRoutes } from './app.routes';
+import { ArticlesModule } from './articles/articles.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -27,6 +28,7 @@ import { appRoutes } from './app.routes';
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     LayoutModule,
     UsersModule,
+    ArticlesModule
   ],
   providers: [{ provide: ITSYNCH_TRAININGS_DEMO_BASE_API_URL, useValue: environment.baseApiUrl }],
   bootstrap: [AppComponent],

@@ -232,13 +232,6 @@
   dependencies:
     tslib "^2.0.0"
 
-"@angular/core@^10.0.0":
-  version "10.2.5"
-  resolved "https://registry.yarnpkg.com/@angular/core/-/core-10.2.5.tgz#2050b0dbb180aa98c2ec46bba6d4827565ba2a2d"
-  integrity sha512-krhOKNTj5XE92Rk9ASX5KmgTF72j7qT2PLVxrGEVjuUKjBY2XaK3TV0Kotq9zI3qa9WgeCrP/Njn6jlKQCCAEQ==
-  dependencies:
-    tslib "^2.0.0"
-
 "@angular/flex-layout@^11.0.0-beta.33":
   version "11.0.0-beta.33"
   resolved "https://registry.yarnpkg.com/@angular/flex-layout/-/flex-layout-11.0.0-beta.33.tgz#c2d08f90164701b66a62b8c4365b4e22c1e95789"
@@ -1188,12 +1181,10 @@
   dependencies:
     tslib "^2.0.0"
 
-"@ngrx/schematics@^10.1.2":
-  version "10.1.2"
-  resolved "https://registry.yarnpkg.com/@ngrx/schematics/-/schematics-10.1.2.tgz#21ff7d5c1cbaee1abb75f8561bcedd017c99bc94"
-  integrity sha512-N53YObCnZoBIHWuCiQSfY3r8M/T0lGkzApLoaGTSNUHbyTBYevpjpUpvANE+Pb4F6Jh/7EEZBsmXBYKcPD2BtA==
-  dependencies:
-    "@angular/core" "^10.0.0"
+"@ngrx/schematics@^13.0.2":
+  version "13.0.2"
+  resolved "https://registry.yarnpkg.com/@ngrx/schematics/-/schematics-13.0.2.tgz#1c7cacebfd7708ed9c8d4b0098984f13292a17cc"
+  integrity sha512-84LwEv7MBTX49e1wjuXKgemxfmQUBdvfUKfPq7AmrTW99EtHHAuLYc+pL9XrbgKvkvVyVmDt+g6d3iw/80TZ1w==
 
 "@ngrx/store-devtools@^10.1.2":
   version "10.1.2"

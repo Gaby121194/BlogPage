@@ -16,4 +16,8 @@ export class UsersService {
   public getUsers(): Observable<User[]> {
     return this.httpClient.get<User[]>(`${this.baseApiUrl}/users`);
   }
+
+  public createUser(user: User): Observable<User> {
+    return this.httpClient.post<User>(`${this.baseApiUrl}/users`, user)
+  }
 }
