@@ -23,6 +23,18 @@ export const initialState: ArticleState = {
 export const articlesReducer = createReducer<ArticleState,Action>(
   initialState,
 
+  on(ArticlesActions.loadArticles, (state) => {
+    return {...state, apiState: 'loading'};
+  }),
+
+  on(ArticlesActions.loadArticlesSuccess, (state, { articles }) => {
+    return { ...state, articles: articles, apiState: "idle" };
+  }),
+
+  on(ArticlesActions.loadArticlesFailure, (state, {error}) => {
+    return { ...state, error : error, apiState: "error"}
+  }),
+
   on(ArticlesActions.createArticleSucess, (state, { article }) => {
     return { ...state, articleCreated: article, apiState: "idle" };
   }),

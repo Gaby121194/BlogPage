@@ -13,7 +13,7 @@ import { Article } from '../articles.model';
   styleUrls: ['./create-article.component.css']
 })
 export class CreateArticleComponent implements OnInit {
-  articleForm = this.fb.group({
+  articleForm = this.formBuilder.group({
     title: ["", [Validators.required]],
     content: ["", [Validators.required, Validators.minLength(5)]],
     date: [ new Date() , [Validators.required]]
@@ -22,7 +22,7 @@ export class CreateArticleComponent implements OnInit {
   article : Article;
   currentUser: User;
 
-  constructor(private fb: FormBuilder, 
+  constructor(private formBuilder: FormBuilder, 
             private store: Store) {
       
    }
@@ -35,7 +35,7 @@ export class CreateArticleComponent implements OnInit {
    submitArticle()
   {
     this.article = this.articleForm.value;
-    this.article.username = this.currentUser.username;
+    this.article.userName = this.currentUser.username;
     this.store.dispatch(createArticle({ article: this.article }));
   }
 

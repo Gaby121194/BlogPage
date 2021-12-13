@@ -25,6 +25,17 @@ export class ArticlesEffects {
     );
   });
 
+  loadArticles$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ArticlesActions.loadArticles),
+      switchMap(() =>
+        this.articlesService.getArticles().pipe(
+          map((articles) => ArticlesActions.loadArticlesSuccess({ articles })),
+          catchError((error) => of(ArticlesActions.loadArticlesFailure({ error })))
+        )
+      )
+    );
+  });
 
 
 }
