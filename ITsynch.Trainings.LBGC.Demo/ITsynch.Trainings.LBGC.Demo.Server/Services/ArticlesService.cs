@@ -8,29 +8,29 @@ using System.Threading.Tasks;
 
 namespace ITsynch.Trainings.LBGC.Demo.Services
 {
-    public class UsersService
+    public class ArticlesService
     {
         private readonly TrainingsDemoContext trainingsDemoContext;
 
-        public UsersService(
+        public ArticlesService(
             TrainingsDemoContext trainingsDemoContext)
         {
             this.trainingsDemoContext = trainingsDemoContext
                 ?? throw new ArgumentNullException(nameof(trainingsDemoContext));
         }
 
-        public async Task<IEnumerable<User>> GetAllUsersAsync()
+        public async Task<IEnumerable<Article>> GetAllArticlesAsync()
         {
-            var users = await this.trainingsDemoContext.Users.ToListAsync();
-            return users.AsEnumerable();
+            var articles = await this.trainingsDemoContext.Articles.ToListAsync();
+            return articles.AsEnumerable();
         }
 
-        public async Task<User> CreateUser(User user)
+        public async Task<Article> CreateArticle(Article article)
         {
 
-            var _user = this.trainingsDemoContext.Add<User>(user);
+            var _article = this.trainingsDemoContext.Add<Article>(article);
             var result = await this.trainingsDemoContext.SaveChangesAsync();
-            return user;
+            return article;
         }
     }
 }
