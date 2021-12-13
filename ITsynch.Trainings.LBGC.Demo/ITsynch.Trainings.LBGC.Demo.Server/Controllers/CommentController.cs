@@ -17,7 +17,7 @@ namespace ITsynch.Trainings.LBGC.Demo.Controllers
         private readonly CommentsService commentsService;
         private readonly IMapper mapper;
 
-        public CommentsService(
+        public CommentController(
             CommentsService commentsService,
             IMapper mapper)
         {

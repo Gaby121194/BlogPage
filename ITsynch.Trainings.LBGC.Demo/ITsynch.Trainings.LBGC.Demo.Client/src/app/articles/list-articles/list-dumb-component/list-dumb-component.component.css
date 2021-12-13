@@ -1,0 +1,12 @@
+.example-card{
+    max-width: 500px;
+    margin: 10px;
+}
+.header{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.dumb{
+    margin: 10px;
+}

@@ -15,6 +15,8 @@ namespace ITsynch.Trainings.LBGC.Demo.Persistence
 
         public virtual DbSet<Article> Articles { get; set; }
 
+        public virtual DbSet<Comment> Comments { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

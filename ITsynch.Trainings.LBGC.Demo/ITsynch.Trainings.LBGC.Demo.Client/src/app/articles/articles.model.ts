@@ -1,5 +1,5 @@
 export interface Article {
-    username: string;
+    userName: string;
     date: Date;
     content: string;
     title: string;

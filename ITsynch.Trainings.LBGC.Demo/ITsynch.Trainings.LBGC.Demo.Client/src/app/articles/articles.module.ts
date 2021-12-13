@@ -8,10 +8,17 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { ArticlesEffects } from './+state/articles.effects';
 import * as fromArticles from './+state/articles.reducer';
+import { ListArticlesComponent } from './list-articles/list-articles.component';
+import { MatListModule } from '@angular/material/list';
+import { MatCardModule } from '@angular/material/card';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { ListDumbComponentComponent } from './list-articles/list-dumb-component/list-dumb-component.component';
 
 @NgModule({
   declarations: [
-    CreateArticleComponent
+    CreateArticleComponent,
+    ListArticlesComponent,
+    ListDumbComponentComponent
   ],
   imports: [
     CommonModule,
@@ -19,7 +26,10 @@ import * as fromArticles from './+state/articles.reducer';
     ReactiveFormsModule,
     StoreModule.forFeature(fromArticles.articlesFeatureKey, fromArticles.reducer),
     EffectsModule.forFeature([ArticlesEffects]),
-    MatButtonModule
+    MatButtonModule,
+    MatListModule,
+    MatCardModule,
+    MatAutocompleteModule
   ],
   exports:[
     CreateArticleComponent
