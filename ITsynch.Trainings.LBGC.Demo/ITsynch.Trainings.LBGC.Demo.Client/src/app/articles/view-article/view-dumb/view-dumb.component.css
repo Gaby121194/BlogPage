@@ -1,0 +1,14 @@
+.article-body{
+    margin: 10px 70px;
+}
+
+.subtitle{
+    display: flex;
+    font-style: italic;
+    margin-top: -15px;
+    margin-left: 1px;
+    margin-bottom: 15px;
+}
+    .date{
+        margin-left: 10px;
+    }

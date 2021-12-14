@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
-import { catchError, map, switchMap } from 'rxjs/operators';
+import { catchError, map, switchMap, tap } from 'rxjs/operators';
 import { ArticlesService } from '../articles.service';
 import * as ArticlesActions from './articles.actions'
 
@@ -11,7 +12,7 @@ export class ArticlesEffects {
 
 
 
-  constructor(private actions$: Actions, private articlesService: ArticlesService) {}
+  constructor(private actions$: Actions, private articlesService: ArticlesService, private snackBar: MatSnackBar) {}
 
   createArticle$ = createEffect(() => {
     return this.actions$.pipe(
@@ -36,6 +37,32 @@ export class ArticlesEffects {
       )
     );
   });
+
+  getArticle$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ArticlesActions.getCurrentArticleById),
+      switchMap(({articleId}) =>
+        this.articlesService.getArticleById(articleId).pipe(
+          map((article) => ArticlesActions.getCurrentArticleByIdSuccess({ article })),
+          catchError((error) => of(ArticlesActions.getCurrentArticleByIdFailure({ error })))
+        )
+      )
+    );
+  });
+
+  createArticleSuccess$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(ArticlesActions.createArticleSucess),
+        tap(() => {
+          this.snackBar.open('Article creating successfully', 'Acept', {
+            duration: 3000,
+          });
+        })
+      );
+    },
+    { dispatch: false }
+  );
 
 
 }

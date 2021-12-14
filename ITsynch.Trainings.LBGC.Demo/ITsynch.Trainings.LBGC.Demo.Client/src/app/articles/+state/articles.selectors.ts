@@ -7,11 +7,10 @@ export const selectUserState = createFeatureSelector<fromArticles.ArticleState>(
   
   export const getArticles = createSelector(selectUserState, (state) => state.articles);
   
-//   export const getCurrentArticleId = createSelector(selectUserState, (state) => state.currentUserId);
+  export const getCurrentArticleId = createSelector(selectUserState, (state) => state.currentArticleId);
   
-//   export const getCurrentArticle = createSelector(getArticles, getCurrentArticleId, (users, currentUserId) => {
-//     return users?.find((x) => x.id === currentUserId);
-//   });
+  export const getCurrentArticle = createSelector(selectUserState, (state) => state.currentArticle);
+
   
   export const getArticlesApiLoading = createSelector(
     selectUserState,

@@ -29,3 +29,18 @@ export const createArticleFailure = createAction(
   '[Articles] Create Article Failure',
   props<{ error: any }>()
 );
+
+export const getCurrentArticleById = createAction(
+  '[Articles] Get current article by id',
+  props<{ articleId: number }>()
+);
+
+export const getCurrentArticleByIdSuccess = createAction(
+  '[Articles] Get current article by id success',
+  props<{ article: Article }>()
+);
+
+export const getCurrentArticleByIdFailure = createAction(
+  '[Articles] Get current article by id failure',
+  props<{ error: any }>()
+);

@@ -2,8 +2,8 @@ import { SidebarItem } from "../layout/layout.models";
 
 export const sidebarItems : SidebarItem[] = [
     {
-       title: "Create article",
-       routerPath: "articles/create",
+       title: "Articles",
+       routerPath: "articles",
        iconName: "description",
        routerLinkActive: "active-link"
      },

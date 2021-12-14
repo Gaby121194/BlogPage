@@ -3,6 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { createArticle } from '../+state/articles.actions';
+import { getArticlesApiLoading } from '../+state/articles.selectors';
 import { getCurrentUser } from '../../users/+state/users.selectors';
 import { User } from '../../users/users.model';
 import { Article } from '../articles.model';
@@ -21,6 +22,7 @@ export class CreateArticleComponent implements OnInit {
   article$ : Observable<Article>;
   article : Article;
   currentUser: User;
+  articleCreating$: Observable<boolean> = this.store.pipe(select(getArticlesApiLoading));
 
   constructor(private formBuilder: FormBuilder, 
             private store: Store) {
