@@ -13,12 +13,17 @@ import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { ListDumbComponentComponent } from './list-articles/list-dumb-component/list-dumb-component.component';
+import { ViewArticleComponent } from './view-article/view-article.component';
+import { ViewDumbComponent } from './view-article/view-dumb/view-dumb.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
     CreateArticleComponent,
     ListArticlesComponent,
-    ListDumbComponentComponent
+    ListDumbComponentComponent,
+    ViewArticleComponent,
+    ViewDumbComponent
   ],
   imports: [
     CommonModule,
@@ -29,7 +34,8 @@ import { ListDumbComponentComponent } from './list-articles/list-dumb-component/
     MatButtonModule,
     MatListModule,
     MatCardModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatProgressSpinnerModule
   ],
   exports:[
     CreateArticleComponent

@@ -21,8 +21,14 @@ namespace ITsynch.Trainings.LBGC.Demo.Services
 
         public async Task<IEnumerable<Article>> GetAllArticlesAsync()
         {
-            var articles = await this.trainingsDemoContext.Articles.ToListAsync();
+            var articles = this.trainingsDemoContext.Articles.OrderByDescending(art => art.Date);
             return articles.AsEnumerable();
+        }
+
+        public async Task<Article> GetArticleById(long id)
+        {
+            var article = await trainingsDemoContext.Articles.SingleAsync(art => art.Id == id);
+            return article;
         }
 
         public async Task<Article> CreateArticle(Article article)

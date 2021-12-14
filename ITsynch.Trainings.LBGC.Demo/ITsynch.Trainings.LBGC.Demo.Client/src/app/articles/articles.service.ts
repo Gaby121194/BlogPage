@@ -19,7 +19,10 @@ export class ArticlesService {
   }
 
   public postArticle(article : Article): Observable<Article> {
-    console.log(article)
     return this.httpClient.post<Article>(`${this.baseApiUrl}/articles`, article);
+  }
+
+  public getArticleById(id: number): Observable<Article> {
+    return this.httpClient.get<Article>(`${this.baseApiUrl}/articles/${id}`)
   }
 }

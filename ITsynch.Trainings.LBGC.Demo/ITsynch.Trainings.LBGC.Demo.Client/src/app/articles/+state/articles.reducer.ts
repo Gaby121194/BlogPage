@@ -8,6 +8,7 @@ export interface ArticleState {
   currentArticleId: number | null;
   articles: Article[];
   articleCreated: Article;
+  currentArticle: Article;
   apiState: 'idle' | 'loading' | 'error';
   error: any;
 }
@@ -15,6 +16,7 @@ export interface ArticleState {
 export const initialState: ArticleState = {
   currentArticleId: null,
   articleCreated: null,
+  currentArticle: null,
   articles: [],
   apiState: 'idle',
   error: null,
@@ -33,6 +35,18 @@ export const articlesReducer = createReducer<ArticleState,Action>(
 
   on(ArticlesActions.loadArticlesFailure, (state, {error}) => {
     return { ...state, error : error, apiState: "error"}
+  }),
+
+  on(ArticlesActions.getCurrentArticleById, (state, {articleId}) => {
+    return {...state, apiState: 'loading', currentArticleId: articleId};
+  }),
+
+  on(ArticlesActions.getCurrentArticleByIdSuccess, (state, { article }) => {
+    return { ...state, currentArticle: article, apiState: "idle" };
+  }),
+
+  on(ArticlesActions.getCurrentArticleByIdFailure, (state, {error}) => {
+    return { ...state, error : error, apiState: "error", currentArticleId: null}
   }),
 
   on(ArticlesActions.createArticleSucess, (state, { article }) => {

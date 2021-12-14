@@ -1,4 +1,5 @@
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Article } from '../../articles.model';
 
 @Component({
@@ -13,7 +14,7 @@ export class ListDumbComponentComponent implements OnInit, OnChanges {
 
   filterArticles: Article[];
 
-  constructor() {
+  constructor(private router: Router) {
     
    }
 
@@ -29,5 +30,15 @@ export class ListDumbComponentComponent implements OnInit, OnChanges {
     this.filterArticles = this.articles;
     this.filterArticles = this.filterArticles.filter((article)=> article.title.toLowerCase().includes(input.toLowerCase()))
   }
+
+  visitArticle(id: number){
+    this.router.navigateByUrl(`articles/${id}`)
+  }
+
+  createArticle(){
+    this.router.navigateByUrl(`articles/create`)
+  }
+
+
 
 }
