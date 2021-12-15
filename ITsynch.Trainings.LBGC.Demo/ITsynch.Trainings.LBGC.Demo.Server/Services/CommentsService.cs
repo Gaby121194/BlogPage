@@ -3,6 +3,7 @@ using ITsynch.Trainings.LBGC.Demo.Persistence;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -23,6 +24,24 @@ namespace ITsynch.Trainings.LBGC.Demo.Services
         {
             var comments = await trainingsDemoContext.Comments.ToListAsync();
             return comments.AsEnumerable();
+        }
+
+        public async Task<IEnumerable<Comment>> GetAllCommentsById(long id)
+        {
+            var comments = this.trainingsDemoContext.Comments.OrderByDescending(art => art.Date);
+            return comments.AsEnumerable();
+        }
+
+        public async Task<Comment> GetCommentById(long id)
+        {
+            var comment = await trainingsDemoContext.Comments.FindAsync(id);
+            return comment;
+        }
+        public async Task<Comment> CreateComment(Comment comment)
+        {
+            var _comment = this.trainingsDemoContext.Add<Comment>(comment);
+            var result = await this.trainingsDemoContext.SaveChangesAsync();
+            return comment;
         }
     }
 }

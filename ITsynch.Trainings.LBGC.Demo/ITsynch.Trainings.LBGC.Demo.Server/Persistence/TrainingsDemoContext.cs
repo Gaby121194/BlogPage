@@ -5,25 +5,21 @@ namespace ITsynch.Trainings.LBGC.Demo.Persistence
 {
     public class TrainingsDemoContext : DbContext
     {
-        public TrainingsDemoContext(DbContextOptions<TrainingsDemoContext> dbContextOptions) 
+        public TrainingsDemoContext(DbContextOptions<TrainingsDemoContext> dbContextOptions)
             : base(dbContextOptions)
         {
 
         }
 
         public virtual DbSet<User> Users { get; set; }
-
-        public virtual DbSet<Article> Articles { get; set; }
-
         public virtual DbSet<Comment> Comments { get; set; }
-
+        public virtual DbSet<Article> Articles { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
             var users = modelBuilder.Entity<User>();
-            
-            //Users
+
             users.ToTable("users");
 
             users.HasKey(x => x.Id);
@@ -37,7 +33,24 @@ namespace ITsynch.Trainings.LBGC.Demo.Persistence
             users.Property(x => x.LastName)
                 .IsRequired();
 
-            //Articles
+            var comments = modelBuilder.Entity<Comment>();
+
+            comments.ToTable("comments");
+
+            comments.HasKey(x => x.Id);
+
+            comments.Property(x => x.Username)
+                .IsRequired();
+
+            comments.Property(x => x.Content)
+                .IsRequired();
+
+            comments.Property(x => x.Date)
+                .IsRequired();
+
+            comments.Property(x => x.IdArticle)
+                .IsRequired();
+
             var articles = modelBuilder.Entity<Article>();
 
             articles.ToTable("articles");
@@ -61,3 +74,4 @@ namespace ITsynch.Trainings.LBGC.Demo.Persistence
         }
     }
 }
+
