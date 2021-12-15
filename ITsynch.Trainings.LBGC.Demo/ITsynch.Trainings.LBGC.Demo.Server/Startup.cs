@@ -41,6 +41,8 @@ namespace ITsynch.Trainings.LBGC.Demo
 
             services.AddTransient<ArticlesService>();
 
+            services.AddTransient<CommentsService>();
+
             services.AddSwaggerGen();
         }
 

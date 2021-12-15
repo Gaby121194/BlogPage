@@ -15,6 +15,9 @@ import { ITSYNCH_TRAININGS_DEMO_BASE_API_URL, ITSYNCH_TRAININGS_DEMO_SIDEBAR_ITE
 import { UsersModule } from './users/users.module';
 import { appRoutes } from './app.routes';
 import { ArticlesModule } from './articles/articles.module';
+import { CreateCommentComponent } from './comments/create-comment/create-comment.component';
+import { CommentsModule } from './comments/comments.module';
+
 
 @NgModule({
   declarations: [AppComponent],
@@ -29,7 +32,8 @@ import { ArticlesModule } from './articles/articles.module';
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     LayoutModule,
     UsersModule,
-    ArticlesModule
+    ArticlesModule,
+    CommentsModule
   ],
   providers: [{ provide: ITSYNCH_TRAININGS_DEMO_BASE_API_URL, useValue: environment.baseApiUrl },
               { provide: ITSYNCH_TRAININGS_DEMO_SIDEBAR_ITEMS, useValue: sidebarItems }

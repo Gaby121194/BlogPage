@@ -1,0 +1,10 @@
+.create-comment {
+  margin: 10px 70px;
+  font-style: italic;
+}
+
+h4 {
+  display: flex;
+  font-style: italic;
+  text-align: left;
+}

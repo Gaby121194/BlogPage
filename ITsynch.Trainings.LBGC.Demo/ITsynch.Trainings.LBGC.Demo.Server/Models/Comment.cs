@@ -9,5 +9,8 @@ namespace ITsynch.Trainings.LBGC.Demo.Models
         public virtual string Content { get; set; }
 
         public virtual DateTime Date { get; set; }
+
+        public virtual long IdArticle { get; set; }
+
     }
 }

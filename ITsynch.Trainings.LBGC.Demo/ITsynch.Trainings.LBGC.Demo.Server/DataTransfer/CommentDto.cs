@@ -11,5 +11,7 @@ namespace ITsynch.Trainings.LBGC.Demo.DataTransfer
         public virtual string Content { get; set; }
 
         public virtual DateTime Date { get; set; }
+
+        public virtual long IdArticle { get; set; }
     }
 }
