@@ -1,9 +1,9 @@
 <div class="article-body" *ngIf="article">
     <h1>{{ article.title }}</h1>
     <div class="subtitle">
-        <span>Autor: {{article.userName}}</span> <span class="date">Creation Date: {{article.date | date}}</span>
+        <span>Autor: {{article.user?.username}}</span> <span class="date">Creation Date: {{article.date | date}}</span>
     </div>
-    <p>
+    <p class="content">
         {{article.content}}
     </p>
 </div>

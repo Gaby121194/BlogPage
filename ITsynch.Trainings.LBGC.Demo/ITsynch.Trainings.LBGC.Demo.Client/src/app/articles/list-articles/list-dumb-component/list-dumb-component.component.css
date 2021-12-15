@@ -1,5 +1,4 @@
 .example-card{
-    max-width: 500px;
     margin: 10px;
 }
 .header{
@@ -12,6 +11,11 @@
 }
 .article-title:hover{
     color: blue;
+}
+.article-content{
+    max-height: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 .dumb{
     margin: 10px;

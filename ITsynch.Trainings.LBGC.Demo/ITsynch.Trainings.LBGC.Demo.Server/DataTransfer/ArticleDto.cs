@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ITsynch.Trainings.LBGC.Demo.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -12,7 +13,8 @@ namespace ITsynch.Trainings.LBGC.Demo.DataTransfer
 
         public virtual string Content { get; set; }
 
-        public virtual string UserName { get; set; }
+
+        public virtual User User { get; set; }
 
         public virtual DateTime Date { get; set; }
     }

@@ -1,5 +1,7 @@
+import { User } from "../users/users.model";
+
 export interface Article {
-    userName: string;
+    user: User;
     date: Date;
     content: string;
     title: string;
