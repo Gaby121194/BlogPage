@@ -1,11 +1,11 @@
 <div class="article-body" *ngIf="article">
-  <h1>{{ article.title }}</h1>
-  <div class="subtitle">
-    <span>Autor: {{article.userName}}</span> <span class="date">Creation Date: {{article.date | date}}</span>
-  </div>
-  <p>
-    {{article.content}}
-  </p>
+    <h1>{{ article.title }}</h1>
+    <div class="subtitle">
+        <span>Autor: {{article.user?.username}}</span> <span class="date">Creation Date: {{article.date | date}}</span>
+    </div>
+    <p class="content">
+        {{article.content}}
+    </p>
 </div>
 
 <its-create-comment></its-create-comment>

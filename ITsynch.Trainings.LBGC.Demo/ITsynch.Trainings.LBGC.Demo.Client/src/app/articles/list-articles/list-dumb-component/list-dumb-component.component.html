@@ -22,12 +22,12 @@
     <ng-container *ngFor="let article of filterArticles">
         <mat-card class="example-card">
             <mat-card-title class="article-title" (click)="visitArticle(article.id)">{{article.title}}</mat-card-title>
-            <mat-card-subtitle>Created by {{article.userName}} on {{article.date | date}}</mat-card-subtitle>
-            <mat-card-content>
+            <mat-card-subtitle>Created by {{article.user?.username}} on {{article.date | date}}</mat-card-subtitle>
+            <mat-card-content class="article-content">
                 <p>{{article.content}}</p>
             </mat-card-content>
             <mat-card-actions>
-                <button mat-raised-button (click)="visitArticle(article.id)">View</button>
+                <button mat-raised-button (click)="visitArticle(article.id)">Learn more...</button>
             </mat-card-actions>
         </mat-card>
     </ng-container>

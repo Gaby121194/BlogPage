@@ -21,20 +21,22 @@ namespace ITsynch.Trainings.LBGC.Demo.Services
 
         public async Task<IEnumerable<Article>> GetAllArticlesAsync()
         {
-            var articles = this.trainingsDemoContext.Articles.OrderByDescending(art => art.Date);
+          
+            var articles = this.trainingsDemoContext.Articles.Include(article => article.User).OrderByDescending(art => art.Date);
             return articles.AsEnumerable();
         }
 
         public async Task<Article> GetArticleById(long id)
         {
-            var article = await trainingsDemoContext.Articles.SingleAsync(art => art.Id == id);
+            var article = trainingsDemoContext.Articles.Where(article => article.Id == id).Include(article => article.User).FirstOrDefault();
             return article;
         }
 
         public async Task<Article> CreateArticle(Article article)
         {
-
-            var _article = this.trainingsDemoContext.Add<Article>(article);
+            var user = trainingsDemoContext.Users.FirstOrDefault(user => user.Id == article.User.Id);
+            article.User = user;
+            var _article = this.trainingsDemoContext.Articles.Add(article);
             var result = await this.trainingsDemoContext.SaveChangesAsync();
             return article;
         }

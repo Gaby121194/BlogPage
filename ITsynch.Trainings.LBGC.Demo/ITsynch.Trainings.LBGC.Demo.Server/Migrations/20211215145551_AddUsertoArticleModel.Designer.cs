@@ -4,14 +4,16 @@ using ITsynch.Trainings.LBGC.Demo.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ITsynch.Trainings.LBGC.Demo.Migrations
 {
     [DbContext(typeof(TrainingsDemoContext))]
-    partial class TrainingsDemoContextModelSnapshot : ModelSnapshot
+    [Migration("20211215145551_AddUsertoArticleModel")]
+    partial class AddUsertoArticleModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -55,22 +57,17 @@ namespace ITsynch.Trainings.LBGC.Demo.Migrations
                         .UseIdentityColumn();
 
                     b.Property<string>("Content")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
-                    b.Property<long>("IdArticle")
-                        .HasColumnType("bigint");
-
                     b.Property<string>("Username")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("comments");
+                    b.ToTable("Comments");
                 });
 
             modelBuilder.Entity("ITsynch.Trainings.LBGC.Demo.Models.User", b =>

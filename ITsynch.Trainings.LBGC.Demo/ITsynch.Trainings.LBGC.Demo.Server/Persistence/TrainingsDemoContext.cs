@@ -66,8 +66,11 @@ namespace ITsynch.Trainings.LBGC.Demo.Persistence
             articles.Property(x => x.Date)
                 .IsRequired();
 
-            articles.Property(x => x.UserName)
-                .IsRequired();
+            articles.HasOne(x => x.User)
+                    .WithMany();
+
+            articles.Navigation(x => x.User)
+            .UsePropertyAccessMode(PropertyAccessMode.Property);
         }
     }
 }
