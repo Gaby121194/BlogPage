@@ -1,1 +1,4 @@
-<its-view-dumb [article]="article$ | async"></its-view-dumb>
+<its-view-dumb
+ [article]="article$ | async"
+ [currentUser]="currentUser$ | async"
+(deleteArticleClick)="deleteArticle($event)"></its-view-dumb>

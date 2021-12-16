@@ -1,4 +1,5 @@
-import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
+import { User } from '../../../users/users.model';
 import { Article } from '../../articles.model';
 
 @Component({
@@ -8,11 +9,19 @@ import { Article } from '../../articles.model';
 })
 export class ViewDumbComponent implements OnInit{
   @Input() public article: Article;
+
+  @Input() public currentUser: User;
+
+  @Output() deleteArticleClick = new EventEmitter<number>();
+
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  onDeleteArticleClicked(id: number){
+    this.deleteArticleClick.emit(id);
+  }
   
 
 }

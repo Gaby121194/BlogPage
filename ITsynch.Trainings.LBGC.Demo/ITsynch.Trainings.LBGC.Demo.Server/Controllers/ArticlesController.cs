@@ -60,8 +60,10 @@ namespace ITsynch.Trainings.LBGC.Demo.Controllers
 
         // DELETE api/<ArticleController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<ArticleDto> Delete(long id)
         {
+            var article = await this.articlesService.DeleteArticle(id);
+            return mapper.Map<ArticleDto>(article);
         }
     }
 }
