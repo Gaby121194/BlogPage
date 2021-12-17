@@ -5,11 +5,11 @@ export const selectCommentState = createFeatureSelector<fromComment.CommentState
   fromComment.commentFeatureKey
 );
 
-export const getComments = createSelector(selectCommentState, (state) => state.comment);
+export const getComment = createSelector(selectCommentState, (state) => state.comment);
 
 export const getCommentsById = createSelector(selectCommentState, (state) => state.currentArticleId);
 
-export const getAllComment = createSelector(selectCommentState, (state) => state.allComment);
+export const getAllComments = createSelector(selectCommentState, (state) => state.allComments);
 
 
 export const getCommentsApiLoading = createSelector(

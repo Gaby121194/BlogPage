@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
-import { Comments } from '../comments.model';
-import { getAllComment } from '../+state/comment.selectors';
+import { Observable, Subscription } from 'rxjs';
+import { Comment } from '../comment.model';
+import { getAllComments } from '../+state/comment.selectors';
 import { ActivatedRoute } from '@angular/router';
-import { getAllCommentById } from '../+state/comment.actions'
+import { getAllCommentsByArticleId } from '../+state/comment.actions'
+import { CommentsService } from '../comments.service';
 
 @Component({
   selector: 'its-view-comment',
@@ -13,13 +14,17 @@ import { getAllCommentById } from '../+state/comment.actions'
 })
 export class ViewCommentComponent implements OnInit {
 
-  comment$: Observable<Comments> = this.store.pipe(select(getAllComment));
-
-  constructor(private activatedRoute: ActivatedRoute, private store: Store) { }
+  comments$: Observable<Comment[]> = this.store.pipe(select(getAllComments));
+  suscription: Subscription;
+  constructor(private activatedRoute: ActivatedRoute, private store: Store, private commentService: CommentsService) { }
 
   ngOnInit(): void {
     let id = this.activatedRoute.snapshot.params.id as number;
-    this.store.dispatch(getAllCommentById({ IdArticle: id }));
+    this.store.dispatch(getAllCommentsByArticleId({ IdArticle: id }));
+    this.suscription = this.commentService.refresh$.subscribe(() => {
+      let id = this.activatedRoute.snapshot.params.id as number;
+      this.store.dispatch(getAllCommentsByArticleId({ IdArticle: id }));
+    })
   }
 
 }

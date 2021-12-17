@@ -26,11 +26,11 @@ export class CommentEffects {
 
   getComment$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(CommentActions.getAllCommentById),
+      ofType(CommentActions.getAllCommentsByArticleId),
       switchMap(({ IdArticle }) =>
-        this.commentService.getCommentsById(IdArticle).pipe(
-          map((comment) => CommentActions.getAllCommentByIdSuccess({ comment })),
-          catchError((error) => of(CommentActions.getAllCommentByIdFailure({ error })))
+        this.commentService.getCommentsByArticleId(IdArticle).pipe(
+          map((comments) => CommentActions.getAllCommentsByArticleIdSuccess({ comments })),
+          catchError((error) => of(CommentActions.getAllCommentsByArticleIdFailure({ error })))
         )
       )
     );

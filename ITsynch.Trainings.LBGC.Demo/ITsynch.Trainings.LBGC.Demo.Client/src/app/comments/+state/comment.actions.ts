@@ -1,14 +1,14 @@
 import { createAction, props } from '@ngrx/store';
-import { Comments } from '../comments.model';
+import { Comment } from '../comment.model';
 
 export const createComment = createAction(
   '[Comment] Create Comment',
-  props<{ comment: Comments }>()
+  props<{ comment: Comment }>()
 );
 
 export const createCommentSucess = createAction(
   '[Comment] Create Comment Success',
-  props<{ comment: Comments }>()
+  props<{ comment: Comment }>()
 );
 
 export const createCommentFailure = createAction(
@@ -16,17 +16,17 @@ export const createCommentFailure = createAction(
   props<{ error: any }>()
 );
 
-export const getAllCommentById = createAction(
+export const getAllCommentsByArticleId = createAction(
   '[Comment] Get all comment by id',
   props<{ IdArticle: number }>()
 );
 
-export const getAllCommentByIdSuccess = createAction(
+export const getAllCommentsByArticleIdSuccess = createAction(
   '[Comment] Get all comment by id success',
-  props<{ comment: Comments }>()
+  props<{ comments: Comment[] }>()
 );
 
-export const getAllCommentByIdFailure = createAction(
+export const getAllCommentsByArticleIdFailure = createAction(
   '[Comment] Get all comment by id failure',
   props<{ error: any }>()
 );

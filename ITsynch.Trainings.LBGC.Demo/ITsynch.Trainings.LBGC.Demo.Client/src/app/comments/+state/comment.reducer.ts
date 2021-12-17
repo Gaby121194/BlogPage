@@ -1,23 +1,21 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import { Comments } from '../comments.model';
+import { Comment } from '../comment.model';
 import * as CommentActions from './comment.actions'
 
 export const commentFeatureKey = 'comment';
 
 export interface CommentState {
   currentArticleId: number | null;
-  comment: Comments[];
-  commentCreated: Comments;
-  allComment: Comments;
+  comment: Comment;
+  allComments: Comment[];
   apiState: 'idle' | 'loading' | 'error';
   error: any;
 }
 
 export const initialState: CommentState = {
   currentArticleId: null,
-  comment: [],
-  commentCreated: null,
-  allComment: null,
+  comment: null,
+  allComments: [],
   apiState: 'idle',
   error: null,
 };
@@ -38,15 +36,15 @@ export const commentReducer = createReducer<CommentState, Action>(
     return { ...state, error: error, apiState: "error" }
   }),
 
-  on(CommentActions.getAllCommentById, (state, { IdArticle }) => {
+  on(CommentActions.getAllCommentsByArticleId, (state, { IdArticle }) => {
     return { ...state, apiState: 'loading', currentArticleId: IdArticle };
   }),
 
-  on(CommentActions.getAllCommentByIdSuccess, (state, { comment }) => {
-    return { ...state, currentComment: comment, apiState: "idle" };
+  on(CommentActions.getAllCommentsByArticleIdSuccess, (state, { comments }) => {
+    return { ...state, allComments: comments, apiState: "idle" };
   }),
 
-  on(CommentActions.getAllCommentByIdFailure, (state, { error }) => {
+  on(CommentActions.getAllCommentsByArticleIdFailure, (state, { error }) => {
     return { ...state, error: error, apiState: "error", currentArticleId: null }
   }),
 

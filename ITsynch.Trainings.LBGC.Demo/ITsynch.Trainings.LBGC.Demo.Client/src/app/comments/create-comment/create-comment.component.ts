@@ -6,7 +6,7 @@ import { User } from '../../users/users.model';
 import { select, Store } from '@ngrx/store';
 import { FormBuilder, Validators } from '@angular/forms';
 import { getCommentsApiLoading } from '../+state/comment.selectors';
-import { Comments } from '../comments.model';
+import { Comment } from '../comment.model';
 import { ActivatedRoute } from '@angular/router';
 import { createComment } from '../+state/comment.actions';
 
@@ -24,8 +24,8 @@ export class CreateCommentComponent implements OnInit {
     date: [new Date(), [Validators.required]]
   });
   currentUser: User;
-  comment$: Observable<Comments>;
-  comment: Comments;
+  comment$: Observable<Comment>;
+  comment: Comment;
   commentCreating$: Observable<boolean> = this.store.pipe(select(getCommentsApiLoading));
   id: number;
 

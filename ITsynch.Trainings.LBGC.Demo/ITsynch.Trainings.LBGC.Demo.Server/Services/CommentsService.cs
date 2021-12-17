@@ -26,17 +26,19 @@ namespace ITsynch.Trainings.LBGC.Demo.Services
             return comments.AsEnumerable();
         }
 
-        public async Task<IEnumerable<Comment>> GetAllCommentsById(long id)
+        public async Task<IEnumerable<Comment>> GetAllCommentsByArticleId(long id)
         {
-            var comments = this.trainingsDemoContext.Comments.OrderByDescending(art => art.Date);
+            var comments = await this.trainingsDemoContext.Comments.Where(comment => comment.IdArticle == id)
+                                                             .OrderByDescending(art => art.Date)
+                                                             .Include(comment => comment.User)
+                                                             .ToListAsync();
             return comments.AsEnumerable();
         }
 
-        //var article = trainingsDemoContext.Articles.Where(article => article.Id == id).Include(article => article.User).FirstOrDefault();
-        public async Task<Comment> GetCommentById(long id)
+        public async Task<Comment> GetCommentByArticleId(long id)
         {
-            var comment = trainingsDemoContext.Comments.Where(comment => comment.IdArticle == id).Include(comment => comment.User).FirstOrDefault();
-            //var comment = trainingsDemoContext.Comments.FindAsync(id);
+            //var comment = trainingsDemoContext.Comments.Where(comment => comment.IdArticle == id).Include(comment => comment.User).FirstOrDefault();
+            var comment = await trainingsDemoContext.Comments.FindAsync(id);
             return comment;
 
         }
