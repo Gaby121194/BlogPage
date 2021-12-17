@@ -10,7 +10,7 @@ namespace ITsynch.Trainings.LBGC.Demo.Models
 
         public virtual string Content { get; set; }
 
-
+        public virtual bool Delete { get; set; }
         public virtual User User { get; set; }
 
         public virtual DateTime Date { get; set; }

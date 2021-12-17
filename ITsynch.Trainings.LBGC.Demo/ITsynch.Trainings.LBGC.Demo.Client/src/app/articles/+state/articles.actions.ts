@@ -1,6 +1,8 @@
 import { createAction, props } from '@ngrx/store';
 import { Article } from '../articles.model';
 
+export const effectInitialized = createAction('[Articles] Articles effect initialized');
+
 export const loadArticles = createAction(
   '[Articles] Load Articles'
 );
@@ -27,6 +29,26 @@ export const createArticleSucess = createAction(
 
 export const createArticleFailure = createAction(
   '[Articles] Create Article Failure',
+  props<{ error: any }>()
+);
+
+export const deleteArticle = createAction(
+  '[Articles] Delete Article',
+  props< {articleId : number}>()
+);
+
+export const confirmDeleteArticle = createAction(
+  '[Articles] Delete Confirm Article',
+  props< {articleId : number}>()
+);
+
+export const deleteArticleSucess = createAction(
+  '[Articles] Delete Article Success',
+  props<{ article: Article }>()
+);
+
+export const deleteArticleFailure = createAction(
+  '[Articles] Delete Article Failure',
   props<{ error: any }>()
 );
 

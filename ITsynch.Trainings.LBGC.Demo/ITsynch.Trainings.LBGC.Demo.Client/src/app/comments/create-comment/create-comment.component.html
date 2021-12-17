@@ -5,7 +5,7 @@
     <textarea matInput class="commentBox" placeholder="Ingrese comentario" cols="40" rows="5"></textarea>
     <br>
     <button type="submit" mat-raised-button color="primary" >Enviar</button>-->
-    <h4>User: {{ (currentUser$ | async).lastName}}</h4>
+    <h4>User: {{ (currentUser$ | async)?.lastName}}</h4>
     <mat-form-field class="comment-full-width" appearance="fill">
       <mat-label>Comment content</mat-label>
       <textarea matInput class="text" placeholder="Input a new comment" formControlName="content"></textarea>

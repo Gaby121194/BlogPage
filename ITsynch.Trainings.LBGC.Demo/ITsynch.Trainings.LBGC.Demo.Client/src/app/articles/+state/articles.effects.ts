@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { Action } from '@ngrx/store';
 import { of } from 'rxjs';
-import { catchError, map, switchMap, tap } from 'rxjs/operators';
+import { catchError, map, switchMap, take, tap } from 'rxjs/operators';
 import { ArticlesService } from '../articles.service';
 import * as ArticlesActions from './articles.actions'
 
@@ -23,6 +24,30 @@ export class ArticlesEffects {
           catchError((error) => of(ArticlesActions.createArticleFailure({ error })))
         )
       )
+    );
+  });
+
+  deleteArticle$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ArticlesActions.deleteArticle),
+      switchMap(({articleId}) =>
+        this.articlesService.deleteArticle(articleId).pipe(
+          map((article) => ArticlesActions.deleteArticleSucess({ article })),
+          catchError((error) => of(ArticlesActions.deleteArticleFailure({ error })))
+        )
+      )
+    );
+  });
+
+  confirmDeleteArticle$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ArticlesActions.confirmDeleteArticle),
+      map(({ articleId }) => {
+        const deleteArticleConfirmed = window.confirm('Are you sure you want to delete article?');
+        if (deleteArticleConfirmed) {
+          return ArticlesActions.deleteArticle({ articleId });
+        }
+      })
     );
   });
 
@@ -63,6 +88,18 @@ export class ArticlesEffects {
     },
     { dispatch: false }
   );
+
+  effectInitialized$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ArticlesActions.effectInitialized),
+      map(() => ArticlesActions.loadArticles()),
+      take(1)
+    );
+  });
+
+  ngrxOnInitEffects(): Action {
+    return ArticlesActions.effectInitialized();
+  }
 
 
 }

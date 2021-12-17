@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { Article } from '../../articles.model';
 
@@ -11,6 +11,11 @@ export class ListDumbComponentComponent implements OnInit, OnChanges {
   
   @Input()
   public articles: Article[];
+
+  @Input()
+  public currentUser: User;
+
+  @Output() deleteArticleClick = new EventEmitter<number>()
 
   filterArticles: Article[];
 
@@ -37,6 +42,10 @@ export class ListDumbComponentComponent implements OnInit, OnChanges {
 
   createArticle(){
     this.router.navigateByUrl(`articles/create`)
+  }
+
+  onDeleteArticleClicked(id: number){
+    this.deleteArticleClick.emit(id);
   }
 
 
