@@ -22,13 +22,17 @@ namespace ITsynch.Trainings.LBGC.Demo.Services
         public async Task<IEnumerable<Article>> GetAllArticlesAsync()
         {
           
-            var articles = this.trainingsDemoContext.Articles.Include(article => article.User).OrderByDescending(art => art.Date);
+            var articles = this.trainingsDemoContext.Articles.Include(article => article.User)
+                                                              .Where(article => article.Delete == false)
+                                                              .OrderByDescending(art => art.Date);
             return articles.AsEnumerable();
         }
 
         public async Task<Article> GetArticleById(long id)
         {
-            var article = trainingsDemoContext.Articles.Where(article => article.Id == id).Include(article => article.User).FirstOrDefault();
+            var article = trainingsDemoContext.Articles.Where(article => article.Id == id && article.Delete == false)
+                                                       .Include(article => article.User)
+                                                       .FirstOrDefault();
             return article;
         }
 
@@ -36,9 +40,18 @@ namespace ITsynch.Trainings.LBGC.Demo.Services
         {
             var user = trainingsDemoContext.Users.FirstOrDefault(user => user.Id == article.User.Id);
             article.User = user;
+            article.Delete = false;
             var _article = this.trainingsDemoContext.Articles.Add(article);
             var result = await this.trainingsDemoContext.SaveChangesAsync();
             return article;
+        }
+
+        public async Task<Article> DeleteArticle(long id)
+        {
+            var _article = this.trainingsDemoContext.Articles.FirstOrDefault(art => art.Id == id);
+            _article.Delete = true;
+            await this.trainingsDemoContext.SaveChangesAsync();
+            return _article;
         }
     }
 }

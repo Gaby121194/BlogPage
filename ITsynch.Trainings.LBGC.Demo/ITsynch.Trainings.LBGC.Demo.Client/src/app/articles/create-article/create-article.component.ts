@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { createArticle } from '../+state/articles.actions';
 import { getArticlesApiLoading } from '../+state/articles.selectors';
 import { getCurrentUser } from '../../users/+state/users.selectors';
@@ -13,7 +14,7 @@ import { Article } from '../articles.model';
   templateUrl: './create-article.component.html',
   styleUrls: ['./create-article.component.css']
 })
-export class CreateArticleComponent implements OnInit {
+export class CreateArticleComponent implements OnInit, OnDestroy {
   articleForm = this.formBuilder.group({
     title: ["", [Validators.required]],
     content: ["", [Validators.required, Validators.minLength(5)]],
@@ -22,10 +23,12 @@ export class CreateArticleComponent implements OnInit {
   article$ : Observable<Article>;
   article : Article;
   currentUser: User;
+  private unsubcribed$: Subject<void> = new Subject<void>();
   articleCreating$: Observable<boolean> = this.store.pipe(select(getArticlesApiLoading));
 
   constructor(private formBuilder: FormBuilder, 
-            private store: Store) {
+            private store: Store,
+            private router: Router) {
       
    }
 
@@ -39,6 +42,12 @@ export class CreateArticleComponent implements OnInit {
     this.article = this.articleForm.value;
     this.article.user = this.currentUser;
     this.store.dispatch(createArticle({ article: this.article }));
+    this.router.navigateByUrl("/articles")
+  }
+
+  ngOnDestroy(): void {
+    this.unsubcribed$.next();
+    this.unsubcribed$.complete();
   }
 
 }

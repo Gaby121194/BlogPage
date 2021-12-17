@@ -25,4 +25,9 @@ export class ArticlesService {
   public getArticleById(id: number): Observable<Article> {
     return this.httpClient.get<Article>(`${this.baseApiUrl}/articles/${id}`)
   }
+
+  public deleteArticle(id: number): Observable<Article> {
+    return this.httpClient.delete<Article>(`${this.baseApiUrl}/articles/${id}`)
+  }
+  
 }
