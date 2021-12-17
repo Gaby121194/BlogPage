@@ -36,8 +36,9 @@ export class CreateCommentComponent implements OnInit {
 
   submitComment() {
     this.comment = this.commentForm.value;
-    this.comment.userName = this.currentUser.username;
+    this.comment.user = this.currentUser;
     this.comment.IdArticle = this.id;
     this.store.dispatch(createComment({ comment: this.comment }));
+    console.log(this.comment);
   }
 }

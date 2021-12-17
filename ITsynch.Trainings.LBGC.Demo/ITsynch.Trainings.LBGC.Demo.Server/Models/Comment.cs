@@ -4,7 +4,7 @@ namespace ITsynch.Trainings.LBGC.Demo.Models
 {
     public class Comment : BaseEntity
     {
-        public virtual string Username { get; set; }
+        public virtual User User { get; set; }
 
         public virtual string Content { get; set; }
 

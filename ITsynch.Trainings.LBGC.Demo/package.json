@@ -1,5 +1,6 @@
 {
   "devDependencies": {
-    "@angular-devkit/build-angular": "^13.0.4"
+    "@angular-devkit/build-angular": "^13.0.4",
+    "redux-devtools-extension": "^2.13.9"
   }
 }

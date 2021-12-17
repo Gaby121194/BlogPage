@@ -32,13 +32,18 @@ namespace ITsynch.Trainings.LBGC.Demo.Services
             return comments.AsEnumerable();
         }
 
+        //var article = trainingsDemoContext.Articles.Where(article => article.Id == id).Include(article => article.User).FirstOrDefault();
         public async Task<Comment> GetCommentById(long id)
         {
-            var comment = await trainingsDemoContext.Comments.FindAsync(id);
+            var comment = trainingsDemoContext.Comments.Where(comment => comment.IdArticle == id).Include(comment => comment.User).FirstOrDefault();
+            //var comment = trainingsDemoContext.Comments.FindAsync(id);
             return comment;
+
         }
         public async Task<Comment> CreateComment(Comment comment)
         {
+            var user = trainingsDemoContext.Users.FirstOrDefault(user => user.Id == comment.User.Id);
+            comment.User = user;
             var _comment = this.trainingsDemoContext.Add<Comment>(comment);
             var result = await this.trainingsDemoContext.SaveChangesAsync();
             return comment;

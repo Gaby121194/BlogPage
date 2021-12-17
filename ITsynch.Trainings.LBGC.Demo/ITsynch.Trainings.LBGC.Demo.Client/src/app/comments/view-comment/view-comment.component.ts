@@ -13,7 +13,7 @@ import { getAllCommentById } from '../+state/comment.actions'
 })
 export class ViewCommentComponent implements OnInit {
 
-  comments$: Observable<Comments> = this.store.pipe(select(getAllComment));
+  comment$: Observable<Comments> = this.store.pipe(select(getAllComment));
 
   constructor(private activatedRoute: ActivatedRoute, private store: Store) { }
 

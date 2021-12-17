@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ITsynch.Trainings.LBGC.Demo.Migrations
 {
     [DbContext(typeof(TrainingsDemoContext))]
-    [Migration("20211215145551_AddUsertoArticleModel")]
-    partial class AddUsertoArticleModel
+    [Migration("20211216125432_AddUsertoCommentModel")]
+    partial class AddUsertoCommentModel
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -57,17 +57,23 @@ namespace ITsynch.Trainings.LBGC.Demo.Migrations
                         .UseIdentityColumn();
 
                     b.Property<string>("Content")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Username")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<long>("IdArticle")
+                        .HasColumnType("bigint");
+
+                    b.Property<long?>("UserId")
+                        .HasColumnType("bigint");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Comments");
+                    b.HasIndex("UserId");
+
+                    b.ToTable("comments");
                 });
 
             modelBuilder.Entity("ITsynch.Trainings.LBGC.Demo.Models.User", b =>
@@ -95,6 +101,15 @@ namespace ITsynch.Trainings.LBGC.Demo.Migrations
                 });
 
             modelBuilder.Entity("ITsynch.Trainings.LBGC.Demo.Models.Article", b =>
+                {
+                    b.HasOne("ITsynch.Trainings.LBGC.Demo.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("ITsynch.Trainings.LBGC.Demo.Models.Comment", b =>
                 {
                     b.HasOne("ITsynch.Trainings.LBGC.Demo.Models.User", "User")
                         .WithMany()

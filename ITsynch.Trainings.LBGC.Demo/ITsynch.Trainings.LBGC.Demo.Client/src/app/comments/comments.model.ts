@@ -1,7 +1,7 @@
-import { logging } from "protractor";
+import { User } from "../users/users.model";
 
 export interface Comments {
-  userName: string;
+  user: User;
   content: string;
   date: Date;
   IdArticle: number;

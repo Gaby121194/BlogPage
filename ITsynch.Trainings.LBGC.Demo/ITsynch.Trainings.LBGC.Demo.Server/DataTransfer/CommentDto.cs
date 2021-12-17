@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ITsynch.Trainings.LBGC.Demo.Models;
+using System;
 
 namespace ITsynch.Trainings.LBGC.Demo.DataTransfer
 {
@@ -6,7 +7,7 @@ namespace ITsynch.Trainings.LBGC.Demo.DataTransfer
     {
         public virtual long Id { get; set; }
 
-        public virtual string Username { get; set; }
+        public virtual User User { get; set; }
 
         public virtual string Content { get; set; }
 
