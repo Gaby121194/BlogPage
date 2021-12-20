@@ -1,0 +1,18 @@
+.edit-article{
+    margin: 10px;
+  }
+  .example-form {
+      min-width: 150px;
+      max-width: 500px;
+      min-height: 200px;
+      width: 100%;
+    }
+    
+    .example-full-width {
+      width: 100%;
+    }
+  
+    .text{
+      height: 300px;
+    }
+  

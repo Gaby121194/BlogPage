@@ -1,29 +1,5 @@
-<div class="create-article">
-  <h1>Create a new Article for blog</h1>
-
-<form class="example-form" [formGroup]="articleForm" (ngSubmit)="submitArticle()" >
-
-    <mat-form-field class="example-full-width" appearance="fill">
-        <mat-label>Article title</mat-label>
-        <input matInput placeholder="Input a new title" formControlName="title">
-        <mat-error *ngIf="articleForm.controls['title'].invalid && articleForm.controls['title'].dirty">
-          Title is <strong>required</strong>
-        </mat-error>
-      </mat-form-field>
-      
-        <mat-form-field class="example-full-width" appearance="fill">
-          <mat-label>Article content</mat-label>
-          <textarea matInput class="text" placeholder="Input a new content" formControlName="content"></textarea>
-          <mat-error *ngIf="articleForm.controls['content'].invalid && articleForm.controls['content'].dirty">
-            Content is <strong>required</strong>
-          </mat-error>
-        </mat-form-field>
-    
-    
-    <button *ngIf="!(articleCreating$ | async)" type="submit"
-     mat-raised-button color="primary" [disabled]="articleForm.invalid">Create</button>
-
-    <mat-spinner [diameter]="50" *ngIf="articleCreating$ | async"></mat-spinner>
-</form>
-
-</div>
+<its-create-article-dumb
+[currentUser]="currentUser$ | async"
+[articleCreating]="articleCreating$ | async"
+(createClick)="createArticle($event)"
+></its-create-article-dumb>

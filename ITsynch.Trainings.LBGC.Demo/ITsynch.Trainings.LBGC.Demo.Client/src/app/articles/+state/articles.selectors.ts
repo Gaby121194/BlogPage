@@ -11,6 +11,7 @@ export const selectUserState = createFeatureSelector<fromArticles.ArticleState>(
   
   export const getCurrentArticle = createSelector(selectUserState, (state) => state.currentArticle);
 
+  export const getArticleEdit = createSelector(selectUserState, (state) => state.articleToEdit);
   
   export const getArticlesApiLoading = createSelector(
     selectUserState,

@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
-import { User } from 'src/app/users/users.model';
+import { User } from '../../../users/users.model';
 import { Article } from '../../articles.model';
 
 @Component({
@@ -16,9 +16,11 @@ export class ListDumbComponentComponent implements OnInit, OnChanges {
   @Input()
   public currentUser: User;
 
-  @Output() deleteArticleClick = new EventEmitter<number>()
+  @Output() deleteArticleClick = new EventEmitter<number>();
+  
+  @Output() editArticleClick = new EventEmitter<number>();
 
-  filterArticles: Article[];
+  filterArticles: Article[]; 
 
   constructor(private router: Router) {
     
@@ -47,6 +49,10 @@ export class ListDumbComponentComponent implements OnInit, OnChanges {
 
   onDeleteArticleClicked(id: number){
     this.deleteArticleClick.emit(id);
+  }
+
+  onEditArticleClicked(id: number){
+    this.editArticleClick.emit(id);
   }
 
 

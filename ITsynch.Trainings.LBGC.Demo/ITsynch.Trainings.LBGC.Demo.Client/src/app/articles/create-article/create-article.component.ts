@@ -1,10 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { Observable, Subject } from 'rxjs';
-import { createArticle } from '../+state/articles.actions';
-import { getArticlesApiLoading } from '../+state/articles.selectors';
+import { takeUntil } from 'rxjs/operators';
+import { createArticle, editArticle, getArticleToEdit } from '../+state/articles.actions';
+import { getArticlesApiLoading, getArticleEdit, getCurrentArticle } from '../+state/articles.selectors';
 import { getCurrentUser } from '../../users/+state/users.selectors';
 import { User } from '../../users/users.model';
 import { Article } from '../articles.model';
@@ -14,40 +15,29 @@ import { Article } from '../articles.model';
   templateUrl: './create-article.component.html',
   styleUrls: ['./create-article.component.css']
 })
-export class CreateArticleComponent implements OnInit, OnDestroy {
-  articleForm = this.formBuilder.group({
-    title: ["", [Validators.required]],
-    content: ["", [Validators.required, Validators.minLength(5)]],
-    date: [ new Date() , [Validators.required]]
-  });
+export class CreateArticleComponent implements OnInit {
   article$ : Observable<Article>;
-  article : Article;
-  currentUser: User;
-  private unsubcribed$: Subject<void> = new Subject<void>();
+  articleForm: FormGroup;
+  currentUser$: Observable<User> = this.store.pipe(select(getCurrentUser));
   articleCreating$: Observable<boolean> = this.store.pipe(select(getArticlesApiLoading));
 
-  constructor(private formBuilder: FormBuilder, 
+  constructor(
             private store: Store,
             private router: Router) {
       
    }
 
   ngOnInit(): void {
-     this.store.pipe(select(getCurrentUser)).subscribe(user => this.currentUser = user)
     
   }
 
-   submitArticle()
+   createArticle(article : Article)
   {
-    this.article = this.articleForm.value;
-    this.article.user = this.currentUser;
-    this.store.dispatch(createArticle({ article: this.article }));
+    this.store.dispatch(createArticle({ article: article }));
     this.router.navigateByUrl("/articles")
   }
 
-  ngOnDestroy(): void {
-    this.unsubcribed$.next();
-    this.unsubcribed$.complete();
-  }
+
+
 
 }
