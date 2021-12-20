@@ -24,7 +24,6 @@ export class CreateCommentComponent implements OnInit {
     date: [new Date(), [Validators.required]]
   });
   currentUser: User;
-  comment$: Observable<Comment>;
   comment: Comment;
   commentCreating$: Observable<boolean> = this.store.pipe(select(getCommentsApiLoading));
   id: number;
@@ -39,6 +38,5 @@ export class CreateCommentComponent implements OnInit {
     this.comment.user = this.currentUser;
     this.comment.IdArticle = this.id;
     this.store.dispatch(createComment({ comment: this.comment }));
-    console.log(this.comment);
   }
 }

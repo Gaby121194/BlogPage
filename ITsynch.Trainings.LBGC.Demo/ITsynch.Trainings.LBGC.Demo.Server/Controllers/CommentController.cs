@@ -29,25 +29,8 @@ namespace ITsynch.Trainings.LBGC.Demo.Controllers
                 ?? throw new ArgumentNullException(nameof(mapper));
         }
 
-        // GET: api/<CommentController>
-        [HttpGet]
-        public async Task<IEnumerable<CommentDto>> GetAllCommentAsync()
-        {
-            var comment = await this.commentsService.GetAllCommentAsync();
-            return mapper.Map<IEnumerable<CommentDto>>(comment);
-        }
-
         // GET api/<CommentController>/5
         [HttpGet("{id}")]
-        public async Task<CommentDto> GetCommentsByArticleId(long id)
-        {
-            var comment = await this.commentsService.GetCommentByArticleId(id);
-            return mapper.Map<CommentDto>(comment);
-        }
-
-        // GET api/<CommentController>/5
-        [HttpGet]
-        [Route("articlecomments/{id}")]
         public async Task<IEnumerable<CommentDto>> GetAllCommentsByArticleId(long id)
         {
             var comment = await this.commentsService.GetAllCommentsByArticleId(id);

@@ -12,7 +12,7 @@ import { Article } from '../articles.model';
   templateUrl: './list-articles.component.html',
   styleUrls: ['./list-articles.component.css']
 })
-export class ListArticlesComponent implements OnInit, OnChanges{
+export class ListArticlesComponent implements OnInit{
   articles$: Observable<Article[]> = this.store.pipe(select(getArticles));
   currentUser$: Observable<User> = this.store.pipe(select(getCurrentUser))
 

@@ -29,12 +29,8 @@ export class CommentsService {
     )
   }
 
-  public getCommentsById(id: number): Observable<Comment> {
-    return this.httpClient.get<Comment>(`${this.baseApiUrl}/comments/${id}`)
-  }
-
   public getCommentsByArticleId(id: number): Observable<Comment[]> {
-    return this.httpClient.get<Comment[]>(`${this.baseApiUrl}/comments/articlecomments/${id}`)
+    return this.httpClient.get<Comment[]>(`${this.baseApiUrl}/comments/${id}`)
   }
   
 }

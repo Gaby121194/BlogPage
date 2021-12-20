@@ -6,7 +6,7 @@ export const commentFeatureKey = 'comment';
 
 export interface CommentState {
   currentArticleId: number | null;
-  comment: Comment;
+  lastCommentCreated: Comment;
   allComments: Comment[];
   apiState: 'idle' | 'loading' | 'error';
   error: any;
@@ -14,7 +14,7 @@ export interface CommentState {
 
 export const initialState: CommentState = {
   currentArticleId: null,
-  comment: null,
+  lastCommentCreated: null,
   allComments: [],
   apiState: 'idle',
   error: null,

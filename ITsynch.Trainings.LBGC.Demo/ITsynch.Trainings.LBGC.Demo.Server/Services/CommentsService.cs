@@ -20,12 +20,6 @@ namespace ITsynch.Trainings.LBGC.Demo.Services
                 ?? throw new ArgumentNullException(nameof(trainingsDemoContext));
         }
 
-        public async Task<IEnumerable<Comment>> GetAllCommentAsync()
-        {
-            var comments = await trainingsDemoContext.Comments.ToListAsync();
-            return comments.AsEnumerable();
-        }
-
         public async Task<IEnumerable<Comment>> GetAllCommentsByArticleId(long id)
         {
             var comments = await this.trainingsDemoContext.Comments.Where(comment => comment.IdArticle == id)
@@ -35,13 +29,6 @@ namespace ITsynch.Trainings.LBGC.Demo.Services
             return comments.AsEnumerable();
         }
 
-        public async Task<Comment> GetCommentByArticleId(long id)
-        {
-            //var comment = trainingsDemoContext.Comments.Where(comment => comment.IdArticle == id).Include(comment => comment.User).FirstOrDefault();
-            var comment = await trainingsDemoContext.Comments.FindAsync(id);
-            return comment;
-
-        }
         public async Task<Comment> CreateComment(Comment comment)
         {
             var user = trainingsDemoContext.Users.FirstOrDefault(user => user.Id == comment.User.Id);

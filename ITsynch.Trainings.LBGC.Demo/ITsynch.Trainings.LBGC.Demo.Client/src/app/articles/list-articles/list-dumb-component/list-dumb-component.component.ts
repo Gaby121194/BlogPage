@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
+import { User } from 'src/app/users/users.model';
 import { Article } from '../../articles.model';
 
 @Component({

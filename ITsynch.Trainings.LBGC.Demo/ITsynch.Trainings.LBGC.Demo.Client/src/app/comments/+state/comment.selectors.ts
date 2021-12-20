@@ -5,9 +5,7 @@ export const selectCommentState = createFeatureSelector<fromComment.CommentState
   fromComment.commentFeatureKey
 );
 
-export const getComment = createSelector(selectCommentState, (state) => state.comment);
-
-export const getCommentsById = createSelector(selectCommentState, (state) => state.currentArticleId);
+export const getCommentCreated = createSelector(selectCommentState, (state) => state.lastCommentCreated);
 
 export const getAllComments = createSelector(selectCommentState, (state) => state.allComments);
 
