@@ -39,9 +39,6 @@ namespace ITsynch.Trainings.LBGC.Demo.Persistence
 
             comments.HasKey(x => x.Id);
 
-            comments.Property(x => x.Username)
-                .IsRequired();
-
             comments.Property(x => x.Content)
                 .IsRequired();
 
@@ -50,6 +47,12 @@ namespace ITsynch.Trainings.LBGC.Demo.Persistence
 
             comments.Property(x => x.IdArticle)
                 .IsRequired();
+
+            comments.HasOne(x => x.User)
+            .WithMany();
+
+            comments.Navigation(x => x.User)
+            .UsePropertyAccessMode(PropertyAccessMode.Property);
 
             var articles = modelBuilder.Entity<Article>();
 

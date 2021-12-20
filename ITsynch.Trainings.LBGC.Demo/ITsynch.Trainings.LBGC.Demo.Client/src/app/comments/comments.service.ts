@@ -1,8 +1,9 @@
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { ITSYNCH_TRAININGS_DEMO_BASE_API_URL } from '../app.tokens';
-import { Comments } from './comments.model';
+import { Comment } from './comment.model';
+import { tap } from 'rxjs/operators';
 
 
 @Injectable({
@@ -10,17 +11,27 @@ import { Comments } from './comments.model';
 })
 export class CommentsService {
 
+  private _refresh$ = new Subject<void>();
   constructor(
     @Inject(ITSYNCH_TRAININGS_DEMO_BASE_API_URL) private baseApiUrl: string,
     private httpClient: HttpClient
   ) { }
 
-  public postComment(comment: Comments): Observable<Comments> {
-    return this.httpClient.post<Comments>(`${this.baseApiUrl}/comment`, comment)
+  get refresh$(){
+    return this._refresh$;
+  }
+  public postComment(comment: Comment): Observable<Comment> {
+    return this.httpClient.post<Comment>(`${this.baseApiUrl}/comments`, comment)
+    .pipe(
+      tap(() => {
+        this._refresh$.next();
+      })
+    )
   }
 
-  public getCommentsById(id: number): Observable<Comments> {
-    return this.httpClient.get<Comments>(`${this.baseApiUrl}/comment/${id}`)
+  public getCommentsByArticleId(id: number): Observable<Comment[]> {
+    return this.httpClient.get<Comment[]>(`${this.baseApiUrl}/comments/${id}`)
   }
+  
 }
 

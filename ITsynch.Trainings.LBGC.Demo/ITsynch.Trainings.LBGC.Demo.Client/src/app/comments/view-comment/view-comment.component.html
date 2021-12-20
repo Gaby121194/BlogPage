@@ -1,1 +1,3 @@
-<its-view-dumb-comment [comment]="comments$ | async"></its-view-dumb-comment>
+<div *ngFor = "let comment of comments$ | async">
+    <its-view-dumb-comment [comment]="comment"></its-view-dumb-comment>
+</div>

@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Comments } from '../../comments.model';
+import { Comment } from '../../comment.model';
 
 @Component({
   selector: 'its-view-dumb-comment',
@@ -7,7 +7,7 @@ import { Comments } from '../../comments.model';
   styleUrls: ['./view-dumb-comment.component.css']
 })
 export class ViewDumbCommentComponent implements OnInit {
-  @Input() public comment: Comments;
+  @Input() public comment: Comment;
   constructor() { }
 
   ngOnInit(): void {

@@ -40,7 +40,8 @@ import { ViewDumbCommentComponent } from './view-comment/view-dumb-comment/view-
   ],
   exports: [
     CreateCommentComponent,
-    ViewCommentComponent
+    ViewCommentComponent,
+    ViewDumbCommentComponent
   ]
 })
 export class CommentsModule {

@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace ITsynch.Trainings.LBGC.Demo.Controllers
 {
-    [Route("comment")]
+    [Route("comments")]
     [ApiController]
     public class CommentController : ControllerBase
     {
@@ -29,20 +29,12 @@ namespace ITsynch.Trainings.LBGC.Demo.Controllers
                 ?? throw new ArgumentNullException(nameof(mapper));
         }
 
-        // GET: api/<CommentController>
-        [HttpGet]
-        public async Task<IEnumerable<CommentDto>> GetAllCommentAsync()
-        {
-            var comment = await this.commentsService.GetAllCommentAsync();
-            return mapper.Map<IEnumerable<CommentDto>>(comment);
-        }
-
         // GET api/<CommentController>/5
         [HttpGet("{id}")]
-        public async Task<Comment> GetCommentsById(long id)
+        public async Task<IEnumerable<CommentDto>> GetAllCommentsByArticleId(long id)
         {
-            var comment = await this.commentsService.GetCommentById(id);
-            return comment;
+            var comment = await this.commentsService.GetAllCommentsByArticleId(id);
+            return mapper.Map<IEnumerable<CommentDto>>(comment);
         }
 
         // POST api/<CommentController>

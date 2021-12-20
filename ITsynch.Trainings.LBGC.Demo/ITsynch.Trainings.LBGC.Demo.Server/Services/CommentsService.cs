@@ -20,25 +20,19 @@ namespace ITsynch.Trainings.LBGC.Demo.Services
                 ?? throw new ArgumentNullException(nameof(trainingsDemoContext));
         }
 
-        public async Task<IEnumerable<Comment>> GetAllCommentAsync()
+        public async Task<IEnumerable<Comment>> GetAllCommentsByArticleId(long id)
         {
-            var comments = await trainingsDemoContext.Comments.ToListAsync();
+            var comments = await this.trainingsDemoContext.Comments.Where(comment => comment.IdArticle == id)
+                                                             .OrderByDescending(art => art.Date)
+                                                             .Include(comment => comment.User)
+                                                             .ToListAsync();
             return comments.AsEnumerable();
         }
 
-        public async Task<IEnumerable<Comment>> GetAllCommentsById(long id)
-        {
-            var comments = this.trainingsDemoContext.Comments.OrderByDescending(art => art.Date);
-            return comments.AsEnumerable();
-        }
-
-        public async Task<Comment> GetCommentById(long id)
-        {
-            var comment = await trainingsDemoContext.Comments.FindAsync(id);
-            return comment;
-        }
         public async Task<Comment> CreateComment(Comment comment)
         {
+            var user = trainingsDemoContext.Users.FirstOrDefault(user => user.Id == comment.User.Id);
+            comment.User = user;
             var _comment = this.trainingsDemoContext.Add<Comment>(comment);
             var result = await this.trainingsDemoContext.SaveChangesAsync();
             return comment;

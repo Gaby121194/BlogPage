@@ -16,7 +16,7 @@ import { ListDumbComponentComponent } from './list-articles/list-dumb-component/
 import { ViewArticleComponent } from './view-article/view-article.component';
 import { ViewDumbComponent } from './view-article/view-dumb/view-dumb.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import { CommentsModule } from '../comments/comments.module';
+import { CommentsModule } from '../comments/comment.module';
 import { EditArticleComponent } from './edit-article/edit-article.component';
 import { EditArticleDumbComponent } from './edit-article/edit-article-dumb/edit-article-dumb.component';
 import { CreateArticleDumbComponent } from './create-article/create-article-dumb/create-article-dumb.component';

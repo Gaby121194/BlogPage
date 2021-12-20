@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ITsynch.Trainings.LBGC.Demo.Migrations
 {
     [DbContext(typeof(TrainingsDemoContext))]
-    [Migration("20211216141948_AddDeletePropertytoArticles")]
-    partial class AddDeletePropertytoArticles
+    [Migration("20211220115228_InitialMigration")]
+    partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -69,11 +69,12 @@ namespace ITsynch.Trainings.LBGC.Demo.Migrations
                     b.Property<long>("IdArticle")
                         .HasColumnType("bigint");
 
-                    b.Property<string>("Username")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<long?>("UserId")
+                        .HasColumnType("bigint");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("comments");
                 });
@@ -103,6 +104,15 @@ namespace ITsynch.Trainings.LBGC.Demo.Migrations
                 });
 
             modelBuilder.Entity("ITsynch.Trainings.LBGC.Demo.Models.Article", b =>
+                {
+                    b.HasOne("ITsynch.Trainings.LBGC.Demo.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("ITsynch.Trainings.LBGC.Demo.Models.Comment", b =>
                 {
                     b.HasOne("ITsynch.Trainings.LBGC.Demo.Models.User", "User")
                         .WithMany()

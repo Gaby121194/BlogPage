@@ -16,7 +16,7 @@ import { UsersModule } from './users/users.module';
 import { appRoutes } from './app.routes';
 import { ArticlesModule } from './articles/articles.module';
 import { CreateCommentComponent } from './comments/create-comment/create-comment.component';
-import { CommentsModule } from './comments/comments.module';
+import { CommentsModule } from './comments/comment.module';
 
 
 @NgModule({
