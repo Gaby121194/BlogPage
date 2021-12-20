@@ -49,18 +49,20 @@ namespace ITsynch.Trainings.LBGC.Demo.Controllers
         public async Task<ArticleDto> PostArticle(Article article)
         {
             var _article = await this.articlesService.CreateArticle(article);
-            return mapper.Map<ArticleDto>(_article); ;
+            return mapper.Map<ArticleDto>(_article); 
         }
 
         // PUT api/<ArticleController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public async Task<ArticleDto> PutArticle(long id, Article article)
         {
+            var _article = await this.articlesService.EditArticle(id,article);
+            return mapper.Map<ArticleDto>(_article); ;
         }
 
         // DELETE api/<ArticleController>/5
         [HttpDelete("{id}")]
-        public async Task<ArticleDto> Delete(long id)
+        public async Task<ArticleDto> DeleteArticle(long id)
         {
             var article = await this.articlesService.DeleteArticle(id);
             return mapper.Map<ArticleDto>(article);

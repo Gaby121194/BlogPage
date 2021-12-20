@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { confirmDeleteArticle, deleteArticle, deleteConfirmArticle, getCurrentArticleById, loadArticles } from '../+state/articles.actions';
+import { confirmDeleteArticle, getCurrentArticleById } from '../+state/articles.actions';
 import { getCurrentArticle } from '../+state/articles.selectors';
 import { getCurrentUser } from '../../users/+state/users.selectors';
 import { User } from '../../users/users.model';
