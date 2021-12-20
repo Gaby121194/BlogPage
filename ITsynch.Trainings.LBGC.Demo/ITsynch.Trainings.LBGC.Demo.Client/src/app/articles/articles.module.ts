@@ -17,6 +17,7 @@ import { ViewArticleComponent } from './view-article/view-article.component';
 import { ViewDumbComponent } from './view-article/view-dumb/view-dumb.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { CommentsModule } from '../comments/comments.module';
+import { CreateArticleDumbComponent } from './create-article/create-article-dumb/create-article-dumb.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { CommentsModule } from '../comments/comments.module';
     ListArticlesComponent,
     ListDumbComponentComponent,
     ViewArticleComponent,
-    ViewDumbComponent
+    ViewDumbComponent,
+    CreateArticleDumbComponent
   ],
   imports: [
     CommonModule,

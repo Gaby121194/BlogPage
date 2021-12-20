@@ -10,6 +10,7 @@ export interface ArticleState {
   articles: Article[];
   lastArticleCreated: Article;
   lastArticleDeleted: Article;
+  articleToEdit: Article;
   currentArticle: Article;
   apiState: 'idle' | 'loading' | 'error';
   error: any;
@@ -20,6 +21,7 @@ export const initialState: ArticleState = {
   lastArticleCreated: null,
   currentArticle: null,
   lastArticleDeleted: null,
+  articleToEdit: null,
   articles: [],
   apiState: 'idle',
   error: null,
@@ -52,8 +54,8 @@ export const articlesReducer = createReducer<ArticleState,Action>(
     return { ...state, error : error, apiState: "error", currentArticleId: null}
   }),
 
-  on(ArticlesActions.createArticleSucess, (state, { article}) => {
-    let _articles = state.articles.concat(article)
+  on(ArticlesActions.createArticleSucess, (state, { article }) => {
+    let _articles = [article, ...state.articles]
     return { ...state, articles: _articles , lastArticleCreated: article, apiState: "idle" };
   }),
 
@@ -78,7 +80,36 @@ export const articlesReducer = createReducer<ArticleState,Action>(
 
   on(ArticlesActions.deleteArticleFailure, (state, {error}) => {
     return { ...state, error : error, apiState: "error"}
-  })
+  }),
+
+  
+
+  on(ArticlesActions.editArticle, (state) => ({
+    ...state,
+    apiState: 'loading',
+  })),
+
+  on(ArticlesActions.editArticleSucess, (state, { article }) => {
+    let _articles = state.articles.filter((art) => art.id !== article.id)
+    _articles.unshift(article)
+    return { ...state, articles: _articles, apiState: "idle" , articleToEdit: null};
+  }),
+
+  on(ArticlesActions.editArticleFailure, (state, {error}) => {
+    return { ...state, error : error, apiState: "error", articleToEdit: null}
+  }),
+
+  on(ArticlesActions.getArticleToEdit, (state) => {
+    return {...state, apiState: 'loading'};
+  }),
+
+  on(ArticlesActions.getArticleToEditSuccess, (state, { article }) => {
+    return { ...state, articleToEdit: article, apiState: "idle" };
+  }),
+
+  on(ArticlesActions.getArticleToEditFailure, (state, {error}) => {
+    return { ...state, error : error, apiState: "error"}
+  }),
 
 );
 

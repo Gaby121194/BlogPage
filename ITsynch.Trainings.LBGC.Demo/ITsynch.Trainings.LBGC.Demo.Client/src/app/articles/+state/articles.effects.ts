@@ -39,6 +39,18 @@ export class ArticlesEffects {
     );
   });
 
+  editArticle$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ArticlesActions.editArticle),
+      switchMap(({article, articleId}) =>
+        this.articlesService.editArticle(articleId, article).pipe(
+          map((article) => ArticlesActions.editArticleSucess({ article })),
+          catchError((error) => of(ArticlesActions.editArticleFailure({ error })))
+        )
+      )
+    );
+  });
+
   confirmDeleteArticle$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ArticlesActions.confirmDeleteArticle),
@@ -75,12 +87,38 @@ export class ArticlesEffects {
     );
   });
 
+  getArticleToEdit$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ArticlesActions.getArticleToEdit),
+      switchMap(({articleId}) =>
+        this.articlesService.getArticleById(articleId).pipe(
+          map((article) => ArticlesActions.getArticleToEditSuccess({ article })),
+          catchError((error) => of(ArticlesActions.getArticleToEditFailure({ error })))
+        )
+      )
+    );
+  });
+
   createArticleSuccess$ = createEffect(
     () => {
       return this.actions$.pipe(
         ofType(ArticlesActions.createArticleSucess),
         tap(() => {
-          this.snackBar.open('Article creating successfully', 'Acept', {
+          this.snackBar.open('Article created successfully', 'Acept', {
+            duration: 3000,
+          });
+        })
+      );
+    },
+    { dispatch: false }
+  );
+
+  editArticleSuccess$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(ArticlesActions.editArticleSucess),
+        tap(() => {
+          this.snackBar.open('Article edited successfully', 'Acept', {
             duration: 3000,
           });
         })

@@ -1,4 +1,5 @@
 <its-list-dumb-component 
 [articles]="articles$ | async"
 [currentUser]="currentUser$ | async"
-(deleteArticleClick)="deleteArticle($event)"></its-list-dumb-component>
+(deleteArticleClick)="deleteArticle($event)"
+(editArticleClick)="navigateToEditArticle($event)"></its-list-dumb-component>

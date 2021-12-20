@@ -11,6 +11,10 @@ export const appRoutes: Routes = [
     component: CreateArticleComponent,
   },
   {
+    path: 'articles/create/:id',
+    component: CreateArticleComponent,
+  },
+  {
     path: 'users',
     component: UsersHomeComponent
   },

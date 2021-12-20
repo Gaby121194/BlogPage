@@ -32,6 +32,36 @@ export const createArticleFailure = createAction(
   props<{ error: any }>()
 );
 
+export const getArticleToEdit = createAction(
+  '[Articles] Get article to edit by id',
+  props<{ articleId: number }>()
+);
+
+export const getArticleToEditSuccess = createAction(
+  '[Articles] Get article to edit by id success',
+  props<{ article: Article }>()
+);
+
+export const getArticleToEditFailure = createAction(
+  '[Articles] Get article to edit by id failure',
+  props<{ error: any }>()
+);
+
+export const editArticle = createAction(
+  '[Articles] Edit Article',
+  props< {article : Article, articleId: number}>()
+);
+
+export const editArticleSucess = createAction(
+  '[Articles] Edit Article Success',
+  props<{ article: Article }>()
+);
+
+export const editArticleFailure = createAction(
+  '[Articles] Edit Article Failure',
+  props<{ error: any }>()
+);
+
 export const deleteArticle = createAction(
   '[Articles] Delete Article',
   props< {articleId : number}>()
