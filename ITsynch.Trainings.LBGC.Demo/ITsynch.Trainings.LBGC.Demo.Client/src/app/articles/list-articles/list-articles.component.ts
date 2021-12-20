@@ -29,7 +29,7 @@ export class ListArticlesComponent implements OnInit {
   }
 
   navigateToEditArticle(id: number){
-    this.router.navigateByUrl(`articles/create/${id}`)
+    this.router.navigateByUrl(`articles/edit/${id}`)
   }
   
 
