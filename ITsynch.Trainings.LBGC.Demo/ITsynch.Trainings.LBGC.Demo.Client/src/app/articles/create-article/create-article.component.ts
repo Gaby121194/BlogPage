@@ -18,25 +18,16 @@ import { Article } from '../articles.model';
 export class CreateArticleComponent implements OnInit {
   article$ : Observable<Article>;
   articleForm: FormGroup;
-  article : Article;
   currentUser$: Observable<User> = this.store.pipe(select(getCurrentUser));
-  articleToEdit$: Observable<Article> = this.store.pipe(select(getArticleEdit));
   articleCreating$: Observable<boolean> = this.store.pipe(select(getArticlesApiLoading));
 
   constructor(
             private store: Store,
-            private router: Router,
-            private activeRoute: ActivatedRoute) {
+            private router: Router) {
       
    }
 
   ngOnInit(): void {
-     
-     let id = this.activeRoute.snapshot.params.id as number
-     if(id){
-      this.store.dispatch(getArticleToEdit({articleId: id}))
-
-     }
     
   }
 
@@ -46,11 +37,7 @@ export class CreateArticleComponent implements OnInit {
     this.router.navigateByUrl("/articles")
   }
 
-  editArticle(art: Article)
-  {
-    this.store.dispatch(editArticle({articleId: art.id, article: art}))
-    this.router.navigateByUrl("/articles")
-  }
+
 
 
 }
