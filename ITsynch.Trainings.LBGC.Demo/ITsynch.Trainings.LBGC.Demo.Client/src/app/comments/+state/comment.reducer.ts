@@ -24,7 +24,7 @@ export const commentReducer = createReducer<CommentState, Action>(
   initialState,
 
   on(CommentActions.createCommentSucess, (state, { comment }) => {
-    return { ...state, commentCreated: comment, apiState: "idle" };
+    return { ...state, lastCommentCreated: comment, apiState: "idle" };
   }),
 
   on(CommentActions.createComment, (state) => ({
