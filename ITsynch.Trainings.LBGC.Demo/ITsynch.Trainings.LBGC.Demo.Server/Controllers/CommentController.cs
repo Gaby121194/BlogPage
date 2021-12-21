@@ -53,8 +53,10 @@ namespace ITsynch.Trainings.LBGC.Demo.Controllers
 
         // DELETE api/<CommentController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<CommentDto> Delete(long id)
         {
+            var comment = await this.commentsService.DeleteComment(id);
+            return mapper.Map<CommentDto>(comment);
         }
     }
 }

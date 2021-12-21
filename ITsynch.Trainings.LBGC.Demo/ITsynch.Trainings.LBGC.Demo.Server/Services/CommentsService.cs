@@ -3,7 +3,6 @@ using ITsynch.Trainings.LBGC.Demo.Persistence;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -34,7 +33,16 @@ namespace ITsynch.Trainings.LBGC.Demo.Services
             var user = trainingsDemoContext.Users.FirstOrDefault(user => user.Id == comment.User.Id);
             comment.User = user;
             var _comment = this.trainingsDemoContext.Add<Comment>(comment);
-            var result = await this.trainingsDemoContext.SaveChangesAsync();
+            await this.trainingsDemoContext.SaveChangesAsync();
+            return comment;
+        }
+
+        public async Task<Comment> DeleteComment(long id)
+        {
+            var comment = this.trainingsDemoContext.Comments.FirstOrDefault(comment => comment.Id == id);
+            this.trainingsDemoContext.Comments.Remove(comment);
+            await this.trainingsDemoContext.SaveChangesAsync();
+
             return comment;
         }
     }

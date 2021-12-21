@@ -81,13 +81,13 @@ namespace ITsynch.Trainings.LBGC.Demo.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "users");
-            
-            migrationBuilder.DropTable(
                 name: "articles");
 
             migrationBuilder.DropTable(
                 name: "comments");
+
+            migrationBuilder.DropTable(
+                name: "users");
         }
     }
 }

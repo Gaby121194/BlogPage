@@ -1,3 +1,6 @@
+<hr size="1px" color="gray" />
+<h2>Comentarios</h2>
 <div *ngFor = "let comment of comments$ | async">
-    <its-view-dumb-comment [comment]="comment"></its-view-dumb-comment>
+    <its-view-dumb-comment [comment]="comment" [currentUser]="currentUser$ | async" 
+    (deleteCommentClick)="deleteComment($event)"></its-view-dumb-comment>
 </div>

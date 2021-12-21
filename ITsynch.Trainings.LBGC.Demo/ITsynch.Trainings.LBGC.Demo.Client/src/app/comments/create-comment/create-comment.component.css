@@ -8,3 +8,8 @@ h4 {
   font-style: italic;
   text-align: left;
 }
+
+h2 {
+  margin: 10px 70px;
+  font-style: normal;
+}
