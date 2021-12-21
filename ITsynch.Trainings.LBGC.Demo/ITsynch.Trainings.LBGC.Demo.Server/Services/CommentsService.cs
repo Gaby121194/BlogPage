@@ -40,11 +40,9 @@ namespace ITsynch.Trainings.LBGC.Demo.Services
         public async Task<Comment> DeleteComment(long id)
         {
             var comment = this.trainingsDemoContext.Comments.FirstOrDefault(comment => comment.Id == id);
-            if (comment != null)
-            {
-                this.trainingsDemoContext.Comments.Remove(comment);
-                await this.trainingsDemoContext.SaveChangesAsync();
-            }
+            this.trainingsDemoContext.Comments.Remove(comment);
+            await this.trainingsDemoContext.SaveChangesAsync();
+
             return comment;
         }
     }

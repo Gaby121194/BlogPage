@@ -35,9 +35,5 @@ export class ViewCommentComponent implements OnInit {
   
   deleteComment(event : number){
     this.store.dispatch(confirmDeleteComment({CommentId: event}));
-    this.suscription = this.commentService.refresh$.subscribe(() => {
-      let id = this.activatedRoute.snapshot.params.id as number;
-      this.store.dispatch(getAllCommentsByArticleId({ IdArticle: id }));
-    })
   }
 }
