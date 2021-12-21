@@ -75,6 +75,20 @@ export class ArticlesEffects {
     );
   });
 
+  filterArticles$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ArticlesActions.filterArticles),
+      switchMap(({filter}) =>
+        this.articlesService.filterArticles(filter).pipe(
+          map((articles) => ArticlesActions.filterArticlesSuccess({ articles })),
+          catchError((error) => of(ArticlesActions.loadArticlesFailure({ error })))
+        )
+      )
+    );
+  });
+
+
+
   getArticle$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ArticlesActions.getCurrentArticleById),

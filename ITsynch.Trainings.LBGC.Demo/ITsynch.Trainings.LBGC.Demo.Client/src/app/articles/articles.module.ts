@@ -20,6 +20,10 @@ import { CommentsModule } from '../comments/comment.module';
 import { EditArticleComponent } from './edit-article/edit-article.component';
 import { EditArticleDumbComponent } from './edit-article/edit-article-dumb/edit-article-dumb.component';
 import { CreateArticleDumbComponent } from './create-article/create-article-dumb/create-article-dumb.component';
+import {MatSelectModule} from '@angular/material/select';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -43,7 +47,11 @@ import { CreateArticleDumbComponent } from './create-article/create-article-dumb
     MatCardModule,
     MatAutocompleteModule,
     MatProgressSpinnerModule,
-    CommentsModule
+    CommentsModule,
+    MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatIconModule
   ],
   exports:[
     CreateArticleComponent

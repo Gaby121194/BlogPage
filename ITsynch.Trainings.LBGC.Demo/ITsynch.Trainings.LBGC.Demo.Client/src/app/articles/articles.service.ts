@@ -2,7 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ITSYNCH_TRAININGS_DEMO_BASE_API_URL } from '../app.tokens';
-import { Article } from './articles.model';
+import { Article } from './models/articles.model';
+import { Filter } from './models/filter.model';
 
 @Injectable({
   providedIn: 'root'
@@ -32,6 +33,10 @@ export class ArticlesService {
 
   public deleteArticle(id: number): Observable<Article> {
     return this.httpClient.delete<Article>(`${this.baseApiUrl}/articles/${id}`)
+  }
+
+  public filterArticles(filter: Filter): Observable<Article[]>{
+    return this.httpClient.post<Article[]>(`${this.baseApiUrl}/articles/searchArticles`, filter)
   }
   
 }

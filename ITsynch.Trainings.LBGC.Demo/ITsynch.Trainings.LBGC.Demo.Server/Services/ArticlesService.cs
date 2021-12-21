@@ -36,6 +36,31 @@ namespace ITsynch.Trainings.LBGC.Demo.Services
             return article;
         }
 
+        public async Task<IEnumerable<Article>> SearchArticles(ArticleFilter filter)
+        {
+
+            var query = this.trainingsDemoContext.Articles.Include(article => article.User)
+                                                              .Where(article => article.Delete == false);
+            if (!String.IsNullOrEmpty(filter.SearchTitle))
+            {
+                query = query.Where(article => article.Title.Contains(filter.SearchTitle));
+            }
+            if (filter.SearchAuthors != null)
+            {
+                query = query.Where(article => filter.SearchAuthors.Contains(article.User.Id));
+
+            }
+            if(filter.MaxDate != null)
+            {
+                query = query.Where(article => article.Date <= filter.MaxDate);
+            }
+            if (filter.MinDate != null)
+            {
+                query = query.Where(article => article.Date >= filter.MinDate);
+            }
+            return query.OrderByDescending(art => art.Date).AsEnumerable();
+        }
+
         public async Task<Article> CreateArticle(Article article)
         {
             var user = trainingsDemoContext.Users.FirstOrDefault(user => user.Id == article.User.Id);

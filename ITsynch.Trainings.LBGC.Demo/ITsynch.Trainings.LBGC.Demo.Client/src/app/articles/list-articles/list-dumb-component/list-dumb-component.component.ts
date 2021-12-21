@@ -1,7 +1,9 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { User } from '../../../users/users.model';
-import { Article } from '../../articles.model';
+import { Article } from '../../models/articles.model';
+import { Filter } from '../../models/filter.model';
 
 @Component({
   selector: 'its-list-dumb-component',
@@ -20,24 +22,30 @@ export class ListDumbComponentComponent implements OnInit, OnChanges {
   
   @Output() editArticleClick = new EventEmitter<number>();
 
-  filterArticles: Article[]; 
+  @Output() filterClick= new EventEmitter<Filter>();
 
-  constructor(private router: Router) {
+  filterArticles: Filter; 
+  filterForm: FormGroup = this.formBuilder.group({
+    searchTitle: [""],
+    searchAuthors: [null],
+    minDate: [],
+    maxDate: []
+  })
+  @Input()
+  public users: User[];
+
+  constructor(private router: Router, private formBuilder: FormBuilder) {
     
    }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    
+  }
   
 
   ngOnChanges(): void {
-    this.filterArticles = this.articles;
   }
 
-  searchArticle(input : string) 
-  {
-    this.filterArticles = this.articles;
-    this.filterArticles = this.filterArticles.filter((article)=> article.title.toLowerCase().includes(input.toLowerCase()))
-  }
 
   visitArticle(id: number){
     this.router.navigateByUrl(`articles/${id}`)
@@ -53,6 +61,16 @@ export class ListDumbComponentComponent implements OnInit, OnChanges {
 
   onEditArticleClicked(id: number){
     this.editArticleClick.emit(id);
+  }
+
+
+  onFilterClicked(){
+    this.filterClick.emit(this.filterForm.value);
+  }
+
+  cleanFilter(){
+    this.filterForm.reset()
+    this.filterClick.emit(this.filterForm.value);
   }
 
 
