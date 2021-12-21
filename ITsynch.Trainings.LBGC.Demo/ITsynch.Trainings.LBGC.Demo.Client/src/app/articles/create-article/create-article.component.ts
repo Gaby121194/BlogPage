@@ -8,7 +8,7 @@ import { createArticle, editArticle, getArticleToEdit } from '../+state/articles
 import { getArticlesApiLoading, getArticleEdit, getCurrentArticle } from '../+state/articles.selectors';
 import { getCurrentUser } from '../../users/+state/users.selectors';
 import { User } from '../../users/users.model';
-import { Article } from '../articles.model';
+import { Article } from '../models/articles.model';
 
 @Component({
   selector: 'its-create-article',

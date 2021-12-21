@@ -1,4 +1,4 @@
-import { User } from "../users/users.model";
+import { User } from "../../users/users.model";
 
 export interface Article {
     user: User;

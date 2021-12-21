@@ -6,7 +6,7 @@ import { confirmDeleteArticle, getCurrentArticleById } from '../+state/articles.
 import { getCurrentArticle } from '../+state/articles.selectors';
 import { getCurrentUser } from '../../users/+state/users.selectors';
 import { User } from '../../users/users.model';
-import { Article } from '../articles.model';
+import { Article } from '../models/articles.model';
 
 @Component({
   selector: 'its-view-article',

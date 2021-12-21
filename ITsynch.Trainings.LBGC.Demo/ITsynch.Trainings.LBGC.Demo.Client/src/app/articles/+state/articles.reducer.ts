@@ -1,6 +1,6 @@
 
 import { Action, createReducer, on } from '@ngrx/store';
-import { Article } from '../articles.model';
+import { Article } from '../models/articles.model';
 import * as ArticlesActions from './articles.actions'
 
 export const articlesFeatureKey = 'articles';
@@ -105,6 +105,18 @@ export const articlesReducer = createReducer<ArticleState,Action>(
 
   on(ArticlesActions.getArticleToEditSuccess, (state, { article }) => {
     return { ...state, articleToEdit: article, apiState: "idle" };
+  }),
+
+  on(ArticlesActions.getArticleToEditFailure, (state, {error}) => {
+    return { ...state, error : error, apiState: "error"}
+  }),
+
+  on(ArticlesActions.filterArticles, (state) => {
+    return {...state, apiState: 'loading'};
+  }),
+
+  on(ArticlesActions.filterArticlesSuccess, (state, { articles }) => {
+    return { ...state, articles: articles, apiState: "idle" };
   }),
 
   on(ArticlesActions.getArticleToEditFailure, (state, {error}) => {

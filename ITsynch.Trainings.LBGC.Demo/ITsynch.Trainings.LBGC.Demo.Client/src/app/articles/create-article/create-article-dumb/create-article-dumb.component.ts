@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from '../../../users/users.model';
-import { Article } from '../../articles.model';
+import { Article } from '../../models/articles.model';
 
 @Component({
   selector: 'its-create-article-dumb',

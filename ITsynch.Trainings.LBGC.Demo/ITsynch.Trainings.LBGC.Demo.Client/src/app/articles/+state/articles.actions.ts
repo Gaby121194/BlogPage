@@ -1,5 +1,6 @@
 import { createAction, props } from '@ngrx/store';
-import { Article } from '../articles.model';
+import { Article } from '../models/articles.model';
+import { Filter } from '../models/filter.model';
 
 export const effectInitialized = createAction('[Articles] Articles effect initialized');
 
@@ -94,5 +95,20 @@ export const getCurrentArticleByIdSuccess = createAction(
 
 export const getCurrentArticleByIdFailure = createAction(
   '[Articles] Get current article by id failure',
+  props<{ error: any }>()
+);
+
+export const filterArticles = createAction(
+  '[Articles] Filter articles',
+  props<{ filter: Filter }>()
+);
+
+export const filterArticlesSuccess = createAction(
+  '[Articles] Filter articles success',
+  props<{ articles: Article[] }>()
+);
+
+export const filterArticlesFailure = createAction(
+  '[Articles] Filter articles failure',
   props<{ error: any }>()
 );

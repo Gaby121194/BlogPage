@@ -44,6 +44,15 @@ namespace ITsynch.Trainings.LBGC.Demo.Controllers
             return article;
         }
 
+        // Get api/<ArticleControllet>
+        [HttpPost("[action]")]
+
+        public async Task<IEnumerable<ArticleDto>> SearchArticles(ArticleFilter filter)
+        {
+            var articles = await articlesService.SearchArticles(filter);
+            return mapper.Map<IEnumerable<ArticleDto>>(articles);
+        }
+
         // POST api/<ArticleController>
         [HttpPost]
         public async Task<ArticleDto> PostArticle(Article article)

@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { User } from '../../../users/users.model';
-import { Article } from '../../articles.model';
+import { Article } from '../../models/articles.model';
 
 @Component({
   selector: 'its-view-dumb',

@@ -18,6 +18,10 @@ import { ViewDumbComponent } from './view-article/view-dumb/view-dumb.component'
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { CommentsModule } from '../comments/comments.module';
 import { CreateArticleDumbComponent } from './create-article/create-article-dumb/create-article-dumb.component';
+import {MatSelectModule} from '@angular/material/select';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -39,7 +43,11 @@ import { CreateArticleDumbComponent } from './create-article/create-article-dumb
     MatCardModule,
     MatAutocompleteModule,
     MatProgressSpinnerModule,
-    CommentsModule
+    CommentsModule,
+    MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatIconModule
   ],
   exports:[
     CreateArticleComponent
