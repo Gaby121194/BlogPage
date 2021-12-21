@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ITsynch.Trainings.LBGC.Demo.Migrations
 {
     [DbContext(typeof(TrainingsDemoContext))]
-    [Migration("20211220115228_InitialMigration")]
+    [Migration("20211221180337_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

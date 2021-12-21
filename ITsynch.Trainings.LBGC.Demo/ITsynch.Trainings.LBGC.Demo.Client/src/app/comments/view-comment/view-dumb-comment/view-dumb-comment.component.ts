@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { User } from 'src/app/users/users.model';
 import { Comment } from '../../comment.model';
 
 @Component({
@@ -8,9 +9,16 @@ import { Comment } from '../../comment.model';
 })
 export class ViewDumbCommentComponent implements OnInit {
   @Input() public comment: Comment;
+  @Input() public currentUser: User;
+
+  @Output() deleteCommentClick = new EventEmitter<number>();
+  
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  onDeleteCommentClicked(id: number){
+    this.deleteCommentClick.emit(id);
+  }
 }

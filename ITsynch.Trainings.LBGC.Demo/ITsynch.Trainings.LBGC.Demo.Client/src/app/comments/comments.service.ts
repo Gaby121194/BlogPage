@@ -32,6 +32,15 @@ export class CommentsService {
   public getCommentsByArticleId(id: number): Observable<Comment[]> {
     return this.httpClient.get<Comment[]>(`${this.baseApiUrl}/comments/${id}`)
   }
+
+  public deleteComment(id: number): Observable<Comment> {
+    return this.httpClient.delete<Comment>(`${this.baseApiUrl}/comments/${id}`)
+    .pipe(
+      tap(() => {
+        this._refresh$.next();
+      })
+    )
+  }
   
 }
 

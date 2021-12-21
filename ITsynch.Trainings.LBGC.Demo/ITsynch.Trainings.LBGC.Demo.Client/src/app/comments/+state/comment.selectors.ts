@@ -9,7 +9,6 @@ export const getCommentCreated = createSelector(selectCommentState, (state) => s
 
 export const getAllComments = createSelector(selectCommentState, (state) => state.allComments);
 
-
 export const getCommentsApiLoading = createSelector(
   selectCommentState,
   (state) => state.apiState === 'loading'

@@ -5,4 +5,5 @@ export interface Comment {
   content: string;
   date: Date;
   IdArticle: number;
+  id: number;
 }

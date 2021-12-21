@@ -1,8 +1,9 @@
 <div class="body" *ngIf="comment">
   <div class="contentComment">
-    <span>Autor: {{comment.user?.username}}</span> <span class="date">Creation Date: {{comment.date | date}}</span>
+    <span>Autor: {{comment.user?.username}}</span> <span class="date"> Creation Date: {{comment.date | date}}</span>
   </div>
   <p>
     {{comment.content}}
   </p>
+  <button mat-raised-button color="warn" *ngIf="comment.user?.id === currentUser?.id" (click)="onDeleteCommentClicked(comment.id)">Delete comment</button>
 </div>

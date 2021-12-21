@@ -7,6 +7,7 @@ export const commentFeatureKey = 'comment';
 export interface CommentState {
   currentArticleId: number | null;
   lastCommentCreated: Comment;
+  lastCommentDeleted: Comment;
   allComments: Comment[];
   apiState: 'idle' | 'loading' | 'error';
   error: any;
@@ -15,6 +16,7 @@ export interface CommentState {
 export const initialState: CommentState = {
   currentArticleId: null,
   lastCommentCreated: null,
+  lastCommentDeleted: null,
   allComments: [],
   apiState: 'idle',
   error: null,
@@ -47,6 +49,21 @@ export const commentReducer = createReducer<CommentState, Action>(
   on(CommentActions.getAllCommentsByArticleIdFailure, (state, { error }) => {
     return { ...state, error: error, apiState: "error", currentArticleId: null }
   }),
+
+  on(CommentActions.deleteCommentSucess, (state, { comment }) => {
+    let _comments = state.allComments.filter((comment) => comment.id !== comment.id)
+    return { ...state, comments: _comments, lastCommentDeleted: comment, apiState: "idle" };
+  }),
+
+  on(CommentActions.deleteComment, (state) => ({
+    ...state,
+    apiState: 'loading',
+  })),
+
+  on(CommentActions.deleteCommentFailure, (state, {error}) => {
+    return { ...state, error : error, apiState: "error"}
+  }),
+
 
 );
 

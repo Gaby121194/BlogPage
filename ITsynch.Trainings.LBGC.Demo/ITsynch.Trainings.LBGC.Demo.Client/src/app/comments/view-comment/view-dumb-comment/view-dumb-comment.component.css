@@ -1,3 +1,7 @@
 .body{
     margin: 10px 70px;
 }
+
+.contentComment{
+    font-style: italic;
+}

@@ -30,3 +30,23 @@ export const getAllCommentsByArticleIdFailure = createAction(
   '[Comment] Get all comment by id failure',
   props<{ error: any }>()
 );
+
+export const confirmDeleteComment = createAction(
+  '[Comment] Confirm Delete Comment',
+  props<{ CommentId: number}>()
+);
+
+export const deleteComment = createAction(
+  '[Comment] Delete Comment',
+  props<{ CommentId: number}>()
+);
+
+export const deleteCommentSucess = createAction(
+  '[Comment] Delete Comment Success',
+  props<{ comment: Comment }>()
+);
+
+export const deleteCommentFailure = createAction(
+  '[Comment] Delete Comment Failure',
+  props<{ error: any }>()
+);
