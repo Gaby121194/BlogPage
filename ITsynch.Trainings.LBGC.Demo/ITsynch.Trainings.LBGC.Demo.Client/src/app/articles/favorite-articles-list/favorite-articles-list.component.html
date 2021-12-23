@@ -1,0 +1,6 @@
+<its-favorite-articles-list-dumb
+[currentUser]="currentUser$ | async"
+[users]="users$ | async"
+[favoritesArticles]="favoritesArticles$ | async"
+(deleteArticleClick)="deleteArticle($event)"
+(editArticleClick)="navigateToEditArticle($event)"></its-favorite-articles-list-dumb>

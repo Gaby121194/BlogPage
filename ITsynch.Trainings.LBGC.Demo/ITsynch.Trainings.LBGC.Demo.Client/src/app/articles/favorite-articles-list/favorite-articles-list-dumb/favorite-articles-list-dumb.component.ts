@@ -1,23 +1,16 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { loadFavoritesArticles, markArticleAsFavorite, unmarkArticleAsFavorite } from '../../+state/articles.actions';
-import { articlesFeatureKey } from '../../+state/articles.reducer';
+import { markArticleAsFavorite, unmarkArticleAsFavorite } from '../../+state/articles.actions';
 import { User } from '../../../users/users.model';
 import { Article } from '../../models/articles.model';
-import { Filter } from '../../models/filter.model';
 
 @Component({
-  selector: 'its-list-dumb-component',
-  templateUrl: './list-dumb-component.component.html',
-  styleUrls: ['./list-dumb-component.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  selector: 'its-favorite-articles-list-dumb',
+  templateUrl: './favorite-articles-list-dumb.component.html',
+  styleUrls: ['./favorite-articles-list-dumb.component.css']
 })
-export class ListDumbComponentComponent implements OnInit, OnChanges {
-  
-  @Input()
-  public articles: Article[];
+export class FavoriteArticlesListDumbComponent implements OnInit {
 
   @Input()
   public currentUser: User;
@@ -26,37 +19,26 @@ export class ListDumbComponentComponent implements OnInit, OnChanges {
   
   @Output() editArticleClick = new EventEmitter<number>();
 
-  @Output() filterClick= new EventEmitter<Filter>();
-
   @Output() favoriteClick= new EventEmitter<number>();
 
-  filterArticles: Filter; 
-  filterForm: FormGroup = this.formBuilder.group({
-    searchTitle: [""],
-    searchAuthors: [null],
-    minDate: [],
-    maxDate: []
-  })
   @Input()
   public users: User[];
 
   @Input()
   public favoritesArticles: Article[];
 
-  articulos : Article[]
 
-
-  constructor(private router: Router, private formBuilder: FormBuilder, private store: Store) {
+  constructor(private router: Router, private store: Store) {
     
    }
 
   ngOnInit(): void {
-      
+    
   }
   
 
   ngOnChanges(): void {
-     
+    
   }
 
   
@@ -79,15 +61,6 @@ export class ListDumbComponentComponent implements OnInit, OnChanges {
   }
 
 
-  onFilterClicked(){
-    this.filterClick.emit(this.filterForm.value);
-  }
-
-  cleanFilter(){
-    this.filterForm.reset()
-    this.filterClick.emit(this.filterForm.value);
-  }
-
   onMarkFavoriteClicked(id) {
     console.log(id)
     this.favoriteClick.emit(id)
@@ -101,10 +74,8 @@ export class ListDumbComponentComponent implements OnInit, OnChanges {
   }
 
   isFavorite(id: number){
-    
+    console.log(id, this.favoritesArticles.some(art=> art.id == id) ? true : false)
     return this.favoritesArticles.some(art=> art.id == id) ? true : false
   }
-
-
 
 }

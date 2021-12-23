@@ -3,6 +3,7 @@ import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { navbarCurrentUserChanges } from '../+state/users.actions';
 import { getCurrentUser, getUsers } from '../+state/users.selectors';
+import { loadFavoritesArticles } from '../../articles/+state/articles.actions';
 import { User } from '../users.model';
 
 @Component({
@@ -20,5 +21,6 @@ export class UsersSelectorComponent implements OnInit {
 
   onUserClicked(user: User) {
     this.store.dispatch(navbarCurrentUserChanges({ newUserId: user.id }));
+    this.store.dispatch(loadFavoritesArticles());
   }
 }

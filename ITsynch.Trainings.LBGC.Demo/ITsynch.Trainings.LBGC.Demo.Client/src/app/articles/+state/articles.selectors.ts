@@ -1,4 +1,5 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { getCurrentUserId } from '../../users/+state/users.selectors';
 import * as fromArticles from './articles.reducer';
 
 export const selectUserState = createFeatureSelector<fromArticles.ArticleState>(
@@ -6,6 +7,10 @@ export const selectUserState = createFeatureSelector<fromArticles.ArticleState>(
   );
   
   export const getArticles = createSelector(selectUserState, (state) => state.articles);
+
+  export const getFavoritesArticles = createSelector(selectUserState, (state)=> 
+  state.favoritesArticles)
+
   
   export const getCurrentArticleId = createSelector(selectUserState, (state) => state.currentArticleId);
   
