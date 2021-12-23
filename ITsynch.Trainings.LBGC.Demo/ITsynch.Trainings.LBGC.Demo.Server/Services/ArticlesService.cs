@@ -12,17 +12,20 @@ namespace ITsynch.Trainings.LBGC.Demo.Services
     {
         private readonly TrainingsDemoContext trainingsDemoContext;
 
+
         public ArticlesService(
-            TrainingsDemoContext trainingsDemoContext)
+            TrainingsDemoContext trainingsDemoContext, UsersService usersService)
         {
             this.trainingsDemoContext = trainingsDemoContext
                 ?? throw new ArgumentNullException(nameof(trainingsDemoContext));
+
         }
 
         public async Task<IEnumerable<Article>> GetAllArticlesAsync()
         {
           
             var articles = this.trainingsDemoContext.Articles.Include(article => article.User)
+                                                              .Include(article => article.FavoritesUsers)
                                                               .Where(article => article.Delete == false)
                                                               .OrderByDescending(art => art.Date);
             return articles.AsEnumerable();
@@ -34,6 +37,30 @@ namespace ITsynch.Trainings.LBGC.Demo.Services
                                                        .Include(article => article.User)
                                                        .FirstOrDefault();
             return article;
+        }
+
+        public async Task<IEnumerable<Article>> GetFavoritesArticles(long id)
+        {
+            var user = trainingsDemoContext.Users.Include(user => user.FavoritesArticles).FirstOrDefault(user => user.Id == id);
+            return user.FavoritesArticles.Where(art => art.Delete == false).AsEnumerable();
+        }
+
+        public async Task<Article> MarkAsFavorite(long userId, long articleId)
+        {
+            var user = trainingsDemoContext.Users.FirstOrDefault(user => user.Id == userId);
+            var _article = trainingsDemoContext.Articles.Include(art => art.FavoritesUsers).FirstOrDefault(art => art.Id == articleId && art.Delete ==false);
+            _article.FavoritesUsers.Add(user);
+            var result = await trainingsDemoContext.SaveChangesAsync();
+            return _article;
+        }
+
+        public async Task<Article> UnmarkAsFavorite(long userId, long articleId)
+        {
+            var user = trainingsDemoContext.Users.FirstOrDefault(user => user.Id == userId);
+            var _article = trainingsDemoContext.Articles.Include(art => art.FavoritesUsers).FirstOrDefault(art => art.Id == articleId && art.Delete == false);
+            _article.FavoritesUsers.Remove(user);
+            var result = await trainingsDemoContext.SaveChangesAsync();
+            return _article;
         }
 
         public async Task<IEnumerable<Article>> SearchArticles(ArticleFilter filter)

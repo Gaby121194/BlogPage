@@ -14,6 +14,7 @@ namespace ITsynch.Trainings.LBGC.Demo.Persistence
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Comment> Comments { get; set; }
         public virtual DbSet<Article> Articles { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -76,8 +77,13 @@ namespace ITsynch.Trainings.LBGC.Demo.Persistence
             articles.HasOne(x => x.User)
                     .WithMany();
 
+            articles.HasMany(x => x.FavoritesUsers)
+                    .WithMany(b => b.FavoritesArticles);
+
+
             articles.Navigation(x => x.User)
             .UsePropertyAccessMode(PropertyAccessMode.Property);
+
         }
     }
 }

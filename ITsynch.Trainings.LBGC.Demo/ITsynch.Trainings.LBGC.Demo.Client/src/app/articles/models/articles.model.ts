@@ -6,5 +6,8 @@ export interface Article {
     content: string;
     title: string;
     id: number;
+
+    //UI
+    favorite?: boolean;
   }
   

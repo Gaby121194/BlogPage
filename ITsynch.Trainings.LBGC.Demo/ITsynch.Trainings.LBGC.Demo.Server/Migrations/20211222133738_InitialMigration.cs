@@ -67,10 +67,39 @@ namespace ITsynch.Trainings.LBGC.Demo.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "ArticleUser",
+                columns: table => new
+                {
+                    FavoritesArticlesId = table.Column<long>(type: "bigint", nullable: false),
+                    FavoritesUsersId = table.Column<long>(type: "bigint", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ArticleUser", x => new { x.FavoritesArticlesId, x.FavoritesUsersId });
+                    table.ForeignKey(
+                        name: "FK_ArticleUser_articles_FavoritesArticlesId",
+                        column: x => x.FavoritesArticlesId,
+                        principalTable: "articles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ArticleUser_users_FavoritesUsersId",
+                        column: x => x.FavoritesUsersId,
+                        principalTable: "users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_articles_UserId",
                 table: "articles",
                 column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ArticleUser_FavoritesUsersId",
+                table: "ArticleUser",
+                column: "FavoritesUsersId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_comments_UserId",
@@ -81,10 +110,13 @@ namespace ITsynch.Trainings.LBGC.Demo.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "articles");
+                name: "ArticleUser");
 
             migrationBuilder.DropTable(
                 name: "comments");
+
+            migrationBuilder.DropTable(
+                name: "articles");
 
             migrationBuilder.DropTable(
                 name: "users");

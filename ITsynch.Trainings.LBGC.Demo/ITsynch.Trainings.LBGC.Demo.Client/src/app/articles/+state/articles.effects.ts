@@ -1,19 +1,20 @@
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { Action } from '@ngrx/store';
+import { Action, select, Store } from '@ngrx/store';
 import { of } from 'rxjs';
-import { catchError, map, switchMap, take, tap } from 'rxjs/operators';
+import { catchError, delay, map, switchMap, take, tap, withLatestFrom } from 'rxjs/operators';
 import { ArticlesService } from '../articles.service';
 import * as ArticlesActions from './articles.actions'
-
+import * as UsersActions from '../../users/+state/users.actions';
+import { getCurrentUser, getCurrentUserId } from '../../users/+state/users.selectors';
 
 @Injectable()
 export class ArticlesEffects {
 
 
 
-  constructor(private actions$: Actions, private articlesService: ArticlesService, private snackBar: MatSnackBar) {}
+  constructor(private actions$: Actions, private articlesService: ArticlesService, private snackBar: MatSnackBar, private store: Store) {}
 
   createArticle$ = createEffect(() => {
     return this.actions$.pipe(
@@ -70,6 +71,44 @@ export class ArticlesEffects {
         this.articlesService.getArticles().pipe(
           map((articles) => ArticlesActions.loadArticlesSuccess({ articles })),
           catchError((error) => of(ArticlesActions.loadArticlesFailure({ error })))
+        )
+      )
+    );
+  });
+
+  loadFavoritesArticles$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ArticlesActions.loadFavoritesArticles),
+      delay(0),
+      withLatestFrom(this.store.pipe(select(getCurrentUserId))),
+      switchMap(([_,userId]) => 
+        this.articlesService.getFavoritesArticles(userId).pipe(
+          map((articles) => ArticlesActions.loadFavoritesArticlesSuccess({ articles })),
+          catchError((error) => of(ArticlesActions.loadFavoritesArticlesFailure({ error })))
+        )
+      )
+    );
+  });
+
+  markAsFavoriteArticle$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ArticlesActions.markArticleAsFavorite),
+      switchMap(({userId, articleId}) => 
+        this.articlesService.markFavoriteArticle(userId, articleId).pipe(
+          map((article) => ArticlesActions.markArticleAsFavoriteSuccess({ article })),
+          catchError((error) => of(ArticlesActions.markArticleAsFavoriteFailure({ error })))
+        )
+      )
+    );
+  });
+
+  unmarkAsFavoriteArticle$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ArticlesActions.unmarkArticleAsFavorite),
+      switchMap(({userId, articleId}) => 
+        this.articlesService.unmarkFavoriteArticle(userId, articleId).pipe(
+          map((article) => ArticlesActions.unmarkArticleAsFavoriteSuccess({ article })),
+          catchError((error) => of(ArticlesActions.unmarkArticleAsFavoriteFailure({ error })))
         )
       )
     );

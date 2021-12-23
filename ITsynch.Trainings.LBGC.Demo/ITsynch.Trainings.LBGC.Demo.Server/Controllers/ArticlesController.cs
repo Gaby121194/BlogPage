@@ -44,6 +44,14 @@ namespace ITsynch.Trainings.LBGC.Demo.Controllers
             return article;
         }
 
+        // GET api/<ArticleController>/5
+        [HttpGet("[action]/{id}")]
+        public async Task<IEnumerable<ArticleDto>> GetFavoritesArticles(long id)
+        {
+            var articles = await this.articlesService.GetFavoritesArticles(id);
+            return mapper.Map<IEnumerable<ArticleDto>>(articles);
+        }
+
         // Get api/<ArticleControllet>
         [HttpPost("[action]")]
 
@@ -58,16 +66,33 @@ namespace ITsynch.Trainings.LBGC.Demo.Controllers
         public async Task<ArticleDto> PostArticle(Article article)
         {
             var _article = await this.articlesService.CreateArticle(article);
-            return mapper.Map<ArticleDto>(_article); 
+            return mapper.Map<ArticleDto>(_article);
         }
 
         // PUT api/<ArticleController>/5
         [HttpPut("{id}")]
-        public async Task<ArticleDto> PutArticle(long id, Article article)
+        public async Task<ArticleDto> PutArticle(long id, [FromBody] Article article)
         {
-            var _article = await this.articlesService.EditArticle(id,article);
+            var _article = await this.articlesService.EditArticle(id, article);
             return mapper.Map<ArticleDto>(_article); ;
         }
+
+        // PUT api/<ArticleController>/5
+        [HttpPut("[action]/{id}")]
+        public async Task<ArticleDto> MarkAsFavorite([FromBody] long userId, long id)
+        {
+            var _article = await this.articlesService.MarkAsFavorite(userId, id);
+            return mapper.Map<ArticleDto>(_article); ;
+        }
+
+        // PUT api/<ArticleController>/5
+        [HttpPut("[action]/{id}")]
+        public async Task<ArticleDto> UnmarkAsFavorite([FromBody] long userId, long id)
+        {
+            var _article = await this.articlesService.UnmarkAsFavorite(userId, id);
+            return mapper.Map<ArticleDto>(_article); ;
+        }
+
 
         // DELETE api/<ArticleController>/5
         [HttpDelete("{id}")]
