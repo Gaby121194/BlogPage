@@ -1,4 +1,5 @@
 import { createAction, props } from '@ngrx/store';
+import { User } from '../../users/users.model';
 import { Article } from '../models/articles.model';
 import { Filter } from '../models/filter.model';
 
@@ -112,3 +113,49 @@ export const filterArticlesFailure = createAction(
   '[Articles] Filter articles failure',
   props<{ error: any }>()
 );
+
+export const loadFavoritesArticles = createAction(
+  '[Articles] Load favorites articles'
+);
+
+export const loadFavoritesArticlesSuccess = createAction(
+  '[Articles] Load favorites articles success',
+  props<{ articles: Article[] }>()
+);
+
+export const loadFavoritesArticlesFailure = createAction(
+  '[Articles] Load favorites articles failure',
+  props<{ error: any }>()
+);
+
+export const markArticleAsFavorite = createAction(
+  '[Articles] Mark article as favorite',
+  props<{ userId: number, articleId: number }>()
+);
+
+export const markArticleAsFavoriteSuccess = createAction(
+  '[Articles] Mark article as favorite success',
+  props<{ article: Article }>()
+);
+
+export const markArticleAsFavoriteFailure = createAction(
+  '[Articles] Mark article as favorite failure',
+  props<{ error: any }>()
+);
+
+export const unmarkArticleAsFavorite = createAction(
+  '[Articles] Unmark article as favorite',
+  props<{ userId: number, articleId: number }>()
+);
+
+export const unmarkArticleAsFavoriteSuccess = createAction(
+  '[Articles] Unmark article as favorite success',
+  props<{ article: Article }>()
+);
+
+export const unmarkArticleAsFavoriteFailure = createAction(
+  '[Articles] Unmark article as favorite failure',
+  props<{ error: any }>()
+);
+
+

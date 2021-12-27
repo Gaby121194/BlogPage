@@ -10,6 +10,7 @@ export interface ArticleState {
   articles: Article[];
   lastArticleCreated: Article;
   lastArticleDeleted: Article;
+  favoritesArticles: Article[];
   articleToEdit: Article;
   currentArticle: Article;
   apiState: 'idle' | 'loading' | 'error';
@@ -22,6 +23,7 @@ export const initialState: ArticleState = {
   currentArticle: null,
   lastArticleDeleted: null,
   articleToEdit: null,
+  favoritesArticles: null,
   articles: [],
   apiState: 'idle',
   error: null,
@@ -82,8 +84,6 @@ export const articlesReducer = createReducer<ArticleState,Action>(
     return { ...state, error : error, apiState: "error"}
   }),
 
-  
-
   on(ArticlesActions.editArticle, (state) => ({
     ...state,
     apiState: 'loading',
@@ -119,7 +119,46 @@ export const articlesReducer = createReducer<ArticleState,Action>(
     return { ...state, articles: articles, apiState: "idle" };
   }),
 
-  on(ArticlesActions.getArticleToEditFailure, (state, {error}) => {
+  on(ArticlesActions.markArticleAsFavorite, (state) => ({
+    ...state,
+    apiState: 'loading',
+  })),
+
+  on(ArticlesActions.markArticleAsFavoriteSuccess, (state, { article }) => {
+    let _articles = state.articles.filter((art) => art.id !== article.id)
+    let _favoritesArticles = state.favoritesArticles.filter((art) => art.id !== article.id)
+    _articles.unshift(article)
+    _favoritesArticles.unshift(article)
+    return { ...state, articles: _articles, favoritesArticles: _favoritesArticles, apiState: "idle"};
+  }),
+
+  on(ArticlesActions.markArticleAsFavoriteFailure, (state, {error}) => {
+    return { ...state, error : error, apiState: "error" }
+  }),
+
+  on(ArticlesActions.unmarkArticleAsFavorite, (state) => ({
+    ...state,
+    apiState: 'loading',
+  })),
+
+  on(ArticlesActions.unmarkArticleAsFavoriteSuccess, (state, { article }) => {
+    let _favoritesArticles = state.favoritesArticles.filter((art) => art.id !== article.id)
+    return { ...state, favoritesArticles: _favoritesArticles, apiState: "idle"};
+  }),
+
+  on(ArticlesActions.markArticleAsFavoriteFailure, (state, {error}) => {
+    return { ...state, error : error, apiState: "error" }
+  }),
+
+  on(ArticlesActions.loadFavoritesArticles, (state) => {
+    return {...state, apiState: 'loading'};
+  }),
+
+  on(ArticlesActions.loadFavoritesArticlesSuccess, (state, { articles }) => {
+    return { ...state, favoritesArticles: articles, apiState: "idle" };
+  }),
+
+  on(ArticlesActions.loadFavoritesArticlesFailure, (state, {error}) => {
     return { ...state, error : error, apiState: "error"}
   }),
 

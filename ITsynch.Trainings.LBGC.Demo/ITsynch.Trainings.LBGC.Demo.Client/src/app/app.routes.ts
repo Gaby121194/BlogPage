@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { CreateArticleComponent } from './articles/create-article/create-article.component';
 import { EditArticleComponent } from './articles/edit-article/edit-article.component';
+import { FavoriteArticlesListComponent } from './articles/favorite-articles-list/favorite-articles-list.component';
 import { ListArticlesComponent } from './articles/list-articles/list-articles.component';
 import { ViewArticleComponent } from './articles/view-article/view-article.component';
 import { NotFoundComponent } from './layout/not-found/not-found.component';
@@ -22,6 +23,10 @@ export const appRoutes: Routes = [
   {
     path: `articles`,
     component: ListArticlesComponent
+  },
+  {
+    path: `favoritesArticles`,
+    component: FavoriteArticlesListComponent
   },
   {
     path: `articles/:id`,

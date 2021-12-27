@@ -12,5 +12,11 @@ export const sidebarItems : SidebarItem[] = [
         routerPath: "users",
         iconName: "account_circle",
         routerLinkActive: "active-link"
+    },
+    {
+        title: "Favorites articles",
+        routerPath: "favoritesArticles",
+        iconName: "favorite",
+        routerLinkActive: "active-link"
     }
 ];

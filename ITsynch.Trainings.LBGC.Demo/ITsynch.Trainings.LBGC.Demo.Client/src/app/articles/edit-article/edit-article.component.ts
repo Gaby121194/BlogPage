@@ -6,7 +6,6 @@ import { editArticle, getArticleToEdit } from '../+state/articles.actions';
 import { getArticleEdit } from '../+state/articles.selectors';
 import { Article } from '../models/articles.model';
 
-
 @Component({
   selector: 'its-edit-article',
   templateUrl: './edit-article.component.html',

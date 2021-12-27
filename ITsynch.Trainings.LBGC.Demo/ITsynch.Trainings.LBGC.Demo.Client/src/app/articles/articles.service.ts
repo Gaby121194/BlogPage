@@ -19,8 +19,24 @@ export class ArticlesService {
     return this.httpClient.get<Article[]>(`${this.baseApiUrl}/articles`);
   }
 
+  public getFavoritesArticles(userId: number): Observable<Article[]> {
+    return this.httpClient.get<Article[]>(`${this.baseApiUrl}/articles/getFavoritesArticles/${userId}`);
+  }
+
   public postArticle(article : Article): Observable<Article> {
     return this.httpClient.post<Article>(`${this.baseApiUrl}/articles`, article);
+  }
+
+  public markFavoriteArticle(userId: number, articleId : number): Observable<Article> {
+    console.log(userId)
+    console.log(articleId)
+    return this.httpClient.put<Article>(`${this.baseApiUrl}/articles/markAsFavorite/${articleId}`, userId);
+  }
+
+  public unmarkFavoriteArticle(userId: number, articleId : number): Observable<Article> {
+    console.log(userId)
+    console.log(articleId)
+    return this.httpClient.put<Article>(`${this.baseApiUrl}/articles/unmarkAsFavorite/${articleId}`, userId);
   }
 
   public editArticle(id: number, article : Article): Observable<Article> {

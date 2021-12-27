@@ -19,6 +19,21 @@ namespace ITsynch.Trainings.LBGC.Demo.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.2");
 
+            modelBuilder.Entity("ArticleUser", b =>
+                {
+                    b.Property<long>("FavoritesArticlesId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("FavoritesUsersId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("FavoritesArticlesId", "FavoritesUsersId");
+
+                    b.HasIndex("FavoritesUsersId");
+
+                    b.ToTable("ArticleUser");
+                });
+
             modelBuilder.Entity("ITsynch.Trainings.LBGC.Demo.Models.Article", b =>
                 {
                     b.Property<long>("Id")
@@ -99,6 +114,21 @@ namespace ITsynch.Trainings.LBGC.Demo.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("users");
+                });
+
+            modelBuilder.Entity("ArticleUser", b =>
+                {
+                    b.HasOne("ITsynch.Trainings.LBGC.Demo.Models.Article", null)
+                        .WithMany()
+                        .HasForeignKey("FavoritesArticlesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ITsynch.Trainings.LBGC.Demo.Models.User", null)
+                        .WithMany()
+                        .HasForeignKey("FavoritesUsersId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("ITsynch.Trainings.LBGC.Demo.Models.Article", b =>

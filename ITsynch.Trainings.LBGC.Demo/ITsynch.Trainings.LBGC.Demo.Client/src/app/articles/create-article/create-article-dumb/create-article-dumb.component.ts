@@ -27,11 +27,9 @@ export class CreateArticleDumbComponent implements OnInit {
 
 
   onSubmitClicked(){
-    console.log(this.articleForm.value)
     this.article = this.articleForm.value;
     this.article.user = this.currentUser;
     this.article.date = new Date();
-    console.log(this.article)
     this.createClick.emit(this.article)
     this.articleForm.setValue({
       title: '',
