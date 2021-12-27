@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from '../../../users/users.model';
 import { Article } from '../../models/articles.model';
@@ -15,7 +15,7 @@ export class CreateArticleDumbComponent implements OnInit {
     title: ["", [Validators.required]],
     content: ["", [Validators.required, Validators.minLength(5)]],
     date: [ new Date() , [Validators.required]]
-  });;
+  });
   article: Article;
   @Input() articleCreating: boolean;
   

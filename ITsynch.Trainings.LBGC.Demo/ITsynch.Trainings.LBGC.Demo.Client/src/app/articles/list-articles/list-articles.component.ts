@@ -2,7 +2,6 @@ import { Component, OnChanges, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { filter, filter } from 'rxjs/operators';
 import { confirmDeleteArticle, deleteArticle, filterArticles, loadArticles } from '../+state/articles.actions';
 import { getArticles } from '../+state/articles.selectors';
 import { getCurrentUser, getUsers } from '../../users/+state/users.selectors';

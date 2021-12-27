@@ -4,7 +4,8 @@ import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { editArticle, getArticleToEdit } from '../+state/articles.actions';
 import { getArticleEdit } from '../+state/articles.selectors';
-import { Article } from '../articles.model';
+import { Article } from '../models/articles.model';
+
 
 @Component({
   selector: 'its-edit-article',

@@ -38,10 +38,10 @@ namespace ITsynch.Trainings.LBGC.Demo.Controllers
 
         // GET api/<ArticleController>/5
         [HttpGet("{id}")]
-        public async Task<Article> GetArticle(long id)
+        public async Task<ArticleDto> GetArticle(long id)
         {
             var article = await this.articlesService.GetArticleById(id);
-            return article;
+            return mapper.Map<ArticleDto>(article);
         }
 
         // Get api/<ArticleControllet>
