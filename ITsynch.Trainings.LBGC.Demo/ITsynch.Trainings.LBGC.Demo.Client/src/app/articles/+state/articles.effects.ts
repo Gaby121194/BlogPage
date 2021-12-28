@@ -110,7 +110,7 @@ export class ArticlesEffects {
       map(({ articleId }) => {
         const restoreArticleConfirmed = window.confirm('Are you sure you want to restore this deleted article?');
         if (restoreArticleConfirmed) {
-          return ArticlesActions.restoreDeletedArticle({ articleId: 9 });
+          return ArticlesActions.restoreDeletedArticle({ articleId });
         }
       })
     );
