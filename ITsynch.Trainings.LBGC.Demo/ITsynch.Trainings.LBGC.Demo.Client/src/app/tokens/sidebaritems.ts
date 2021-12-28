@@ -18,5 +18,11 @@ export const sidebarItems : SidebarItem[] = [
         routerPath: "favoritesArticles",
         iconName: "favorite",
         routerLinkActive: "active-link"
+    },
+    {
+        title: "Deleted articles",
+        routerPath: "deletedArticles",
+        iconName: "delete",
+        routerLinkActive: "active-link"
     }
 ];

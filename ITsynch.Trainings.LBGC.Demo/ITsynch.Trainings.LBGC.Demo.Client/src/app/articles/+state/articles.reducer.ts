@@ -11,6 +11,7 @@ export interface ArticleState {
   lastArticleCreated: Article;
   lastArticleDeleted: Article;
   favoritesArticles: Article[];
+  deletedArticles: Article[],
   articleToEdit: Article;
   currentArticle: Article;
   apiState: 'idle' | 'loading' | 'error';
@@ -24,6 +25,7 @@ export const initialState: ArticleState = {
   lastArticleDeleted: null,
   articleToEdit: null,
   favoritesArticles: null,
+  deletedArticles: null,
   articles: [],
   apiState: 'idle',
   error: null,
@@ -159,6 +161,32 @@ export const articlesReducer = createReducer<ArticleState,Action>(
   }),
 
   on(ArticlesActions.loadFavoritesArticlesFailure, (state, {error}) => {
+    return { ...state, error : error, apiState: "error"}
+  }),
+
+  on(ArticlesActions.loadDeletedArticles, (state) => {
+    return {...state, apiState: 'loading'};
+  }),
+
+  on(ArticlesActions.loadDeletedArticlesSuccess, (state, { articles }) => {
+    return { ...state, deletedArticles: articles, apiState: "idle" };
+  }),
+
+  on(ArticlesActions.loadDeletedArticlesFailure, (state, {error}) => {
+    return { ...state, error : error, apiState: "error"}
+  }),
+
+  on(ArticlesActions.restoreDeletedArticle, (state) => {
+    return {...state, apiState: 'loading'};
+  }),
+
+  on(ArticlesActions.restoreDeletedArticleSucess, (state, { article }) => {
+    let _deletedArticles = state.deletedArticles.filter(art => art.id !== article.id);
+    let _articles = [...state.articles, article];
+    return { ...state, deletedArticles: _deletedArticles, articles: _articles, apiState: "idle" };
+  }),
+
+  on(ArticlesActions.restoreDeletedArticleFailure, (state, {error}) => {
     return { ...state, error : error, apiState: "error"}
   }),
 

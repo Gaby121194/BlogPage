@@ -26,6 +26,8 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
 import { FavoriteArticlesListComponent } from './favorite-articles-list/favorite-articles-list.component';
 import { FavoriteArticlesListDumbComponent } from './favorite-articles-list/favorite-articles-list-dumb/favorite-articles-list-dumb.component';
+import { DeletedArticlesListComponent } from './deleted-articles-list/deleted-articles-list.component';
+import { DeletedArticlesListDumbComponent } from './deleted-articles-list/deleted-articles-list-dumb/deleted-articles-list-dumb.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,9 @@ import { FavoriteArticlesListDumbComponent } from './favorite-articles-list/favo
     EditArticleComponent,
     EditArticleDumbComponent,
     FavoriteArticlesListComponent,
-    FavoriteArticlesListDumbComponent
+    FavoriteArticlesListDumbComponent,
+    DeletedArticlesListComponent,
+    DeletedArticlesListDumbComponent
   ],
   imports: [
     CommonModule,

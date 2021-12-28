@@ -23,6 +23,10 @@ export class ArticlesService {
     return this.httpClient.get<Article[]>(`${this.baseApiUrl}/articles/getFavoritesArticles/${userId}`);
   }
 
+  public getDeletedArticles(userId: number): Observable<Article[]> {
+    return this.httpClient.get<Article[]>(`${this.baseApiUrl}/articles/getDeletedArticles/${userId}`);
+  }
+
   public postArticle(article : Article): Observable<Article> {
     return this.httpClient.post<Article>(`${this.baseApiUrl}/articles`, article);
   }
@@ -37,6 +41,10 @@ export class ArticlesService {
 
   public editArticle(id: number, article : Article): Observable<Article> {
     return this.httpClient.put<Article>(`${this.baseApiUrl}/articles/${id}`, article);
+  }
+
+  public restoreDeletedArticle(id: number): Observable<Article> {
+    return this.httpClient.put<Article>(`${this.baseApiUrl}/articles/restoreDeletedArticle/${id}`, null);
   }
 
   public getArticleById(id: number): Observable<Article> {

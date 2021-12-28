@@ -158,4 +158,36 @@ export const unmarkArticleAsFavoriteFailure = createAction(
   props<{ error: any }>()
 );
 
+export const loadDeletedArticles = createAction(
+  '[Articles] Load deleted articles'
+);
 
+export const loadDeletedArticlesSuccess = createAction(
+  '[Articles] Load deleted articles success',
+  props<{ articles: Article[] }>()
+);
+
+export const loadDeletedArticlesFailure = createAction(
+  '[Articles] Load deleted articles failure',
+  props<{ error: any }>()
+);
+
+export const restoreDeletedArticle = createAction(
+  '[Articles] Restore deleted Article',
+  props< {articleId : number}>()
+);
+
+export const confirmRestoredDeleteArticle = createAction(
+  '[Articles] Restore Confirm deleted Article',
+  props< {articleId : number}>()
+);
+
+export const restoreDeletedArticleSucess = createAction(
+  '[Articles] Restore delete Article Success',
+  props<{ article: Article }>()
+);
+
+export const restoreDeletedArticleFailure = createAction(
+  '[Articles] Restore deleted Article Failure',
+  props<{ error: any }>()
+);
