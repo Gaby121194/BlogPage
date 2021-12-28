@@ -81,7 +81,6 @@ export class ListDumbComponentComponent implements OnInit, OnChanges {
 
 
   onFilterClicked(){
-    console.log(this.filterForm.value)
     this.filterClick.emit(this.filterForm.value);
   }
 
@@ -91,13 +90,11 @@ export class ListDumbComponentComponent implements OnInit, OnChanges {
   }
 
   onMarkFavoriteClicked(id) {
-    console.log(id)
     this.favoriteClick.emit(id)
     this.store.dispatch(markArticleAsFavorite({userId: this.currentUser.id, articleId: id}))
   }
 
   onUnmarkFavoriteClicked(id) {
-    console.log(id)
     this.favoriteClick.emit(id)
     this.store.dispatch(unmarkArticleAsFavorite({userId: this.currentUser.id, articleId: id}))
   }

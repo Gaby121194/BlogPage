@@ -15,6 +15,7 @@ namespace ITsynch.Trainings.LBGC.Demo.Models
         public virtual bool Delete { get; set; }
 
         public virtual string Category { get; set; }
+
         public virtual User User { get; set; }
 
         [JsonIgnore]

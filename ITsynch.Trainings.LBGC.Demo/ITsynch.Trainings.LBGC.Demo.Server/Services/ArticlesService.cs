@@ -107,6 +107,7 @@ namespace ITsynch.Trainings.LBGC.Demo.Services
             var _article = trainingsDemoContext.Articles.Where(art => art.Id == id).Include(article=> article.User).FirstOrDefault();
             _article.Title = article.Title;
             _article.Content = article.Content;
+            _article.Category = article.Category;
             _article.Date = article.Date;
             var result = await this.trainingsDemoContext.SaveChangesAsync();
             return _article;

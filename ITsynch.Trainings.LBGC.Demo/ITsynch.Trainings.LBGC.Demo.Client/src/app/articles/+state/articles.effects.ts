@@ -6,8 +6,7 @@ import { of } from 'rxjs';
 import { catchError, delay, map, switchMap, take, tap, withLatestFrom } from 'rxjs/operators';
 import { ArticlesService } from '../articles.service';
 import * as ArticlesActions from './articles.actions'
-import * as UsersActions from '../../users/+state/users.actions';
-import { getCurrentUser, getCurrentUserId } from '../../users/+state/users.selectors';
+import { getCurrentUserId } from '../../users/+state/users.selectors';
 
 @Injectable()
 export class ArticlesEffects {
@@ -125,20 +124,6 @@ export class ArticlesEffects {
       )
     );
   });
-
-  filterArticlesSuccess$ = createEffect(
-    () => {
-      return this.actions$.pipe(
-        ofType(ArticlesActions.filterArticlesSuccess),
-        tap(() => {
-          this.snackBar.open('Articles filtered successfully', 'Acept', {
-            duration: 3000,
-          });
-        })
-      );
-    },
-    { dispatch: false }
-  );
 
   filterArticlesFailure$ = createEffect(
     () => {

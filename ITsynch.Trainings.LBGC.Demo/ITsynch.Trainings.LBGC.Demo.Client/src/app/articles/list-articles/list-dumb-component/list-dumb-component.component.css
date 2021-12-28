@@ -42,3 +42,14 @@
 .new-article-button{
     height: 50px;
 }
+.category{
+    float: right;
+    display: flex;
+    flex-direction: column; 
+}
+.label-category{
+    font-size: 12px;
+}
+.content-category{
+    cursor: auto;
+}

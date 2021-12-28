@@ -69,7 +69,11 @@
                 <button mat-icon-button color="warn" (click)="onMarkFavoriteClicked(article.id)" *ngIf="favoritesArticles && !isFavorite(article.id)" aria-label="Example icon button with a heart icon">
                     <mat-icon>favorite_border</mat-icon>
                 </button>
-                <button mat-stroked-button [disabled]="true" color="primary">{{article.category}}</button>
+                <div class="category">
+                    <span class="label-category">Category:</span>
+                    <button class="content-category" mat-stroked-button color="primary">{{article.category}}</button>
+                </div>
+                
             </mat-card-title>
             <mat-card-subtitle>Created by {{article.user?.username}} on {{article.date | date}}</mat-card-subtitle>
             <mat-card-content class="article-content">
