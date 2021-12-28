@@ -1,5 +1,12 @@
 <div class="article-body" *ngIf="article">
-    <h1>{{ article.title }}</h1>
+    <div class="header">
+        <h1>{{ article.title }}</h1>
+        <div class="category">
+        <span class="label-category">Category:</span>
+        <button class="content-category" mat-stroked-button color="primary">{{article.category}}</button>
+        </div>
+    </div>
+    
     <div class="subtitle">
         <span>Autor: {{article.user?.username}}</span> <span class="date">Creation Date: {{article.date | date}}</span>
     </div>

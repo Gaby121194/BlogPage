@@ -1,6 +1,10 @@
 .article-body{
     margin: 10px 70px;
 }
+.header{
+    display: flex;
+    justify-content: space-between;
+}
 
 .subtitle{
     display: flex;
@@ -14,4 +18,15 @@
     }
     .content{
         font-size: 17px;
+    }
+.category{
+        float: right;
+        display: flex;
+        flex-direction: column; 
+    }
+    .label-category{
+        font-size: 12px;
+    }
+    .content-category{
+        cursor: auto;
     }

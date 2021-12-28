@@ -85,6 +85,10 @@ namespace ITsynch.Trainings.LBGC.Demo.Services
             {
                 query = query.Where(article => article.Date >= filter.MinDate);
             }
+            if (!String.IsNullOrEmpty(filter.Category))
+            {
+                query = query.Where(article => article.Category == filter.Category);
+            }
             return query.OrderByDescending(art => art.Date).AsEnumerable();
         }
 
@@ -103,6 +107,7 @@ namespace ITsynch.Trainings.LBGC.Demo.Services
             var _article = trainingsDemoContext.Articles.Where(art => art.Id == id).Include(article=> article.User).FirstOrDefault();
             _article.Title = article.Title;
             _article.Content = article.Content;
+            _article.Category = article.Category;
             _article.Date = article.Date;
             var result = await this.trainingsDemoContext.SaveChangesAsync();
             return _article;

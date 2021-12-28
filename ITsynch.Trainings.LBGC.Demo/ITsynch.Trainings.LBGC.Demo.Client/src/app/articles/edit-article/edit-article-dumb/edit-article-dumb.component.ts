@@ -15,9 +15,11 @@ export class EditArticleDumbComponent implements OnInit {
   articleForm: FormGroup = this.formBuilder.group({
     title: ["", [Validators.required]],
     content: ["", [Validators.required, Validators.minLength(5)]],
-    date: [ new Date() , [Validators.required]]
+    date: [ new Date() , [Validators.required]],
+    category: ['', [Validators.required]]
   });;
   article: Article;
+  categories: string[] = ['Economy', 'Culture', 'Politics', 'Cooking','Entertainment', 'Research'];
   
   constructor(private formBuilder: FormBuilder) { }
 
@@ -31,7 +33,8 @@ export class EditArticleDumbComponent implements OnInit {
       this.articleForm.setValue({
         title: this.articleToEdit.title,
         content: this.articleToEdit.content,
-        date: this.articleToEdit.date
+        date: this.articleToEdit.date,
+        category: this.articleToEdit.category
       })
     }
       
@@ -40,17 +43,16 @@ export class EditArticleDumbComponent implements OnInit {
 
   onSubmitClicked(){
     
-    console.log(this.articleForm.value)
     this.article = this.articleForm.value;
     this.article.user = this.articleToEdit.user;
     this.article.id = this.articleToEdit.id
     this.article.date = new Date();
-    console.log(this.article)
     this.editClick.emit(this.article)
     this.articleForm.setValue({
       title: '',
       content: '',
-      date: null
+      date: null,
+      category: null
     })
     
   }

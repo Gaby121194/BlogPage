@@ -5,6 +5,7 @@ export interface Article {
     date: Date;
     content: string;
     title: string;
+    category: 'Economy' | 'Cooking' | 'Entertaiment' | 'Politics' | 'Research' | 'Culture';
     id: number;
 
     //UI

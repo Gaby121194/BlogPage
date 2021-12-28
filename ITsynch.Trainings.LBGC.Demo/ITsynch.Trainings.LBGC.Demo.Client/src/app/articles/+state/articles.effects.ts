@@ -6,8 +6,7 @@ import { of } from 'rxjs';
 import { catchError, delay, map, switchMap, take, tap, withLatestFrom } from 'rxjs/operators';
 import { ArticlesService } from '../articles.service';
 import * as ArticlesActions from './articles.actions'
-import * as UsersActions from '../../users/+state/users.actions';
-import { getCurrentUser, getCurrentUserId } from '../../users/+state/users.selectors';
+import { getCurrentUserId } from '../../users/+state/users.selectors';
 
 @Injectable()
 export class ArticlesEffects {
@@ -192,6 +191,19 @@ export class ArticlesEffects {
     );
   });
 
+  filterArticlesFailure$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(ArticlesActions.filterArticlesFailure),
+        tap(() => {
+          this.snackBar.open('Articles filtered failed', 'Close', {
+            duration: 3000,
+          });
+        })
+      );
+    },
+    { dispatch: false }
+  );
 
 
   getArticle$ = createEffect(() => {
@@ -224,6 +236,20 @@ export class ArticlesEffects {
         ofType(ArticlesActions.createArticleSucess),
         tap(() => {
           this.snackBar.open('Article created successfully', 'Acept', {
+            duration: 3000,
+          });
+        })
+      );
+    },
+    { dispatch: false }
+  );
+
+  createArticleFailure$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(ArticlesActions.createArticleFailure),
+        tap(() => {
+          this.snackBar.open('Article created failed', 'Acept', {
             duration: 3000,
           });
         })

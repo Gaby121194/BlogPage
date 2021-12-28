@@ -10,6 +10,18 @@
             Title is <strong>required</strong>
           </mat-error>
         </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Category</mat-label>
+          <mat-select formControlName="category">
+            <mat-option *ngFor="let category of categories" [value]="category">
+              {{category}}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="articleForm.controls['content'].invalid && articleForm.controls['content'].dirty">
+            Content is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
         
           <mat-form-field class="example-full-width" appearance="fill">
             <mat-label>Article content</mat-label>

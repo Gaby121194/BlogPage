@@ -35,7 +35,8 @@ export class ListDumbComponentComponent implements OnInit, OnChanges {
     searchTitle: [""],
     searchAuthors: [null],
     minDate: [],
-    maxDate: []
+    maxDate: [],
+    category: []
   })
   @Input()
   public users: User[];
@@ -44,7 +45,7 @@ export class ListDumbComponentComponent implements OnInit, OnChanges {
   public favoritesArticles: Article[];
 
   articulos : Article[]
-
+  categories: string[] = ['Economy', 'Culture', 'Politics', 'Cooking','Entertainment', 'Research'];
 
   constructor(private router: Router, private formBuilder: FormBuilder, private store: Store) {
     
@@ -89,13 +90,11 @@ export class ListDumbComponentComponent implements OnInit, OnChanges {
   }
 
   onMarkFavoriteClicked(id) {
-    console.log(id)
     this.favoriteClick.emit(id)
     this.store.dispatch(markArticleAsFavorite({userId: this.currentUser.id, articleId: id}))
   }
 
   onUnmarkFavoriteClicked(id) {
-    console.log(id)
     this.favoriteClick.emit(id)
     this.store.dispatch(unmarkArticleAsFavorite({userId: this.currentUser.id, articleId: id}))
   }

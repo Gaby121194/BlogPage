@@ -15,5 +15,7 @@ namespace ITsynch.Trainings.LBGC.Demo.Models
 
         public DateTime? MaxDate { get; set; }
 
+        public string Category { get; set; }
+
     }
 }

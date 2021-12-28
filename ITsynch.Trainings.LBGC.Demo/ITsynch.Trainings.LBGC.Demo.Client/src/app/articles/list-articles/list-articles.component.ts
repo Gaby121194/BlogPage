@@ -30,7 +30,8 @@ export class ListArticlesComponent implements OnInit, OnChanges {
       createdFrom: null,
       createdTo: null,
       searchAuthor: null,
-      searchTitle: ""
+      searchTitle: "",
+      category: null,
     }
     this.store.dispatch(filterArticles({filter: this.filter}))
     this.store.dispatch(loadFavoritesArticles()) 
