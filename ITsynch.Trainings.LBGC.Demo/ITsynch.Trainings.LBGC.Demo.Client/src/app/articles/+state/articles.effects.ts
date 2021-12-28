@@ -126,6 +126,33 @@ export class ArticlesEffects {
     );
   });
 
+  filterArticlesSuccess$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(ArticlesActions.filterArticlesSuccess),
+        tap(() => {
+          this.snackBar.open('Articles filtered successfully', 'Acept', {
+            duration: 3000,
+          });
+        })
+      );
+    },
+    { dispatch: false }
+  );
+
+  filterArticlesFailure$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(ArticlesActions.filterArticlesFailure),
+        tap(() => {
+          this.snackBar.open('Articles filtered failed', 'Close', {
+            duration: 3000,
+          });
+        })
+      );
+    },
+    { dispatch: false }
+  );
 
 
   getArticle$ = createEffect(() => {
@@ -158,6 +185,20 @@ export class ArticlesEffects {
         ofType(ArticlesActions.createArticleSucess),
         tap(() => {
           this.snackBar.open('Article created successfully', 'Acept', {
+            duration: 3000,
+          });
+        })
+      );
+    },
+    { dispatch: false }
+  );
+
+  createArticleFailure$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(ArticlesActions.createArticleFailure),
+        tap(() => {
+          this.snackBar.open('Article created failed', 'Acept', {
             duration: 3000,
           });
         })

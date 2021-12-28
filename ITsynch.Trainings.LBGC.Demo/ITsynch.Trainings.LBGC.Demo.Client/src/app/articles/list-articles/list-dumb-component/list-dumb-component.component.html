@@ -18,6 +18,15 @@
                   <mat-option *ngFor="let author of users" [value]="author.id">{{author.username}}</mat-option>
                 </mat-select>
               </mat-form-field>
+
+              <mat-form-field class="input-filter" appearance="fill">
+                <mat-label>Category</mat-label>
+                <mat-select formControlName="category">
+                  <mat-option *ngFor="let category of categories" [value]="category">
+                    {{category}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
     
     
               <mat-form-field class="input-filter" appearance="fill">
@@ -60,6 +69,7 @@
                 <button mat-icon-button color="warn" (click)="onMarkFavoriteClicked(article.id)" *ngIf="favoritesArticles && !isFavorite(article.id)" aria-label="Example icon button with a heart icon">
                     <mat-icon>favorite_border</mat-icon>
                 </button>
+                <button mat-stroked-button [disabled]="true" color="primary">{{article.category}}</button>
             </mat-card-title>
             <mat-card-subtitle>Created by {{article.user?.username}} on {{article.date | date}}</mat-card-subtitle>
             <mat-card-content class="article-content">

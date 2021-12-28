@@ -85,6 +85,10 @@ namespace ITsynch.Trainings.LBGC.Demo.Services
             {
                 query = query.Where(article => article.Date >= filter.MinDate);
             }
+            if (!String.IsNullOrEmpty(filter.Category))
+            {
+                query = query.Where(article => article.Category == filter.Category);
+            }
             return query.OrderByDescending(art => art.Date).AsEnumerable();
         }
 
