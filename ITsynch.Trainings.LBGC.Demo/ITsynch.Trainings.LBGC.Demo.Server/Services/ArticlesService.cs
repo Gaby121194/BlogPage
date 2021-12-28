@@ -108,12 +108,30 @@ namespace ITsynch.Trainings.LBGC.Demo.Services
             return _article;
         }
 
+
+        public async Task<Article> RestoreDeletedArticle(long id)
+        {
+            var _article = this.trainingsDemoContext.Articles.FirstOrDefault(art => art.Id == id && art.Delete== true);
+            _article.Delete = false;
+            await this.trainingsDemoContext.SaveChangesAsync();
+            return _article;
+        }
+
         public virtual async Task<Article> DeleteArticle(long id)
         {
             var _article = this.trainingsDemoContext.Articles.FirstOrDefault(art => art.Id == id);
             _article.Delete = true;
             await this.trainingsDemoContext.SaveChangesAsync();
             return _article;
+        }
+
+        public async Task<IEnumerable<Article>> GetDeletedArticles(long userId)
+        {
+
+            var articles = this.trainingsDemoContext.Articles.Include(article => article.User)
+                                                              .Where(article => article.Delete == true && article.User.Id == userId)
+                                                              .OrderByDescending(art => art.Date);
+            return articles.AsEnumerable();
         }
     }
 }

@@ -67,9 +67,9 @@
             </mat-card-content>
             <mat-card-actions>
                 <button mat-raised-button (click)="visitArticle(article.id)">Learn more...</button>
-                <button mat-raised-button color="warn" *ngIf="article.user?.id === currentUser?.id" (click)="onDeleteArticleClicked(article.id)">Delete article</button>
-                <button mat-raised-button color="primary" *ngIf="article.user?.id === currentUser?.id" (click)="onEditArticleClicked(article.id)">Edit article</button>
-                <button mat-raised-button color="primary" (click)="onFavoriteClicked(article.id)">favorite</button>
+                <button mat-raised-button color="warn" *ngIf="article.user?.id === currentUser?.id" (click)="onDeleteArticleClicked(article.id)"><mat-icon class="icon">delete</mat-icon>Delete article</button>
+                <button mat-raised-button color="primary" *ngIf="article.user?.id === currentUser?.id" (click)="onEditArticleClicked(article.id)"><mat-icon class="icon">edit</mat-icon>Edit article</button>
+            
             </mat-card-actions>
         </mat-card>
     </ng-container>

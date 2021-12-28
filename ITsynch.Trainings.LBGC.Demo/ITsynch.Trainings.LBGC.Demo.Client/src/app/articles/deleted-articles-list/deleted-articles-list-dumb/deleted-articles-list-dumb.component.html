@@ -1,0 +1,20 @@
+<div class="dumb">
+    <div class="header">
+        <h2>List of Deleted Articles</h2>
+    </div>
+
+    <ng-container *ngFor="let article of deletedArticles">
+        <mat-card class="example-card">
+            <mat-card-title>
+                <span class="article-title">{{article.title}}</span>
+            </mat-card-title>
+            <mat-card-subtitle>Created by {{article.user?.username}} on {{article.date | date}}</mat-card-subtitle>
+            <mat-card-content class="article-content">
+                <p>{{article.content}}</p>
+            </mat-card-content>
+            <mat-card-actions>
+                <button mat-raised-button color="primary" (click)="onRestoreArticleClicked(article.id)"><mat-icon class="icon-restore">restore</mat-icon>Restore article</button>
+            </mat-card-actions>
+        </mat-card>
+    </ng-container>
+</div>

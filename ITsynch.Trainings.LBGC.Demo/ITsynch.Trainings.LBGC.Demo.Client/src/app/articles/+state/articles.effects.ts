@@ -90,6 +90,72 @@ export class ArticlesEffects {
     );
   });
 
+  loadDeletedArticles$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ArticlesActions.loadDeletedArticles),
+      delay(0),
+      withLatestFrom(this.store.pipe(select(getCurrentUserId))),
+      switchMap(([_,userId]) =>
+        this.articlesService.getDeletedArticles(userId).pipe(
+          map((articles) => ArticlesActions.loadDeletedArticlesSuccess({ articles })),
+          catchError((error) => of(ArticlesActions.loadDeletedArticlesFailure({ error })))
+        )
+      )
+    );
+  });
+
+  confirmRestoreArticle$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ArticlesActions.confirmRestoredDeleteArticle),
+      map(({ articleId }) => {
+        const restoreArticleConfirmed = window.confirm('Are you sure you want to restore this deleted article?');
+        if (restoreArticleConfirmed) {
+          return ArticlesActions.restoreDeletedArticle({ articleId });
+        }
+      })
+    );
+  });
+
+  restoreDeletedArticle$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ArticlesActions.restoreDeletedArticle),
+      switchMap(({articleId}) =>
+        this.articlesService.restoreDeletedArticle(articleId).pipe(
+          map((article) => ArticlesActions.restoreDeletedArticleSucess({ article })),
+          catchError((error) => of(ArticlesActions.restoreDeletedArticleFailure({ error })))
+        )
+      )
+    );
+  });
+
+  restoreArticleDeletedSuccess$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(ArticlesActions.restoreDeletedArticleSucess),
+        tap(() => {
+          this.snackBar.open('Article deleted has benn restored successfully', 'Acept', {
+            duration: 3000,
+          });
+        })
+      );
+    },
+    { dispatch: false }
+  );
+
+  restoreArticleDeletedFailure$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(ArticlesActions.restoreDeletedArticleFailure),
+        tap((err) => {
+          this.snackBar.open('Failed restoring the deleted article' , 'Acept', {
+            duration: 3000,
+          });
+        })
+      );
+    },
+    { dispatch: false }
+  );
+
   markAsFavoriteArticle$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ArticlesActions.markArticleAsFavorite),
