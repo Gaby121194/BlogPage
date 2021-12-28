@@ -31,7 +31,7 @@ namespace ITsynch.Trainings.LBGC.Demo.Services
             return articles.AsEnumerable();
         }
 
-        public async Task<Article> GetArticleById(long id)
+        public virtual async Task<Article> GetArticleById(long id)
         {
             var article = trainingsDemoContext.Articles.Where(article => article.Id == id && article.Delete == false)
                                                        .Include(article => article.User)
@@ -113,7 +113,7 @@ namespace ITsynch.Trainings.LBGC.Demo.Services
             return _article;
         }
 
-        public async Task<Article> DeleteArticle(long id)
+        public virtual async Task<Article> DeleteArticle(long id)
         {
             var _article = this.trainingsDemoContext.Articles.FirstOrDefault(art => art.Id == id);
             _article.Delete = true;
