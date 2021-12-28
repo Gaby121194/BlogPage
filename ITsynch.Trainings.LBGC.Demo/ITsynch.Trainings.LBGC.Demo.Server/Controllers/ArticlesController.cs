@@ -52,6 +52,14 @@ namespace ITsynch.Trainings.LBGC.Demo.Controllers
             return mapper.Map<IEnumerable<ArticleDto>>(articles);
         }
 
+        // DELETE api/<ArticleController>/5
+        [HttpGet("[action]/{id}")]
+        public async Task<IEnumerable<ArticleDto>> GetDeletedArticles(long id)
+        {
+            var articles = await this.articlesService.GetDeletedArticles(id);
+            return mapper.Map<IEnumerable<ArticleDto>>(articles);
+        }
+
         // Get api/<ArticleControllet>
         [HttpPost("[action]")]
 
@@ -90,6 +98,14 @@ namespace ITsynch.Trainings.LBGC.Demo.Controllers
         public async Task<ArticleDto> UnmarkAsFavorite([FromBody] long userId, long id)
         {
             var _article = await this.articlesService.UnmarkAsFavorite(userId, id);
+            return mapper.Map<ArticleDto>(_article); ;
+        }
+
+        // PUT api/<ArticleController>/5
+        [HttpPut("[action]/{id}")]
+        public async Task<ArticleDto> RestoreDeletedArticle(long id)
+        {
+            var _article = await this.articlesService.RestoreDeletedArticle(id);
             return mapper.Map<ArticleDto>(_article); ;
         }
 

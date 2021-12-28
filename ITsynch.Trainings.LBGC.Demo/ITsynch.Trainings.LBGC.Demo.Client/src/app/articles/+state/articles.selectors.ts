@@ -11,6 +11,9 @@ export const selectUserState = createFeatureSelector<fromArticles.ArticleState>(
   export const getFavoritesArticles = createSelector(selectUserState, (state)=> 
   state.favoritesArticles)
 
+  export const getDeletedArticles = createSelector(selectUserState, (state)=> 
+  state.deletedArticles)
+
   
   export const getCurrentArticleId = createSelector(selectUserState, (state) => state.currentArticleId);
   
