@@ -75,6 +75,9 @@ namespace ITsynch.Trainings.LBGC.Demo.Persistence
 
             articles.Property(x => x.Draft)
                 .IsRequired();
+            articles.Property(x => x.Category)
+                .IsRequired();
+
 
             articles.HasOne(x => x.User)
                     .WithMany();

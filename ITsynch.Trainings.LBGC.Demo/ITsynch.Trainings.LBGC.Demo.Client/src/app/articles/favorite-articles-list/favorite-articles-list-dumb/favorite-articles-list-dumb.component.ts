@@ -62,19 +62,16 @@ export class FavoriteArticlesListDumbComponent implements OnInit {
 
 
   onMarkFavoriteClicked(id) {
-    console.log(id)
     this.favoriteClick.emit(id)
     this.store.dispatch(markArticleAsFavorite({userId: this.currentUser.id, articleId: id}))
   }
 
   onUnmarkFavoriteClicked(id) {
-    console.log(id)
     this.favoriteClick.emit(id)
     this.store.dispatch(unmarkArticleAsFavorite({userId: this.currentUser.id, articleId: id}))
   }
 
   isFavorite(id: number){
-    console.log(id, this.favoritesArticles.some(art=> art.id == id) ? true : false)
     return this.favoritesArticles.some(art=> art.id == id) ? true : false
   }
 

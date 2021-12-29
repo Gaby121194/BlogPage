@@ -44,14 +44,10 @@ export class ArticlesService {
   }
 
   public markFavoriteArticle(userId: number, articleId : number): Observable<Article> {
-    console.log(userId)
-    console.log(articleId)
     return this.httpClient.put<Article>(`${this.baseApiUrl}/articles/markAsFavorite/${articleId}`, userId);
   }
 
   public unmarkFavoriteArticle(userId: number, articleId : number): Observable<Article> {
-    console.log(userId)
-    console.log(articleId)
     return this.httpClient.put<Article>(`${this.baseApiUrl}/articles/unmarkAsFavorite/${articleId}`, userId);
   }
 
