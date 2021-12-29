@@ -28,6 +28,8 @@ import { FavoriteArticlesListComponent } from './favorite-articles-list/favorite
 import { FavoriteArticlesListDumbComponent } from './favorite-articles-list/favorite-articles-list-dumb/favorite-articles-list-dumb.component';
 import { DeletedArticlesListComponent } from './deleted-articles-list/deleted-articles-list.component';
 import { DeletedArticlesListDumbComponent } from './deleted-articles-list/deleted-articles-list-dumb/deleted-articles-list-dumb.component';
+import { DraftArticlesComponent } from './draft-articles/draft-articles.component';
+import { DraftArticlesListDumbComponent } from './draft-articles/draft-articles-list-dumb/draft-articles-list-dumb.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +44,9 @@ import { DeletedArticlesListDumbComponent } from './deleted-articles-list/delete
     FavoriteArticlesListComponent,
     FavoriteArticlesListDumbComponent,
     DeletedArticlesListComponent,
-    DeletedArticlesListDumbComponent
+    DeletedArticlesListDumbComponent,
+    DraftArticlesComponent,
+    DraftArticlesListDumbComponent
   ],
   imports: [
     CommonModule,

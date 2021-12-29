@@ -13,6 +13,7 @@ namespace ITsynch.Trainings.LBGC.Demo.DataTransfer
                 .ForMember(dest => dest.Content, opts => opts.MapFrom(src => src.Content))
                 .ForMember(dest => dest.Date, opts => opts.MapFrom(src => src.Date))
                 .ForMember(dest => dest.Delete, opts => opts.MapFrom(src => src.Delete))
+                .ForMember(dest => dest.Draft, opts => opts.MapFrom(src => src.Draft))
                 .ForMember(dest => dest.Category, opts => opts.MapFrom(src => src.Category))
                 .ForMember(dest => dest.User, opts => opts.MapFrom(src => src.User));
                 

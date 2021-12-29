@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ITsynch.Trainings.LBGC.Demo.Migrations
 {
     [DbContext(typeof(TrainingsDemoContext))]
-    [Migration("20211222133738_InitialMigration")]
+    [Migration("20211228181830_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -51,6 +51,9 @@ namespace ITsynch.Trainings.LBGC.Demo.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<bool>("Delete")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("Draft")
                         .HasColumnType("bit");
 
                     b.Property<string>("Title")

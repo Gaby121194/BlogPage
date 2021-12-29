@@ -7,7 +7,7 @@
         <form class="filter-form" [formGroup]="filterForm" (ngSubmit)="onFilterClicked()" >
   
             <mat-form-field class="input-filter" appearance="fill">
-                <mat-label>Serach for title</mat-label>
+                <mat-label>Search for title</mat-label>
                 <input matInput placeholder="Input a title for search..." formControlName="searchTitle">
               </mat-form-field>
               
@@ -30,14 +30,14 @@
     
               <mat-form-field class="input-filter" appearance="fill">
                 <mat-label>Choose a date min</mat-label>
-                <input formControlName="minDate" matInput [matDatepicker]="pickerMin">
+                <input readonly formControlName="minDate" matInput [matDatepicker]="pickerMin">
                 <mat-datepicker-toggle matSuffix [for]="pickerMin"></mat-datepicker-toggle>
                 <mat-datepicker #pickerMin></mat-datepicker>
               </mat-form-field>
     
               <mat-form-field class="input-filter" appearance="fill">
                 <mat-label>Choose a date max</mat-label>
-                <input formControlName="maxDate" matInput [matDatepicker]="pickerMax">
+                <input readonly formControlName="maxDate" matInput [matDatepicker]="pickerMax">
                 <mat-datepicker-toggle matSuffix [for]="pickerMax"></mat-datepicker-toggle>
                 <mat-datepicker #pickerMax></mat-datepicker>
               </mat-form-field>

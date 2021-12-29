@@ -29,8 +29,7 @@ export class ViewCommentComponent implements OnInit {
     this.suscription = this.commentService.refresh$.subscribe(() => {
       let id = this.activatedRoute.snapshot.params.id as number;
       this.store.dispatch(getAllCommentsByArticleId({ IdArticle: id }));
-    })
-   
+    })   
   }
   
   deleteComment(event : number){

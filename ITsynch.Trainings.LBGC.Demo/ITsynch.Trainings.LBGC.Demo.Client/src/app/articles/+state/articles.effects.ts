@@ -29,6 +29,18 @@ export class ArticlesEffects {
     );
   });
 
+  createDraftArticle$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ArticlesActions.createDraftArticle),
+      switchMap(({article}) =>
+        this.articlesService.createDraftArticle(article).pipe(
+          map((article) => ArticlesActions.createDraftArticleSucess({ article })),
+          catchError((error) => of(ArticlesActions.createDraftArticleFailure({ error })))
+        )
+      )
+    );
+  });
+
   deleteArticle$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ArticlesActions.deleteArticle),
@@ -104,6 +116,20 @@ export class ArticlesEffects {
         this.articlesService.getFavoritesArticles(userId).pipe(
           map((articles) => ArticlesActions.loadFavoritesArticlesSuccess({ articles })),
           catchError((error) => of(ArticlesActions.loadFavoritesArticlesFailure({ error })))
+        )
+      )
+    );
+  });
+
+  loadDraftArticles$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ArticlesActions.loadDraftArticles),
+      delay(0),
+      withLatestFrom(this.store.pipe(select(getCurrentUserId))),
+      switchMap(([_,userId]) =>
+        this.articlesService.getDraftArticles(userId).pipe(
+          map((articles) => ArticlesActions.loadDraftArticlesSuccess({ articles })),
+          catchError((error) => of(ArticlesActions.loadDraftArticlesFailure({ error })))
         )
       )
     );
@@ -257,6 +283,29 @@ export class ArticlesEffects {
   );
 
 
+  confirmPostDraftArticle$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ArticlesActions.confirmPostDraftArticle),
+      map(({ articleId }) => {
+        const postDraftArticleConfirmed = window.confirm('Are you sure you want to post this draft as an article?');
+        if (postDraftArticleConfirmed) {
+          return ArticlesActions.postDraftArticle({ articleId });
+        } 
+      })
+    );
+  });
+
+  postDraftArticle$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ArticlesActions.postDraftArticle),
+      switchMap(({articleId}) =>
+        this.articlesService.postDraftArticle(articleId).pipe(
+          map((article) => ArticlesActions.postDraftArticleSucess({ article })),
+          catchError((error) => of(ArticlesActions.postDraftArticleFailure({ error })))
+        )
+      )
+    );
+  });
   filterArticlesFailure$ = createEffect(
     () => {
       return this.actions$.pipe(
@@ -271,6 +320,19 @@ export class ArticlesEffects {
     { dispatch: false }
   );
 
+  postDraftArticleSuccess$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(ArticlesActions.postDraftArticleSucess),
+        tap(() => {
+          this.snackBar.open('Draft Article post successfully', 'Accept', {
+            duration: 3000,
+          });
+        })
+      );
+    },
+    { dispatch: false }
+  );
 
   getArticle$ = createEffect(() => {
     return this.actions$.pipe(
@@ -310,6 +372,20 @@ export class ArticlesEffects {
     { dispatch: false }
   );
 
+  createDraftArticleSuccess$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(ArticlesActions.createDraftArticleSucess),
+        tap(() => {
+          this.snackBar.open('Draft Article created successfully', 'Acept', {
+            duration: 3000,
+          });
+        })
+      );
+    },
+    { dispatch: false }
+  );
+  
   createArticleFailure$ = createEffect(
     () => {
       return this.actions$.pipe(

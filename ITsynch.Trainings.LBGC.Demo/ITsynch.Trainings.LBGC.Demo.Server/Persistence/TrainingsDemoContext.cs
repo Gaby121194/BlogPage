@@ -73,6 +73,8 @@ namespace ITsynch.Trainings.LBGC.Demo.Persistence
             articles.Property(x => x.Delete)
                 .IsRequired();
 
+            articles.Property(x => x.Draft)
+                .IsRequired();
             articles.Property(x => x.Category)
                 .IsRequired();
 

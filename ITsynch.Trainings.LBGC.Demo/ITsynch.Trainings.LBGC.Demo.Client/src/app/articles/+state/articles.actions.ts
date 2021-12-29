@@ -34,6 +34,21 @@ export const createArticleFailure = createAction(
   props<{ error: any }>()
 );
 
+export const createDraftArticle = createAction(
+  '[Articles] Create Draft Article',
+  props< {article : Article}>()
+);
+
+export const createDraftArticleSucess = createAction(
+  '[Articles] Create Draft Article Success',
+  props<{ article: Article }>()
+);
+
+export const createDraftArticleFailure = createAction(
+  '[Articles] Create Draft Article Failure',
+  props<{ error: any }>()
+);
+
 export const getArticleToEdit = createAction(
   '[Articles] Get article to edit by id',
   props<{ articleId: number }>()
@@ -194,4 +209,37 @@ export const restoreDeletedArticleFailure = createAction(
 
 export const cancelAlert = createAction(
   '[Articles] Alert cancel'
+);
+export const loadDraftArticles = createAction(
+  '[Articles] Load draft articles'
+);
+
+export const loadDraftArticlesSuccess = createAction(
+  '[Articles] Load draft articles success',
+  props<{ articles: Article[] }>()
+);
+
+export const loadDraftArticlesFailure = createAction(
+  '[Articles] Load draft articles failure',
+  props<{ error: any }>()
+);
+
+export const postDraftArticle = createAction(
+  '[Articles] Post Draft Article',
+  props< {articleId : number}>()
+);
+
+export const confirmPostDraftArticle = createAction(
+  '[Articles] Confirm Post Draft Article',
+  props< {articleId : number}>()
+);
+
+export const postDraftArticleSucess = createAction(
+  '[Articles] Post Draft Article Success',
+  props<{ article: Article }>()
+);
+
+export const postDraftArticleFailure = createAction(
+  '[Articles] Post Draft Article Failure',
+  props<{ error: any }>()
 );

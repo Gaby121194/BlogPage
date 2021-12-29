@@ -60,7 +60,7 @@ namespace ITsynch.Trainings.LBGC.Demo.Controllers
             return mapper.Map<IEnumerable<ArticleDto>>(articles);
         }
 
-        // Get api/<ArticleControllet>
+        // Get api/<ArticleController>
         [HttpPost("[action]")]
 
         public async Task<IEnumerable<ArticleDto>> SearchArticles(ArticleFilter filter)
@@ -69,11 +69,36 @@ namespace ITsynch.Trainings.LBGC.Demo.Controllers
             return mapper.Map<IEnumerable<ArticleDto>>(articles);
         }
 
+        // Get api/<ArticleController>
+        [HttpGet("[action]/{id}")]
+
+        public async Task<IEnumerable<ArticleDto>> GetDraftArticles(long id)
+        {
+            var articles = await this.articlesService.GetDraftArticles(id);
+            return mapper.Map<IEnumerable<ArticleDto>>(articles);
+        }
+
         // POST api/<ArticleController>
         [HttpPost]
         public async Task<ArticleDto> PostArticle(Article article)
         {
             var _article = await this.articlesService.CreateArticle(article);
+            return mapper.Map<ArticleDto>(_article);
+        }
+
+        // PUT api/<ArticleController>
+        [HttpPut("[action]/{id}")]
+        public async Task<ArticleDto> PostDraftArticle(long id)
+        {
+            var _article = await this.articlesService.PostDraftArticle(id);
+            return mapper.Map<ArticleDto>(_article);
+        }
+
+        // POST api/<ArticleController>
+        [HttpPost("[action]")]
+        public async Task<ArticleDto> CreateDraftArticle(Article article)
+        {
+            var _article = await this.articlesService.CreateDraftArticle(article);
             return mapper.Map<ArticleDto>(_article);
         }
 
