@@ -13,13 +13,7 @@ namespace ITsynch.Trainings.LBGC.Demo.Models
         public virtual string Content { get; set; }
 
         public virtual bool Delete { get; set; }
-<<<<<<< HEAD
-        
-=======
-
         public virtual string Category { get; set; }
-
->>>>>>> dev
         public virtual User User { get; set; }
 
         public virtual bool Draft { get; set; }
