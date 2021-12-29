@@ -1,0 +1,6 @@
+<its-draft-articles-list-dumb
+    [draftArticles]="draftArticles$ | async"
+    (deleteDraftArticleClick)="deleteDraftArticle($event)"
+    (postDraftArticleClick)="postDraftArticle($event)"
+    (editDraftArticleClick)="editDraftArticle($event)">
+</its-draft-articles-list-dumb>

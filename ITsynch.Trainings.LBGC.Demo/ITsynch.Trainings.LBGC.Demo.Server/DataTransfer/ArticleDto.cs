@@ -16,6 +16,7 @@ namespace ITsynch.Trainings.LBGC.Demo.DataTransfer
 
         public virtual bool Delete { get; set; }
 
+        public virtual bool Draft { get; set; }
         public virtual string Category { get; set; }
 
         public virtual User User { get; set; }

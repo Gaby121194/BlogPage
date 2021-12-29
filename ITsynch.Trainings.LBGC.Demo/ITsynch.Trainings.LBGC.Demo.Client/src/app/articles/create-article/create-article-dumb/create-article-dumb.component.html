@@ -32,8 +32,10 @@
           </mat-form-field>
       
       
-      <button id="sumbitButton" *ngIf="!articleCreating" type="submit"
+      <button id="sumbitButton" *ngIf="!articleCreating" type="submit" (click)="articleClick()"
        mat-raised-button color="primary" [disabled]="articleForm.invalid">Create</button>
+      <button class="saveButton"   type="submit" (click)="draftArticleClick()"
+       mat-raised-button color="primary" [disabled]="articleForm.invalid">Save draft</button>
   
   </form>
   

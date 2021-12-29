@@ -11,7 +11,8 @@ export interface ArticleState {
   lastArticleCreated: Article;
   lastArticleDeleted: Article;
   favoritesArticles: Article[];
-  deletedArticles: Article[],
+  draftArticles: Article[];
+  deletedArticles: Article[];
   articleToEdit: Article;
   currentArticle: Article;
   apiState: 'idle' | 'loading' | 'error';
@@ -25,6 +26,7 @@ export const initialState: ArticleState = {
   lastArticleDeleted: null,
   articleToEdit: null,
   favoritesArticles: null,
+  draftArticles: null,
   deletedArticles: null,
   articles: [],
   apiState: 'idle',
@@ -72,9 +74,26 @@ export const articlesReducer = createReducer<ArticleState,Action>(
     return { ...state, error : error, apiState: "error"}
   }),
 
+  on(ArticlesActions.createDraftArticleSucess, (state, { article }) => {
+    let _draftArticles = [article, ...state.articles]
+    return { ...state, draftArticles: _draftArticles , lastArticleCreated: article, apiState: "idle" };
+  }),
+
+  on(ArticlesActions.createDraftArticle, (state) => ({
+    ...state,
+    apiState: 'loading',
+  })),
+
+  on(ArticlesActions.createDraftArticleFailure, (state, {error}) => {
+    return { ...state, error : error, apiState: "error"}
+  }),
+
   on(ArticlesActions.deleteArticleSucess, (state, { article }) => {
     let _articles = state.articles.filter((art) => art.id !== article.id)
-    return { ...state, articles: _articles, lastArticleDeleted: article, apiState: "idle" };
+    let _favoritesArticles = state.favoritesArticles.filter((art) => art.id !== article.id)
+    let _draftArticles = state.draftArticles.filter((art) => art.id !== article.id)
+    return { ...state, articles: _articles, favoritesArticles: _favoritesArticles,
+      draftArticles: _draftArticles, lastArticleDeleted: article, apiState: "idle" };
   }),
 
   on(ArticlesActions.deleteArticle, (state) => ({
@@ -176,6 +195,18 @@ export const articlesReducer = createReducer<ArticleState,Action>(
     return { ...state, error : error, apiState: "error"}
   }),
 
+  on(ArticlesActions.loadDraftArticles, (state) => {
+    return {...state, apiState: 'loading'};
+  }),
+
+  on(ArticlesActions.loadDraftArticlesSuccess, (state, { articles }) => {
+    return { ...state, draftArticles: articles, apiState: "idle" };
+  }),
+
+  on(ArticlesActions.loadDraftArticlesFailure, (state, {error}) => {
+    return { ...state, error : error, apiState: "error"}
+  }),
+
   on(ArticlesActions.restoreDeletedArticle, (state) => {
     return {...state, apiState: 'loading'};
   }),
@@ -188,6 +219,20 @@ export const articlesReducer = createReducer<ArticleState,Action>(
 
   on(ArticlesActions.restoreDeletedArticleFailure, (state, {error}) => {
     return { ...state, error : error, apiState: "error"}
+  }),
+
+  on(ArticlesActions.postDraftArticle, (state, {articleId}) => {
+    return {...state, apiState: 'loading', currentArticleId: articleId};
+  }),
+
+  on(ArticlesActions.postDraftArticleSucess, (state, { article }) => {
+    let _postDraftArticles = state.draftArticles.filter(art => art.id !== article.id);
+    let _articles = [...state.articles, article];
+    return { ...state, draftArticles: _postDraftArticles, articles: _articles, apiState: "idle" };
+  }),
+
+  on(ArticlesActions.postDraftArticleFailure, (state, {error}) => {
+    return { ...state, error : error, apiState: "error", currentArticleId: null}
   }),
 
 );

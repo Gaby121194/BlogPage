@@ -1,5 +1,7 @@
 <its-create-article-dumb
 [currentUser]="currentUser$ | async"
 [articleCreating]="articleCreating$ | async"
+
 (createClick)="createArticle($event)"
+(createDraftClick)="createDraftArticle($event)"
 ></its-create-article-dumb>
