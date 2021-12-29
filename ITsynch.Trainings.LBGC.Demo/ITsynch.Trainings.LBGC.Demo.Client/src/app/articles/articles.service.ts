@@ -27,8 +27,20 @@ export class ArticlesService {
     return this.httpClient.get<Article[]>(`${this.baseApiUrl}/articles/getDeletedArticles/${userId}`);
   }
 
+  public getDraftArticles(userId: number): Observable<Article[]> {
+    return this.httpClient.get<Article[]>(`${this.baseApiUrl}/articles/getDraftArticles/${userId}`);
+  }
+
   public postArticle(article : Article): Observable<Article> {
     return this.httpClient.post<Article>(`${this.baseApiUrl}/articles`, article);
+  }
+
+  public createDraftArticle(article : Article): Observable<Article> {
+    return this.httpClient.post<Article>(`${this.baseApiUrl}/articles/createDraftArticle`, article);
+  }
+
+  public postDraftArticle(id: number): Observable<Article> {
+    return this.httpClient.put<Article>(`${this.baseApiUrl}/articles/postDraftArticle/${id}`, null)
   }
 
   public markFavoriteArticle(userId: number, articleId : number): Observable<Article> {

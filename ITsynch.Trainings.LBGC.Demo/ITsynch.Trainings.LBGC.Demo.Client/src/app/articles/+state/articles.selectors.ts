@@ -8,12 +8,11 @@ export const selectUserState = createFeatureSelector<fromArticles.ArticleState>(
   
   export const getArticles = createSelector(selectUserState, (state) => state.articles);
 
-  export const getFavoritesArticles = createSelector(selectUserState, (state)=> 
-  state.favoritesArticles)
+  export const getFavoritesArticles = createSelector(selectUserState, (state) => state.favoritesArticles)
 
-  export const getDeletedArticles = createSelector(selectUserState, (state)=> 
-  state.deletedArticles)
+  export const getDeletedArticles = createSelector(selectUserState, (state) => state.deletedArticles)
 
+  export const getDraftArticles = createSelector(selectUserState, (state) => state.draftArticles)
   
   export const getCurrentArticleId = createSelector(selectUserState, (state) => state.currentArticleId);
   
@@ -22,19 +21,10 @@ export const selectUserState = createFeatureSelector<fromArticles.ArticleState>(
   export const getArticleEdit = createSelector(selectUserState, (state) => state.articleToEdit);
 
   
-  export const getArticlesApiLoading = createSelector(
-    selectUserState,
-    (state) => state.apiState === 'loading'
-  );
+  export const getArticlesApiLoading = createSelector(selectUserState,(state) => state.apiState === 'loading');
   
-  export const getArticlesApiIdle = createSelector(
-    selectUserState,
-    (state) => state.apiState === 'idle'
-  );
+  export const getArticlesApiIdle = createSelector(selectUserState,(state) => state.apiState === 'idle');
   
-  export const getArticlesApiErrored = createSelector(
-    selectUserState,
-    (state) => state.apiState === 'error'
-  );
+  export const getArticlesApiErrored = createSelector(selectUserState,(state) => state.apiState === 'error');
   
   export const getArticlesApiError = createSelector(selectUserState, (state) => state.error);

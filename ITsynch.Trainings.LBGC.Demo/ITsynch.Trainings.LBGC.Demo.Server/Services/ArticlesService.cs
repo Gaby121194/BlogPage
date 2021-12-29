@@ -26,7 +26,7 @@ namespace ITsynch.Trainings.LBGC.Demo.Services
           
             var articles = this.trainingsDemoContext.Articles.Include(article => article.User)
                                                               .Include(article => article.FavoritesUsers)
-                                                              .Where(article => article.Delete == false)
+                                                              .Where(article => article.Delete == false && article.Draft == false)
                                                               .OrderByDescending(art => art.Date);
             return articles.AsEnumerable();
         }
@@ -42,13 +42,14 @@ namespace ITsynch.Trainings.LBGC.Demo.Services
         public async Task<IEnumerable<Article>> GetFavoritesArticles(long id)
         {
             var user = trainingsDemoContext.Users.Include(user => user.FavoritesArticles).FirstOrDefault(user => user.Id == id);
-            return user.FavoritesArticles.Where(art => art.Delete == false).AsEnumerable();
+            return user.FavoritesArticles.Where(art => art.Delete == false && art.Draft == false).AsEnumerable();
         }
 
         public async Task<Article> MarkAsFavorite(long userId, long articleId)
         {
             var user = trainingsDemoContext.Users.FirstOrDefault(user => user.Id == userId);
-            var _article = trainingsDemoContext.Articles.Include(art => art.FavoritesUsers).FirstOrDefault(art => art.Id == articleId && art.Delete ==false);
+            var _article = trainingsDemoContext.Articles.Include(art => art.FavoritesUsers)
+                .FirstOrDefault(art => art.Id == articleId && art.Delete ==false && art.Draft == false);
             _article.FavoritesUsers.Add(user);
             var result = await trainingsDemoContext.SaveChangesAsync();
             return _article;
@@ -57,7 +58,8 @@ namespace ITsynch.Trainings.LBGC.Demo.Services
         public async Task<Article> UnmarkAsFavorite(long userId, long articleId)
         {
             var user = trainingsDemoContext.Users.FirstOrDefault(user => user.Id == userId);
-            var _article = trainingsDemoContext.Articles.Include(art => art.FavoritesUsers).FirstOrDefault(art => art.Id == articleId && art.Delete == false);
+            var _article = trainingsDemoContext.Articles.Include(art => art.FavoritesUsers)
+                .FirstOrDefault(art => art.Id == articleId && art.Delete == false && art.Draft == false);
             _article.FavoritesUsers.Remove(user);
             var result = await trainingsDemoContext.SaveChangesAsync();
             return _article;
@@ -67,7 +69,7 @@ namespace ITsynch.Trainings.LBGC.Demo.Services
         {
 
             var query = this.trainingsDemoContext.Articles.Include(article => article.User)
-                                                              .Where(article => article.Delete == false);
+                                                              .Where(article => article.Delete == false && article.Draft == false);
             if (!String.IsNullOrEmpty(filter.SearchTitle))
             {
                 query = query.Where(article => article.Title.Contains(filter.SearchTitle));
@@ -93,6 +95,7 @@ namespace ITsynch.Trainings.LBGC.Demo.Services
             var user = trainingsDemoContext.Users.FirstOrDefault(user => user.Id == article.User.Id);
             article.User = user;
             article.Delete = false;
+            article.Draft = false;
             var _article = this.trainingsDemoContext.Articles.Add(article);
             var result = await this.trainingsDemoContext.SaveChangesAsync();
             return article;
@@ -132,6 +135,33 @@ namespace ITsynch.Trainings.LBGC.Demo.Services
                                                               .Where(article => article.Delete == true && article.User.Id == userId)
                                                               .OrderByDescending(art => art.Date);
             return articles.AsEnumerable();
+        }
+
+        public async Task<Article> CreateDraftArticle(Article article)
+        {
+            var user = trainingsDemoContext.Users.FirstOrDefault(user => user.Id == article.User.Id);
+            article.User = user;
+            article.Delete = false;
+            article.Draft = true;
+            var _article = this.trainingsDemoContext.Articles.Add(article);
+            var result = await this.trainingsDemoContext.SaveChangesAsync();
+            return article;
+        }
+
+        public async Task<IEnumerable<Article>> GetDraftArticles(long userId)
+        {
+            var articles = this.trainingsDemoContext.Articles.Include(article => article.User)
+                                                             .Where(article => article.Draft == true && article.User.Id == userId && article.Delete == false)
+                                                             .OrderByDescending(article => article.Date);
+            return articles.AsEnumerable();
+        }
+
+        public virtual async Task<Article> PostDraftArticle(long id)
+        {
+            var _article = this.trainingsDemoContext.Articles.FirstOrDefault(art => art.Id == id);
+            _article.Draft = false;
+            await this.trainingsDemoContext.SaveChangesAsync();
+            return _article;
         }
     }
 }

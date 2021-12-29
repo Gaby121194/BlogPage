@@ -51,6 +51,9 @@ namespace ITsynch.Trainings.LBGC.Demo.Migrations
                     b.Property<bool>("Delete")
                         .HasColumnType("bit");
 
+                    b.Property<bool>("Draft")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");

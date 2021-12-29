@@ -32,6 +32,7 @@ namespace ITsynch.Trainings.LBGC.Demo.Migrations
                     Content = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Delete = table.Column<bool>(type: "bit", nullable: false),
                     UserId = table.Column<long>(type: "bigint", nullable: true),
+                    Draft = table.Column<bool>(type: "bit", nullable: false),
                     Date = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>

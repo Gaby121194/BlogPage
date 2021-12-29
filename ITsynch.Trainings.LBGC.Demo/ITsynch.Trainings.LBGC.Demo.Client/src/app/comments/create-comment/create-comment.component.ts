@@ -38,5 +38,9 @@ export class CreateCommentComponent implements OnInit {
     this.comment.user = this.currentUser;
     this.comment.IdArticle = this.id;
     this.store.dispatch(createComment({ comment: this.comment }));
+    this.commentForm = this.formBuilder.group({
+      content: ["", [Validators.required, Validators.minLength(5)]],
+      date: [new Date(), [Validators.required]]
+    });
   }
 }
