@@ -50,3 +50,8 @@ export const deleteCommentFailure = createAction(
   '[Comment] Delete Comment Failure',
   props<{ error: any }>()
 );
+
+
+export const cancelAlert = createAction(
+  '[Comment] Cancel alert'
+);

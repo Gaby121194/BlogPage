@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, OnChanges, OnInit } from '@angular/
 import { Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { confirmDeleteArticle, filterArticles, loadFavoritesArticles } from '../+state/articles.actions';
+import { confirmDeleteArticle, filterArticles, loadArticles, loadFavoritesArticles } from '../+state/articles.actions';
 import { getArticles, getFavoritesArticles } from '../+state/articles.selectors';
 import { getCurrentUser, getUsers } from '../../users/+state/users.selectors';
 import { User } from '../../users/users.model';
@@ -33,8 +33,8 @@ export class ListArticlesComponent implements OnInit, OnChanges {
       searchTitle: "",
       category: null,
     }
-    this.store.dispatch(filterArticles({filter: this.filter}))
-    this.store.dispatch(loadFavoritesArticles()) 
+    this.store.dispatch(loadArticles())
+    // this.store.dispatch(filterArticles({filter: this.filter}))
   }
   
   ngOnChanges(): void {
@@ -52,6 +52,7 @@ export class ListArticlesComponent implements OnInit, OnChanges {
   filterArticles(filter: Filter){
     this.store.dispatch(filterArticles({filter}))
   }
+
   
 
 }

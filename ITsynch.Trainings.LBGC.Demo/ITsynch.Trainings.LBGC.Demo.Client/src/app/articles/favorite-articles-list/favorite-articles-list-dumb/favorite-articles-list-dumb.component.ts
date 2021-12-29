@@ -75,4 +75,8 @@ export class FavoriteArticlesListDumbComponent implements OnInit {
     return this.favoritesArticles.some(art=> art.id == id) ? true : false
   }
 
+  backToArticles(){
+    this.router.navigateByUrl("/articles")
+  }
+
 }

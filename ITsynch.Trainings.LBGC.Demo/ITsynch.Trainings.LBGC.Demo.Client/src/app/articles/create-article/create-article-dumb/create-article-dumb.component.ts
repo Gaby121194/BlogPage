@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router, RouterLink } from '@angular/router';
 import { User } from '../../../users/users.model';
 import { Article } from '../../models/articles.model';
 
@@ -24,7 +25,7 @@ export class CreateArticleDumbComponent implements OnInit {
   @Input() draftArticleCreating: boolean;
  
   categories: string[] = ['Economy', 'Culture', 'Politics', 'Cooking','Entertainment', 'Research'];
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder, private router: Router) { }
 
   ngOnInit(): void {
 
@@ -53,5 +54,11 @@ export class CreateArticleDumbComponent implements OnInit {
       date: null
     })
   }
+
+  backToArticles(){
+    this.router.navigateByUrl("/articles")
+  }
+
+ 
 
 }

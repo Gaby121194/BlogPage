@@ -1,7 +1,20 @@
 .body{
     margin: 10px 70px;
+    border-bottom: 1px solid lightgray;
+    padding-bottom: 20px;
 }
 
 .contentComment{
     font-style: italic;
+    margin-bottom: 5px;
 }
+    .author-comment{
+        opacity: 75%;
+        margin-right: 10px;
+    }
+    .date-comment{
+        opacity: 75%;
+    }
+    .delete-icon{
+        margin-right: 5px;
+    }

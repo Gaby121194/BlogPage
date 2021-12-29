@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import { User } from '../../../users/users.model';
 import { Article } from '../../models/articles.model';
 
@@ -14,7 +15,7 @@ export class ViewDumbComponent implements OnInit{
 
   @Output() deleteArticleClick = new EventEmitter<number>();
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -23,5 +24,8 @@ export class ViewDumbComponent implements OnInit{
     this.deleteArticleClick.emit(id);
   }
   
+  backToArticles(){
+    this.router.navigateByUrl("/articles")
+  }
 
 }
