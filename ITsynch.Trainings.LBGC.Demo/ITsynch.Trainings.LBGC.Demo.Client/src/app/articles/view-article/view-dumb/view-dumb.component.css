@@ -1,5 +1,18 @@
+.article-view{
+    display: flex;
+}
+.article{
+    width: 100%;
+}
+.back-button{
+    margin-top: 5px;
+    margin-left: 5px;
+  }
+
 .article-body{
-    margin: 10px 70px;
+    margin: 10px 30px;
+    border: solid 1px lightgray;
+    padding: 30px;
 }
 .header{
     display: flex;
@@ -12,6 +25,7 @@
     margin-top: -15px;
     margin-left: 1px;
     margin-bottom: 15px;
+    opacity: 75%;
 }
     .date{
         margin-left: 10px;
@@ -29,4 +43,11 @@
     }
     .content-category{
         cursor: auto;
+    }
+    .article-comments{
+        margin: 10px 30px;
+        border: solid 1px lightgray;
+    }
+    .delete-icon{
+        margin-right: 5px;
     }

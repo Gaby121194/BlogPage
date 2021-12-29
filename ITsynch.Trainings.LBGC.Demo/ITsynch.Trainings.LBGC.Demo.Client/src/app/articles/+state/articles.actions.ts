@@ -191,3 +191,7 @@ export const restoreDeletedArticleFailure = createAction(
   '[Articles] Restore deleted Article Failure',
   props<{ error: any }>()
 );
+
+export const cancelAlert = createAction(
+  '[Articles] Alert cancel'
+);

@@ -1,9 +1,8 @@
 <div class="dumb">
     <div class="header">
         <h1>Demo Blog Page</h1>
-        <h3>List of Articles</h3>
     </div>
-
+    <h2>List of Articles</h2>
     <div class="filter" *ngIf="filterForm">
         <form class="filter-form" [formGroup]="filterForm" (ngSubmit)="onFilterClicked()" >
   
@@ -43,11 +42,12 @@
                 <mat-datepicker #pickerMax></mat-datepicker>
               </mat-form-field>
     
-              <button class="filter-button" type="submit" mat-raised-button color="primary">Filter</button>
+              <button class="filter-button" type="submit" mat-raised-button color="primary"><mat-icon class="icon">sort</mat-icon>Filter</button>
               
         </form>
     
-        <button *ngIf="filterForm.dirty" (click)="cleanFilter()" class="clean-button" mat-mini-fab color="warn" aria-label="Example icon button with a filter list icon">
+        <button *ngIf="filterForm.dirty" (click)="cleanFilter()" class="clean-button" mat-mini-fab color="warn" 
+        aria-label="Example icon button with a filter list icon">
             <mat-icon>clear</mat-icon>
         </button>
             
@@ -55,7 +55,7 @@
     </div>
    
     <button class="new-article-button" mat-raised-button color="primary" (click)="createArticle()">
-        Create new article
+        <mat-icon class="icon">add</mat-icon>Create new article
     </button>
     
 
@@ -80,7 +80,7 @@
                 <p>{{article.content}}</p>
             </mat-card-content>
             <mat-card-actions>
-                <button mat-raised-button (click)="visitArticle(article.id)">Learn more...</button>
+                <button class="learn-button" mat-raised-button (click)="visitArticle(article.id)">Learn more...</button>
                 <button mat-raised-button color="warn" *ngIf="article.user?.id === currentUser?.id" (click)="onDeleteArticleClicked(article.id)"><mat-icon class="icon">delete</mat-icon>Delete article</button>
                 <button mat-raised-button color="primary" *ngIf="article.user?.id === currentUser?.id" (click)="onEditArticleClicked(article.id)"><mat-icon class="icon">edit</mat-icon>Edit article</button>
             

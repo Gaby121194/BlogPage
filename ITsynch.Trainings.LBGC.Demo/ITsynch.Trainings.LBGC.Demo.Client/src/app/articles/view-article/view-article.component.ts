@@ -27,7 +27,7 @@ export class ViewArticleComponent implements OnInit {
 
   deleteArticle(event : number){
     this.store.dispatch(confirmDeleteArticle({articleId : event}))
-    this.router.navigateByUrl("/articles")
+    // this.router.navigateByUrl("/articles")
   }
 
 

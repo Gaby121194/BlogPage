@@ -2,18 +2,20 @@ import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Action, select, Store } from '@ngrx/store';
-import { of } from 'rxjs';
+import { merge, of } from 'rxjs';
 import { catchError, delay, map, switchMap, take, tap, withLatestFrom } from 'rxjs/operators';
 import { ArticlesService } from '../articles.service';
 import * as ArticlesActions from './articles.actions'
 import { getCurrentUserId } from '../../users/+state/users.selectors';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class ArticlesEffects {
 
 
 
-  constructor(private actions$: Actions, private articlesService: ArticlesService, private snackBar: MatSnackBar, private store: Store) {}
+  constructor(private actions$: Actions, private articlesService: ArticlesService, 
+    private snackBar: MatSnackBar, private store: Store, private router: Router) {}
 
   createArticle$ = createEffect(() => {
     return this.actions$.pipe(
@@ -39,6 +41,21 @@ export class ArticlesEffects {
     );
   });
 
+  deleteArticleSuccess$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(ArticlesActions.deleteArticleSucess),
+        tap(() => {
+          this.snackBar.open('Article deleted successfully', 'Accept', {
+            duration: 3000,
+          });
+          this.router.navigateByUrl("/articles")
+        })
+      );
+    },
+    { dispatch: false }
+  );
+
   editArticle$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ArticlesActions.editArticle),
@@ -58,6 +75,9 @@ export class ArticlesEffects {
         const deleteArticleConfirmed = window.confirm('Are you sure you want to delete article?');
         if (deleteArticleConfirmed) {
           return ArticlesActions.deleteArticle({ articleId });
+        }
+        else{
+          return ArticlesActions.cancelAlert()
         }
       })
     );
@@ -110,6 +130,9 @@ export class ArticlesEffects {
         const restoreArticleConfirmed = window.confirm('Are you sure you want to restore this deleted article?');
         if (restoreArticleConfirmed) {
           return ArticlesActions.restoreDeletedArticle({ articleId });
+        }
+        else{
+          return ArticlesActions.cancelAlert();
         }
       })
     );
@@ -167,6 +190,20 @@ export class ArticlesEffects {
     );
   });
 
+  markAsFavoriteArticleSuccess$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(ArticlesActions.markArticleAsFavoriteSuccess),
+        tap(() => {
+          this.snackBar.open('Your have mark an article as favorite successfully', 'Accept', {
+            duration: 3000,
+          });
+        })
+      );
+    },
+    { dispatch: false }
+  );
+
   unmarkAsFavoriteArticle$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ArticlesActions.unmarkArticleAsFavorite),
@@ -179,6 +216,20 @@ export class ArticlesEffects {
     );
   });
 
+  unmarkAsFavoriteArticleSuccess$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(ArticlesActions.unmarkArticleAsFavoriteSuccess),
+        tap(() => {
+          this.snackBar.open('Your have unmark an article as favorite successfully', 'Accept', {
+            duration: 3000,
+          });
+        })
+      );
+    },
+    { dispatch: false }
+  );
+
   filterArticles$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ArticlesActions.filterArticles),
@@ -190,6 +241,21 @@ export class ArticlesEffects {
       )
     );
   });
+
+  filterArticlesSuccess$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(ArticlesActions.filterArticlesSuccess),
+        tap(() => {
+          this.snackBar.open('Articles were filtered successfully', 'Close', {
+            duration: 3000,
+          });
+        })
+      );
+    },
+    { dispatch: false }
+  );
+
 
   filterArticlesFailure$ = createEffect(
     () => {
@@ -272,10 +338,18 @@ export class ArticlesEffects {
     { dispatch: false }
   );
 
-  effectInitialized$ = createEffect(() => {
+  effectInitializedArticles$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ArticlesActions.effectInitialized),
       map(() => ArticlesActions.loadArticles()),
+      take(1)
+    );
+  });
+
+  effectInitializedFavortiesArticles$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ArticlesActions.effectInitialized),
+      map(() => ArticlesActions.loadFavoritesArticles()),
       take(1)
     );
   });

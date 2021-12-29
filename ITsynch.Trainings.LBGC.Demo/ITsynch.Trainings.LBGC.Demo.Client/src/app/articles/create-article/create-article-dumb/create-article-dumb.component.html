@@ -1,4 +1,8 @@
-<div class="create-article">
+<div class="create-article-page">
+  <button mat-icon-button class="back-button" (click)="backToArticles()">
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+  <div class="create-article">
     <h1>Create a new Article for blog</h1>
   
   <form class="example-form" [formGroup]="articleForm" (ngSubmit)="onSubmitClicked()" >
@@ -38,3 +42,5 @@
   </form>
   
   </div>
+
+</div>

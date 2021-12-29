@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import { Article } from '../../models/articles.model';
 
 @Component({
@@ -9,7 +10,7 @@ import { Article } from '../../models/articles.model';
 export class DeletedArticlesListDumbComponent implements OnInit {
   @Input() public deletedArticles: Article[];
   @Output() public restoreArticleClick = new EventEmitter<number>()
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -17,6 +18,10 @@ export class DeletedArticlesListDumbComponent implements OnInit {
   onRestoreArticleClicked(id : number)
   {
     this.restoreArticleClick.emit(id)
+  }
+
+  backToArticles(){
+    this.router.navigateByUrl("/articles")
   }
 
 }

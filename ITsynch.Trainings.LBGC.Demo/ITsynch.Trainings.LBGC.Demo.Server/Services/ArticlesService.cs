@@ -41,8 +41,8 @@ namespace ITsynch.Trainings.LBGC.Demo.Services
 
         public async Task<IEnumerable<Article>> GetFavoritesArticles(long id)
         {
-            var user = trainingsDemoContext.Users.Include(user => user.FavoritesArticles).FirstOrDefault(user => user.Id == id);
-            return user.FavoritesArticles.Where(art => art.Delete == false).AsEnumerable();
+            var user = trainingsDemoContext.Users.Include(user => user.FavoritesArticles).ThenInclude(art => art.User).FirstOrDefault(user => user.Id == id);
+            return user.FavoritesArticles.Where(art => art.Delete == false).OrderByDescending(art => art.Date).AsEnumerable();
         }
 
         public async Task<Article> MarkAsFavorite(long userId, long articleId)
