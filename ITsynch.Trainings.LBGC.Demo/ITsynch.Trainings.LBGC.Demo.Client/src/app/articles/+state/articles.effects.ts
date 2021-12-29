@@ -224,7 +224,7 @@ export class ArticlesEffects {
         const postDraftArticleConfirmed = window.confirm('Are you sure you want to post this draft as an article?');
         if (postDraftArticleConfirmed) {
           return ArticlesActions.postDraftArticle({ articleId });
-        }
+        } 
       })
     );
   });

@@ -38,32 +38,20 @@ export class CreateArticleDumbComponent implements OnInit {
   }
 
   onSubmitClicked(){
+    this.article = this.articleForm.value;
+    this.article.user = this.currentUser;
+    this.article.date = new Date();
     if (this.draftArticle){
-      this.article = this.articleForm.value;
-      this.article.user = this.currentUser;
-      this.article.date = new Date();
       this.createDraftClick.emit(this.article)
-      this.articleForm.setValue({
-        title: '',
-        content: '',
-        category: '',
-        date: null
-      })
     } else {
-      this.article = this.articleForm.value;
-      this.article.user = this.currentUser;
-      this.article.date = new Date();
       this.createClick.emit(this.article)
-      this.articleForm.setValue({
-        title: '',
-        content: '',
-        category: '',
-        date: null
-      })
     }
-    
-    
-    
+    this.articleForm.setValue({
+      title: '',
+      content: '',
+      category: '',
+      date: null
+    })
   }
 
 }

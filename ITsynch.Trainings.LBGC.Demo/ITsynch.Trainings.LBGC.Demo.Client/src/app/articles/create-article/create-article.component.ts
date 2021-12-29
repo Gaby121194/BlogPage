@@ -20,7 +20,6 @@ export class CreateArticleComponent implements OnInit {
   articleForm: FormGroup;
   currentUser$: Observable<User> = this.store.pipe(select(getCurrentUser));
   articleCreating$: Observable<boolean> = this.store.pipe(select(getArticlesApiLoading));
-  //draftArticleCreating$: Observable<boolean> = this.store.pipe(select(getArticlesApiLoading));
 
   constructor(
             private store: Store,

@@ -75,8 +75,8 @@ export const articlesReducer = createReducer<ArticleState,Action>(
   }),
 
   on(ArticlesActions.createDraftArticleSucess, (state, { article }) => {
-    let _articles = [article, ...state.articles]
-    return { ...state, articles: _articles , lastArticleCreated: article, apiState: "idle" };
+    let _draftArticles = [article, ...state.articles]
+    return { ...state, draftArticles: _draftArticles , lastArticleCreated: article, apiState: "idle" };
   }),
 
   on(ArticlesActions.createDraftArticle, (state) => ({
