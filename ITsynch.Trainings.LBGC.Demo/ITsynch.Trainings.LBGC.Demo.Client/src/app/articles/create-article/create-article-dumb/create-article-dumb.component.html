@@ -22,8 +22,8 @@
               {{category}}
             </mat-option>
           </mat-select>
-          <mat-error *ngIf="articleForm.controls['content'].invalid && articleForm.controls['content'].dirty">
-            Content is <strong>required</strong>
+          <mat-error *ngIf="articleForm.controls['category'].invalid && articleForm.controls['category'].dirty">
+            Category is <strong>required</strong>
           </mat-error>
         </mat-form-field>
         

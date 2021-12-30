@@ -14,7 +14,7 @@ namespace ITsynch.Trainings.LBGC.Demo.Services
 
 
         public ArticlesService(
-            TrainingsDemoContext trainingsDemoContext, UsersService usersService)
+            TrainingsDemoContext trainingsDemoContext)
         {
             this.trainingsDemoContext = trainingsDemoContext
                 ?? throw new ArgumentNullException(nameof(trainingsDemoContext));

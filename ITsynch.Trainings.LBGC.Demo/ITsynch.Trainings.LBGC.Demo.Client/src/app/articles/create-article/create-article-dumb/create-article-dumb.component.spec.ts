@@ -2,7 +2,9 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { Router } from '@angular/router';
 
 import { CreateArticleDumbComponent } from './create-article-dumb.component';
 
@@ -14,8 +16,9 @@ fdescribe('CreateArticleDumbComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ CreateArticleDumbComponent ],
-      imports: [ReactiveFormsModule, MatInputModule, BrowserAnimationsModule],
-      providers: [ { provide: FormBuilder, useValue: formBuilder } ],
+      imports: [ReactiveFormsModule, MatInputModule, BrowserAnimationsModule, MatSelectModule],
+      providers: [ { provide: FormBuilder, useValue: formBuilder },
+                    { provide: Router, userValue: {}} ],
       schemas: [NO_ERRORS_SCHEMA]
     })
     .compileComponents();
@@ -27,7 +30,8 @@ fdescribe('CreateArticleDumbComponent', () => {
     component.articleForm = formBuilder.group({
       title: ["", [Validators.required]],
       content: ["", [Validators.required, Validators.minLength(5)]],
-      date: [ new Date() , [Validators.required]]
+      date: [ new Date() , [Validators.required]],
+      category: ['', [Validators.required]]
     });
     fixture.detectChanges();
   });
@@ -46,7 +50,8 @@ fdescribe('CreateArticleDumbComponent', () => {
     component.articleForm.setValue({
       title: "es un nuevo titulo",
       content: "un contenido para el form",
-      date: new Date()
+      date: new Date(),
+      category: 'Economy'
     })
     fixture.detectChanges();
     expect(sumbitButton.disabled).toBeFalse();
