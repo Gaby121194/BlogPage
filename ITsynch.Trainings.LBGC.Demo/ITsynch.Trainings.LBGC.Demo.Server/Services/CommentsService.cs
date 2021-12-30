@@ -19,7 +19,7 @@ namespace ITsynch.Trainings.LBGC.Demo.Services
                 ?? throw new ArgumentNullException(nameof(trainingsDemoContext));
         }
 
-        public async Task<IEnumerable<Comment>> GetAllCommentsByArticleId(long id)
+        public virtual async Task<IEnumerable<Comment>> GetAllCommentsByArticleId(long id)
         {
             var comments = await this.trainingsDemoContext.Comments.Where(comment => comment.IdArticle == id)
                                                              .OrderByDescending(art => art.Date)
@@ -28,7 +28,7 @@ namespace ITsynch.Trainings.LBGC.Demo.Services
             return comments.AsEnumerable();
         }
 
-        public async Task<Comment> CreateComment(Comment comment)
+        public virtual async Task<Comment> CreateComment(Comment comment)
         {
             var user = trainingsDemoContext.Users.FirstOrDefault(user => user.Id == comment.User.Id);
             comment.User = user;
