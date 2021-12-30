@@ -1,4 +1,6 @@
-﻿using ITsynch.Trainings.LBGC.Demo.Models;
+﻿using AutoMapper;
+using ITsynch.Trainings.LBGC.Demo.DataTransfer;
+using ITsynch.Trainings.LBGC.Demo.Models;
 using ITsynch.Trainings.LBGC.Demo.Persistence;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -11,12 +13,16 @@ namespace ITsynch.Trainings.LBGC.Demo.Services
     public class CommentsService
     {
         private readonly TrainingsDemoContext trainingsDemoContext;
+        private readonly IMapper mapper;
 
         public CommentsService(
-            TrainingsDemoContext trainingsDemoContext)
+            TrainingsDemoContext trainingsDemoContext, IMapper mapper)
         {
             this.trainingsDemoContext = trainingsDemoContext
                 ?? throw new ArgumentNullException(nameof(trainingsDemoContext));
+
+            this.mapper = mapper
+                ?? throw new ArgumentNullException(nameof(mapper));
         }
 
         public virtual async Task<IEnumerable<Comment>> GetAllCommentsByArticleId(long id)
@@ -28,9 +34,10 @@ namespace ITsynch.Trainings.LBGC.Demo.Services
             return comments.AsEnumerable();
         }
 
-        public virtual async Task<Comment> CreateComment(Comment comment)
+        public virtual async Task<Comment> CreateComment(CommentDto commentDto)
         {
-            var user = trainingsDemoContext.Users.FirstOrDefault(user => user.Id == comment.User.Id);
+            var user = trainingsDemoContext.Users.FirstOrDefault(user => user.Id == commentDto.User.Id);
+            var comment = mapper.Map<Comment>(commentDto);
             comment.User = user;
             var _comment = this.trainingsDemoContext.Add<Comment>(comment);
             await this.trainingsDemoContext.SaveChangesAsync();

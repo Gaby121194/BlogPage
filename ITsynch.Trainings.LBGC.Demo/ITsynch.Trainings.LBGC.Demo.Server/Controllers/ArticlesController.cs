@@ -80,7 +80,7 @@ namespace ITsynch.Trainings.LBGC.Demo.Controllers
 
         // POST api/<ArticleController>
         [HttpPost]
-        public async Task<ArticleDto> PostArticle(Article article)
+        public async Task<ArticleDto> PostArticle(ArticleDto article)
         {
             var _article = await this.articlesService.CreateArticle(article);
             return mapper.Map<ArticleDto>(_article);
@@ -96,7 +96,7 @@ namespace ITsynch.Trainings.LBGC.Demo.Controllers
 
         // POST api/<ArticleController>
         [HttpPost("[action]")]
-        public async Task<ArticleDto> CreateDraftArticle(Article article)
+        public async Task<ArticleDto> CreateDraftArticle(ArticleDto article)
         {
             var _article = await this.articlesService.CreateDraftArticle(article);
             return mapper.Map<ArticleDto>(_article);
@@ -104,7 +104,7 @@ namespace ITsynch.Trainings.LBGC.Demo.Controllers
 
         // PUT api/<ArticleController>/5
         [HttpPut("{id}")]
-        public async Task<ArticleDto> PutArticle(long id, [FromBody] Article article)
+        public async Task<ArticleDto> PutArticle(long id, [FromBody] ArticleDto article)
         {
             var _article = await this.articlesService.EditArticle(id, article);
             return mapper.Map<ArticleDto>(_article); ;

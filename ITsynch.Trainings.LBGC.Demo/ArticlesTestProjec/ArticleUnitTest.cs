@@ -44,7 +44,7 @@ namespace ArticlesTestProjec
             var demoContext = new Mock<TrainingsDemoContext>(contextOptions);
             var mapperMock = new Mock<IMapper>();
             mapperMock.Setup(m => m.Map<ArticleDto>(article)).Returns(articleMapperDto);
-            var articleServiceMock = new Mock<ArticlesService>(demoContext.Object);
+            var articleServiceMock = new Mock<ArticlesService>(demoContext.Object, mapperMock.Object);
             articleServiceMock.Setup(m => m.GetArticleById(2)).ReturnsAsync(article);
             var articleController = new ArticlesController(articleServiceMock.Object, mapperMock.Object);
 
@@ -89,7 +89,7 @@ namespace ArticlesTestProjec
             var demoContext = new Mock<TrainingsDemoContext>(contextOptions);
             var mapperMock = new Mock<IMapper>();
             mapperMock.Setup(m => m.Map<ArticleDto>(article)).Returns(articleMapperDto);
-            var articleServiceMock = new Mock<ArticlesService>(demoContext.Object);
+            var articleServiceMock = new Mock<ArticlesService>(demoContext.Object, mapperMock.Object);
             articleServiceMock.Setup(m => m.DeleteArticle(2)).ReturnsAsync(article);
             var articleController = new ArticlesController(articleServiceMock.Object, mapperMock.Object);
 

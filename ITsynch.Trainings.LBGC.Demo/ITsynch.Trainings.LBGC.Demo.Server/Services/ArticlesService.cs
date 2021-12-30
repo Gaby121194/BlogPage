@@ -1,4 +1,6 @@
-﻿using ITsynch.Trainings.LBGC.Demo.Models;
+﻿using AutoMapper;
+using ITsynch.Trainings.LBGC.Demo.DataTransfer;
+using ITsynch.Trainings.LBGC.Demo.Models;
 using ITsynch.Trainings.LBGC.Demo.Persistence;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -11,13 +13,16 @@ namespace ITsynch.Trainings.LBGC.Demo.Services
     public class ArticlesService
     {
         private readonly TrainingsDemoContext trainingsDemoContext;
-
+        private readonly IMapper mapper;
 
         public ArticlesService(
-            TrainingsDemoContext trainingsDemoContext)
+            TrainingsDemoContext trainingsDemoContext, IMapper mapper)
         {
             this.trainingsDemoContext = trainingsDemoContext
                 ?? throw new ArgumentNullException(nameof(trainingsDemoContext));
+
+            this.mapper = mapper
+                ?? throw new ArgumentNullException(nameof(mapper));
 
         }
 
@@ -94,9 +99,10 @@ namespace ITsynch.Trainings.LBGC.Demo.Services
             return query.OrderByDescending(art => art.Date).AsEnumerable();
         }
 
-        public async Task<Article> CreateArticle(Article article)
+        public async Task<Article> CreateArticle(ArticleDto articleDto)
         {
-            var user = trainingsDemoContext.Users.FirstOrDefault(user => user.Id == article.User.Id);
+            var user = trainingsDemoContext.Users.FirstOrDefault(user => user.Id == articleDto.User.Id);
+            var article = mapper.Map<Article>(articleDto);
             article.User = user;
             article.Delete = false;
             article.Draft = false;
@@ -105,13 +111,13 @@ namespace ITsynch.Trainings.LBGC.Demo.Services
             return article;
         }
 
-        public async Task<Article> EditArticle(long id, Article article)
+        public async Task<Article> EditArticle(long id, ArticleDto articleDto)
         {
             var _article = trainingsDemoContext.Articles.Where(art => art.Id == id).Include(article=> article.User).FirstOrDefault();
-            _article.Title = article.Title;
-            _article.Content = article.Content;
-            _article.Category = article.Category;
-            _article.Date = article.Date;
+            _article.Title = articleDto.Title;
+            _article.Content = articleDto.Content;
+            _article.Category = articleDto.Category;
+            _article.Date = articleDto.Date;
             var result = await this.trainingsDemoContext.SaveChangesAsync();
             return _article;
         }
@@ -142,9 +148,10 @@ namespace ITsynch.Trainings.LBGC.Demo.Services
             return articles.AsEnumerable();
         }
 
-        public async Task<Article> CreateDraftArticle(Article article)
+        public async Task<Article> CreateDraftArticle(ArticleDto articleDto)
         {
-            var user = trainingsDemoContext.Users.FirstOrDefault(user => user.Id == article.User.Id);
+            var user = trainingsDemoContext.Users.FirstOrDefault(user => user.Id == articleDto.User.Id);
+            var article = mapper.Map<Article>(articleDto);
             article.User = user;
             article.Delete = false;
             article.Draft = true;

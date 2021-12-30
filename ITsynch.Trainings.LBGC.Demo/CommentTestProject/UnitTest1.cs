@@ -24,30 +24,31 @@ namespace CommentControllerTests
             var options = new DbContextOptionsBuilder<TrainingsDemoContext>()
                 .UseSqlServer("Server=localhost,11433;Database=ITsynchTrainingsDemo;User Id=sa;Password=ITsDemos2021;")
                 .Options;
-
             var comment = new Comment();
             var commentDto = new CommentDto();
+            var commentMapperDto = new CommentDto();
 
-            comment.Content = "Comentario de prueba";
-            comment.Date = DateTime.Now;
-            comment.Id = 1;
-            comment.IdArticle = 10;
+            commentDto.Content = "Comentario de prueba";
+            commentDto.Date = DateTime.Now;
+            commentDto.Id = 1;
+            commentDto.IdArticle = 10;
 
-            commentDto.Content = comment.Content;
-            commentDto.Date = comment.Date;
-            commentDto.Id = comment.Id;
-            commentDto.IdArticle = comment.IdArticle;
+            comment.Content = commentDto.Content;
+            comment.Date = commentDto.Date;
+            comment.Id = commentDto.Id;
+            comment.IdArticle = commentDto.IdArticle;
 
             var dbContext = new Mock<TrainingsDemoContext>(options);
             var mockMapper = new Mock<IMapper>();
             mockMapper.Setup(sp => sp.Map<CommentDto>(comment)).Returns(commentDto);
-            var mockCommentsService = new Mock<CommentsService>(dbContext.Object);
-            mockCommentsService.Setup(sp => sp.CreateComment(comment)).ReturnsAsync(comment);
+            mockMapper.Setup(sp => sp.Map<Comment>(commentDto)).Returns(comment);
+            var mockCommentsService = new Mock<CommentsService>(dbContext.Object, mockMapper.Object);
+            mockCommentsService.Setup(sp => sp.CreateComment(commentDto)).ReturnsAsync(comment);
 
             var controller = new CommentController(mockCommentsService.Object, mockMapper.Object);
 
             //Act
-            var result = await controller.PostComment(comment);
+            var result = await controller.PostComment(commentDto);
 
             //Assert
             Assert.Equal(comment.Id, result.Id);
@@ -113,7 +114,7 @@ namespace CommentControllerTests
             var dbContext = new Mock<TrainingsDemoContext>(options);
             var mockMapper = new Mock<IMapper>();
             mockMapper.Setup(sp => sp.Map<IEnumerable<CommentDto>>(allComments)).Returns(allCommentsDto);
-            var mockCommentsService = new Mock<CommentsService>(dbContext.Object);
+            var mockCommentsService = new Mock<CommentsService>(dbContext.Object, mockMapper.Object);
             mockCommentsService.Setup(sp => sp.GetAllCommentsByArticleId(10)).ReturnsAsync(allComments);
 
             var controller = new CommentController(mockCommentsService.Object, mockMapper.Object);
