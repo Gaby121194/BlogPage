@@ -37,9 +37,9 @@
       
       
       <button id="sumbitButton" *ngIf="!articleCreating" type="submit" (click)="articleClick()"
-       mat-raised-button color="primary" [disabled]="articleForm.invalid">Create</button>
+       mat-raised-button color="primary" [disabled]="articleForm.invalid"><mat-icon class="icon">create</mat-icon>Create</button>
       <button class="saveButton"   type="submit" (click)="draftArticleClick()"
-       mat-raised-button color="primary" [disabled]="articleForm.invalid">Save draft</button>
+       mat-raised-button color="primary" [disabled]="articleForm.invalid"><mat-icon class="icon">drafts</mat-icon>Save draft</button>
   
   </form>
   
