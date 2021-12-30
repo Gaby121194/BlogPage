@@ -1,7 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { navbarCurrentUserChanges } from '../../users/+state/users.actions';
-import { getCurrentUser, getUsers } from '../../users/+state/users.selectors';
+import { getCurrentUser } from '../../users/+state/users.selectors';
 import { User } from '../../users/users.model';
 import { select, Store } from '@ngrx/store';
 import { FormBuilder, Validators } from '@angular/forms';
@@ -42,5 +41,12 @@ export class CreateCommentComponent implements OnInit {
       content: ["", [Validators.required, Validators.minLength(5)]],
       date: [new Date(), [Validators.required]]
     });
+  }
+
+  public inputValidator(event: any) {
+    const pattern = /^[a-zA-Z0-9-?.,:() ]*$/;   
+    if (!pattern.test(event.target.value)) {
+      event.target.value = event.target.value.replace(/[^a-zA-Z0-9-?.,:() ]/g, "");
+    }
   }
 }

@@ -22,3 +22,7 @@
 .icon-restore{
     margin-right: 5px;
 }
+
+.article-draft{
+    color: grey;
+}

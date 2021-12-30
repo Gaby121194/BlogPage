@@ -1,17 +1,18 @@
 <hr size="1px" color="gray" />
-<h2>Ingrese un comentario</h2>
+<h2>Post comment</h2>
 <div class="create-comment">
 
   <form class="comment-form" [formGroup]="commentForm" (ngSubmit)="submitComment()">
-    <h4>User: {{ (currentUser$ | async).lastName}}</h4>
     <mat-form-field class="comment-full-width" appearance="fill">
       <mat-label>Comment content</mat-label>
-      <textarea matInput class="text" placeholder="Input a new comment" formControlName="content"></textarea>
+      <textarea matInput class="text" placeholder="Input a new comment" formControlName="content" (input)="inputValidator($event)"></textarea>
     </mat-form-field>
-    <button type="submit" mat-raised-button color="primary"
-            [disabled]="commentForm.invalid">
-      Send
-    </button>
+
+    <br>
+      <button id='submitButton' type="submit" mat-raised-button color="primary" [disabled]="commentForm.invalid">
+        Send
+      </button>
+
 
     <mat-spinner [diameter]="50" *ngIf="commentCreating$ | async"></mat-spinner>
   </form>

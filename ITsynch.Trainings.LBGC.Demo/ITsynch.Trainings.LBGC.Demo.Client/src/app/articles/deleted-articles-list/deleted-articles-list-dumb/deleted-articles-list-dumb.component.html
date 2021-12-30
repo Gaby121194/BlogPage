@@ -6,7 +6,7 @@
     <ng-container *ngFor="let article of deletedArticles">
         <mat-card class="example-card">
             <mat-card-title>
-                <span class="article-title">{{article.title}}</span>
+                <span class="article-draft" *ngIf="article.draft==true">(Draft) </span> <span class="article-title">{{article.title}}</span> 
             </mat-card-title>
             <mat-card-subtitle>Created by {{article.user?.username}} on {{article.date | date}}</mat-card-subtitle>
             <mat-card-content class="article-content">

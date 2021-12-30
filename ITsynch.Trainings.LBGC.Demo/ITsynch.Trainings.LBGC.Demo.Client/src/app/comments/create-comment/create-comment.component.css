@@ -13,3 +13,19 @@ h2 {
   margin: 10px 70px;
   font-style: normal;
 }
+
+textarea {
+  resize: both;
+  height: 100px;
+}
+
+.comment-form {
+  min-width: 150px;
+  max-width: 500px;
+  min-height: 200px;
+  width: 100%;
+}
+
+.comment-full-width {
+  width: 100%;
+}
