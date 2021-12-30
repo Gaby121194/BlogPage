@@ -39,7 +39,7 @@ namespace ITsynch.Trainings.LBGC.Demo.Controllers
 
         // POST api/<CommentController>
         [HttpPost]
-        public async Task<CommentDto> PostComment(Comment comment)
+        public async Task<CommentDto> PostComment(CommentDto comment)
         {
             var _comment = await this.commentsService.CreateComment(comment);
             return mapper.Map<CommentDto>(_comment);
