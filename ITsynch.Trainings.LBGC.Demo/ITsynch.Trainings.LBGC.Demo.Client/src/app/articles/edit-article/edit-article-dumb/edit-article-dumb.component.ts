@@ -58,7 +58,6 @@ export class EditArticleDumbComponent implements OnInit {
     
   }
 
-<<<<<<< HEAD
   public inputValidator(event: any) {
     const pattern = /^[a-zA-Z0-9-?.,:() ]*$/;   
     if (!pattern.test(event.target.value)) {
@@ -66,11 +65,9 @@ export class EditArticleDumbComponent implements OnInit {
     }
   }
 
-=======
   backToArticles(){
     this.router.navigateByUrl("/articles")
   }
 
 
->>>>>>> dev
 }

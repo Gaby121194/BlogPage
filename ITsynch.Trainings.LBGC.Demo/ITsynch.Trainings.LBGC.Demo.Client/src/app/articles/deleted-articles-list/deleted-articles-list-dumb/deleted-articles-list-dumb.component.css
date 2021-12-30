@@ -36,14 +36,12 @@
 .icon-restore{
     margin-right: 5px;
 }
-<<<<<<< HEAD
 
 .article-draft{
     color: grey;
-=======
+}
 .notFound{
     font-family: inherit;
     font-style: italic;
     font-size: 17px;
->>>>>>> dev
 }
