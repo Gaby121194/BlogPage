@@ -26,6 +26,7 @@ export class CreateCommentComponent implements OnInit {
   comment: Comment;
   commentCreating$: Observable<boolean> = this.store.pipe(select(getCommentsApiLoading));
   id: number;
+  
 
   ngOnInit(): void {
     this.store.pipe(select(getCurrentUser)).subscribe(user => this.currentUser = user);
