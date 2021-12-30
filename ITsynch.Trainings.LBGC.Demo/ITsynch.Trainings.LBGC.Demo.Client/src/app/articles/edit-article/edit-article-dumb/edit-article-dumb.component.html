@@ -10,7 +10,7 @@
   
       <mat-form-field class="example-full-width" appearance="fill">
           <mat-label>Article title</mat-label>
-          <input matInput placeholder="Input a new title" formControlName="title">
+          <input matInput placeholder="Input a new title" formControlName="title" (input)="inputValidator($event)">
           <mat-error *ngIf="articleForm.controls['title'].invalid && articleForm.controls['title'].dirty">
             Title is <strong>required</strong>
           </mat-error>
@@ -30,7 +30,7 @@
         
           <mat-form-field class="example-full-width" appearance="fill">
             <mat-label>Article content</mat-label>
-            <textarea matInput class="text" placeholder="Input a new content" formControlName="content"></textarea>
+            <textarea matInput class="text" placeholder="Input a new content" formControlName="content" (input)="inputValidator($event)"></textarea>
             <mat-error *ngIf="articleForm.controls['content'].invalid && articleForm.controls['content'].dirty">
               Content is <strong>required</strong>
             </mat-error>

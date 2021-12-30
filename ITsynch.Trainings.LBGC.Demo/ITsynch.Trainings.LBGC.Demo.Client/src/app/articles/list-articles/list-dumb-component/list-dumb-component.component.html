@@ -8,7 +8,7 @@
   
             <mat-form-field class="input-filter" appearance="fill">
                 <mat-label>Search for title</mat-label>
-                <input matInput placeholder="Input a title for search..." formControlName="searchTitle">
+                <input matInput placeholder="Input a title for search..." formControlName="searchTitle" (input)="inputValidator($event)">
               </mat-form-field>
               
               <mat-form-field class="input-filter" appearance="fill">

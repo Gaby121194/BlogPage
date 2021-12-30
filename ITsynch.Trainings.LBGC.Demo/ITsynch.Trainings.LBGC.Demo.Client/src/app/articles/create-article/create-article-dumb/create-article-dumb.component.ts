@@ -28,7 +28,7 @@ export class CreateArticleDumbComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, private router: Router) { }
 
   ngOnInit(): void {
-
+    
   }
   articleClick(): void {
     this.draftArticle = false;
@@ -53,6 +53,13 @@ export class CreateArticleDumbComponent implements OnInit {
       category: '',
       date: null
     })
+  }
+
+  public inputValidator(event: any) {
+    const pattern = /^[a-zA-Z0-9-?.,:() ]*$/;   
+    if (!pattern.test(event.target.value)) {
+      event.target.value = event.target.value.replace(/[^a-zA-Z0-9-?.,:() ]/g, "");
+    }
   }
 
   backToArticles(){

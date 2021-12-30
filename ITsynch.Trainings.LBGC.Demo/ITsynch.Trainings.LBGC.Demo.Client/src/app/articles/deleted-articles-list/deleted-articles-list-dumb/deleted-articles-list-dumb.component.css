@@ -36,6 +36,10 @@
 .icon-restore{
     margin-right: 5px;
 }
+
+.article-draft{
+    color: grey;
+}
 .notFound{
     font-family: inherit;
     font-style: italic;

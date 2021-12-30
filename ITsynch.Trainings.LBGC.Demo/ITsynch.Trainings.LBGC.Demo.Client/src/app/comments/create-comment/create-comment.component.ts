@@ -1,7 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { navbarCurrentUserChanges } from '../../users/+state/users.actions';
-import { getCurrentUser, getUsers } from '../../users/+state/users.selectors';
+import { getCurrentUser } from '../../users/+state/users.selectors';
 import { User } from '../../users/users.model';
 import { select, Store } from '@ngrx/store';
 import { FormBuilder, Validators } from '@angular/forms';
@@ -27,6 +26,7 @@ export class CreateCommentComponent implements OnInit {
   comment: Comment;
   commentCreating$: Observable<boolean> = this.store.pipe(select(getCommentsApiLoading));
   id: number;
+  
 
   ngOnInit(): void {
     this.store.pipe(select(getCurrentUser)).subscribe(user => this.currentUser = user);
@@ -42,5 +42,12 @@ export class CreateCommentComponent implements OnInit {
       content: "",
       date: new Date()
     });
+  }
+
+  public inputValidator(event: any) {
+    const pattern = /^[a-zA-Z0-9-?.,:() ]*$/;   
+    if (!pattern.test(event.target.value)) {
+      event.target.value = event.target.value.replace(/[^a-zA-Z0-9-?.,:() ]/g, "");
+    }
   }
 }

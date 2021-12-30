@@ -58,6 +58,13 @@ export class EditArticleDumbComponent implements OnInit {
     
   }
 
+  public inputValidator(event: any) {
+    const pattern = /^[a-zA-Z0-9-?.,:() ]*$/;   
+    if (!pattern.test(event.target.value)) {
+      event.target.value = event.target.value.replace(/[^a-zA-Z0-9-?.,:() ]/g, "");
+    }
+  }
+
   backToArticles(){
     this.router.navigateByUrl("/articles")
   }

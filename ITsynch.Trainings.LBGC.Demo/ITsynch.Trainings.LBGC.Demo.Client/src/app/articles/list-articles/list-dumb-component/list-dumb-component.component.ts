@@ -103,7 +103,12 @@ export class ListDumbComponentComponent implements OnInit, OnChanges {
     
     return this.favoritesArticles.some(art=> art.id == id) ? true : false
   }
-
+  public inputValidator(event: any) {
+    const pattern = /^[a-zA-Z0-9-?.,:() ]*$/;   
+    if (!pattern.test(event.target.value)) {
+      event.target.value = event.target.value.replace(/[^a-zA-Z0-9-?.,:() ]/g, "");
+    }
+  }
 
 
 }
