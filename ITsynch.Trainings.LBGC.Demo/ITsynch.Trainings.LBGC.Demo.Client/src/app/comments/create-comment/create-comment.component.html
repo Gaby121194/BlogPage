@@ -1,18 +1,6 @@
-<div class="create-comment">
+<its-create-comment-dumb 
+[currentUser]="currentUser$ | async"
+[commentCreating]="commentCreating$ | async"
 
-  <form class="comment-form" [formGroup]="commentForm" (ngSubmit)="submitComment()">
-    <h4>User: {{ (currentUser$ | async)?.username}}</h4>
-    <mat-form-field class="comment-full-width" appearance="fill">
-      <mat-label>Write a new content</mat-label>
-      <textarea matInput class="comment-text" placeholder="Input a new comment" 
-      formControlName="content" (input)="inputValidator($event)"></textarea>
-    </mat-form-field>
-    <button id='submitButton' type="submit" mat-raised-button color="primary"
-            [disabled]="commentForm.invalid">
-            <mat-icon class="send-icon">send</mat-icon>
-      Send
-    </button>
-
-    <mat-spinner [diameter]="50" *ngIf="commentCreating$ | async"></mat-spinner>
-  </form>
-</div>
+(createClick)="createComment($event)">
+</its-create-comment-dumb>
