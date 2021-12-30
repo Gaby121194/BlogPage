@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <hr size="1px" color="gray" />
 <h2>Post comment</h2>
 <div class="create-comment">
@@ -13,6 +14,22 @@
         Send
       </button>
 
+=======
+
+<div class="create-comment">
+
+  <form class="comment-form" [formGroup]="commentForm" (ngSubmit)="submitComment()">
+    <h4>User: {{ (currentUser$ | async).username}}</h4>
+    <mat-form-field class="comment-full-width" appearance="fill">
+      <mat-label>Write a new content</mat-label>
+      <textarea matInput class="comment-text" placeholder="Input a new comment" formControlName="content"></textarea>
+    </mat-form-field>
+    <button type="submit" mat-raised-button color="primary"
+            [disabled]="commentForm.invalid">
+            <mat-icon class="send-icon">send</mat-icon>
+      Send
+    </button>
+>>>>>>> dev
 
     <mat-spinner [diameter]="50" *ngIf="commentCreating$ | async"></mat-spinner>
   </form>

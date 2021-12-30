@@ -89,9 +89,9 @@ export const articlesReducer = createReducer<ArticleState,Action>(
   }),
 
   on(ArticlesActions.deleteArticleSucess, (state, { article }) => {
-    let _articles = state.articles.filter((art) => art.id !== article.id)
-    let _favoritesArticles = state.favoritesArticles.filter((art) => art.id !== article.id)
-    let _draftArticles = state.draftArticles.filter((art) => art.id !== article.id)
+    let _articles = state.articles?.filter((art) => art.id !== article.id)
+    let _favoritesArticles = state.favoritesArticles?.filter((art) => art.id !== article.id)
+    let _draftArticles = state.draftArticles?.filter((art) => art.id !== article.id)
     return { ...state, articles: _articles, favoritesArticles: _favoritesArticles,
       draftArticles: _draftArticles, lastArticleDeleted: article, apiState: "idle" };
   }),
@@ -146,11 +146,9 @@ export const articlesReducer = createReducer<ArticleState,Action>(
   })),
 
   on(ArticlesActions.markArticleAsFavoriteSuccess, (state, { article }) => {
-    let _articles = state.articles.filter((art) => art.id !== article.id)
     let _favoritesArticles = state.favoritesArticles.filter((art) => art.id !== article.id)
-    _articles.unshift(article)
     _favoritesArticles.unshift(article)
-    return { ...state, articles: _articles, favoritesArticles: _favoritesArticles, apiState: "idle"};
+    return { ...state, favoritesArticles: _favoritesArticles, apiState: "idle"};
   }),
 
   on(ArticlesActions.markArticleAsFavoriteFailure, (state, {error}) => {

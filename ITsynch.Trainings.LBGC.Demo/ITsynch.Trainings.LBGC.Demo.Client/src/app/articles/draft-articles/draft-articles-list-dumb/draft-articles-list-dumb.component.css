@@ -1,3 +1,16 @@
+.draft-articles-page{
+    display: flex;
+    
+}
+.back-button{
+    margin-top: 5px;
+    margin-left: 5px;
+}
+.draft-articles-list{
+    margin-top: 10px;
+    margin-left: 30px;
+    width: 100%;
+}
 .example-card{
     margin: 10px;
 }
@@ -15,9 +28,6 @@
     max-height: 100px;
     overflow: hidden;
     text-overflow: ellipsis;
-}
-.dumb{
-    margin: 10px;
 }
 .icon-restore{
     margin-right: 5px;

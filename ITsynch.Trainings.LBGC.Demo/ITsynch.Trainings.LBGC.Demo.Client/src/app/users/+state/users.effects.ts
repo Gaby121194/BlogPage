@@ -30,6 +30,9 @@ export class UsersEffects implements OnInitEffects {
         if (userChangeConfirmed) {
           return UsersActions.currentUserChangeConfirmed({ newUserId });
         }
+        else{
+          return UsersActions.cancelAlert();
+        }
       })
     );
   });

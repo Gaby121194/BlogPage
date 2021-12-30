@@ -16,6 +16,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { CommentEffects } from './+state/comment.effects';
 import { ViewCommentComponent } from './view-comment/view-comment.component';
 import { ViewDumbCommentComponent } from './view-comment/view-dumb-comment/view-dumb-comment.component';
+import { MatIconModule } from '@angular/material/icon';
 
 
 
@@ -37,6 +38,7 @@ import { ViewDumbCommentComponent } from './view-comment/view-dumb-comment/view-
     MatAutocompleteModule,
     MatProgressSpinnerModule,
     MatInputModule,
+    MatIconModule
   ],
   exports: [
     CreateCommentComponent,

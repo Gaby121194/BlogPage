@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import { Article } from '../../models/articles.model';
 
 @Component({
@@ -15,7 +16,7 @@ export class DraftArticlesListDumbComponent implements OnInit {
   
   @Output() editDraftArticleClick = new EventEmitter<number>();
   
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -31,4 +32,9 @@ export class DraftArticlesListDumbComponent implements OnInit {
   onPostDraftArticleClicked(id: number){
     this.postDraftArticleClick.emit(id);
   }
+
+  backToArticles(){
+    this.router.navigateByUrl("/articles")
+  }
+
 }

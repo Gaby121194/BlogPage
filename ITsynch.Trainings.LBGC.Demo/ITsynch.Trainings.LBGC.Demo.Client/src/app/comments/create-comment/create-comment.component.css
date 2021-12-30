@@ -2,6 +2,15 @@
   margin: 10px 70px;
   font-style: italic;
 }
+.comment-form {
+  min-width: 150px;
+  width: 100%;
+}
+
+.comment-full-width {
+  width: 100%;
+}
+
 
 h4 {
   display: flex;
@@ -11,6 +20,7 @@ h4 {
 
 h2 {
   margin: 10px 70px;
+<<<<<<< HEAD
   font-style: normal;
 }
 
@@ -28,4 +38,10 @@ textarea {
 
 .comment-full-width {
   width: 100%;
+=======
+  font-family: fangsong;
+}
+.send-icon{
+  margin-right: 5px;
+>>>>>>> dev
 }

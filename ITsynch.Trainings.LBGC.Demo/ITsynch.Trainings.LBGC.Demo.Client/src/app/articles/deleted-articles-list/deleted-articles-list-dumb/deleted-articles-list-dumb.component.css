@@ -1,3 +1,17 @@
+.deleted-articles-page{
+    display: flex;
+    
+}
+.back-button{
+    margin-top: 5px;
+    margin-left: 5px;
+}
+.deleted-articles-list{
+    margin-top: 10px;
+    margin-left: 30px;
+    width: 100%;
+}
+
 .example-card{
     margin: 10px;
 }
@@ -22,7 +36,14 @@
 .icon-restore{
     margin-right: 5px;
 }
+<<<<<<< HEAD
 
 .article-draft{
     color: grey;
+=======
+.notFound{
+    font-family: inherit;
+    font-style: italic;
+    font-size: 17px;
+>>>>>>> dev
 }

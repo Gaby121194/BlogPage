@@ -63,6 +63,20 @@ export class CommentEffects {
     );
   });
 
+  deleteCommentSuccess$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(CommentActions.deleteCommentSucess),
+        tap(() => {
+          this.snackBar.open('Comment deleted successfully', 'Accept', {
+            duration: 3000,
+          });
+        })
+      );
+    },
+    { dispatch: false }
+  );
+
   confirmDeleteComment$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(CommentActions.confirmDeleteComment),
@@ -70,6 +84,9 @@ export class CommentEffects {
         const deleteCommentConfirmed = window.confirm('Are you sure you want to delete comment?');
         if (deleteCommentConfirmed) {
           return CommentActions.deleteComment({ CommentId });
+        }
+        else{
+          return CommentActions.cancelAlert()
         }
       })
     );

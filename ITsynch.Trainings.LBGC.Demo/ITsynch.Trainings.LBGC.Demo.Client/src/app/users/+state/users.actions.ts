@@ -21,3 +21,5 @@ export const loadUsersSuccess = createAction(
 );
 
 export const loadUsersFailure = createAction('[Users] Load Users Failure', props<{ error: any }>());
+
+export const cancelAlert = createAction('[Users] Cancel users alert');

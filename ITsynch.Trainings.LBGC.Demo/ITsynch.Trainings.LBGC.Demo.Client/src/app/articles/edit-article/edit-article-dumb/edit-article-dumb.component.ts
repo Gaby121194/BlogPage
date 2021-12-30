@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Article } from '../../models/articles.model';
 
 
@@ -21,7 +22,7 @@ export class EditArticleDumbComponent implements OnInit {
   article: Article;
   categories: string[] = ['Economy', 'Culture', 'Politics', 'Cooking','Entertainment', 'Research'];
   
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder, private router: Router) { }
 
   ngOnInit(): void {
 
@@ -57,6 +58,7 @@ export class EditArticleDumbComponent implements OnInit {
     
   }
 
+<<<<<<< HEAD
   public inputValidator(event: any) {
     const pattern = /^[a-zA-Z0-9-?.,:() ]*$/;   
     if (!pattern.test(event.target.value)) {
@@ -64,4 +66,11 @@ export class EditArticleDumbComponent implements OnInit {
     }
   }
 
+=======
+  backToArticles(){
+    this.router.navigateByUrl("/articles")
+  }
+
+
+>>>>>>> dev
 }

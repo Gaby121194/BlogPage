@@ -207,6 +207,9 @@ export const restoreDeletedArticleFailure = createAction(
   props<{ error: any }>()
 );
 
+export const cancelAlert = createAction(
+  '[Articles] Alert cancel'
+);
 export const loadDraftArticles = createAction(
   '[Articles] Load draft articles'
 );

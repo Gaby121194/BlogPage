@@ -1,4 +1,9 @@
-<div class="edit-article">
+<div class="edit-article-page">
+  <button mat-icon-button class="back-button" (click)="backToArticles()">
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+
+  <div class="edit-article">
     <h1>Edit article</h1>
   
   <form class="example-form" [formGroup]="articleForm" (ngSubmit)="onSubmitClicked()" >
@@ -38,3 +43,5 @@
   </form>
   
   </div>
+</div>
+

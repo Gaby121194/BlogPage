@@ -1,5 +1,13 @@
+.create-article-page{
+  display: flex;
+}
+  .back-button{
+    margin-top: 5px;
+    margin-left: 5px;
+  }
 .create-article{
     margin: 10px;
+    margin-left: 30px;
   }
   .example-form {
       min-width: 150px;
@@ -18,4 +26,8 @@
   
  .saveButton{
     margin-left: 20px;
+  }
+
+  .icon{
+    margin-right: 5px;
   }
