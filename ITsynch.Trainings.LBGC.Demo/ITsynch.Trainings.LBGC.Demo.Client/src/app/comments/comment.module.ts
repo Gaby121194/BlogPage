@@ -17,6 +17,7 @@ import { CommentEffects } from './+state/comment.effects';
 import { ViewCommentComponent } from './view-comment/view-comment.component';
 import { ViewDumbCommentComponent } from './view-comment/view-dumb-comment/view-dumb-comment.component';
 import { MatIconModule } from '@angular/material/icon';
+import { CreateCommentDumbComponent } from './create-comment/create-comment-dumb/create-comment-dumb.component';
 
 
 
@@ -24,7 +25,7 @@ import { MatIconModule } from '@angular/material/icon';
 
 
 @NgModule({
-  declarations: [CreateCommentComponent, ViewCommentComponent, ViewDumbCommentComponent],
+  declarations: [CreateCommentComponent, ViewCommentComponent, ViewDumbCommentComponent, CreateCommentDumbComponent],
   imports: [
     CommonModule,
     LayoutModule,

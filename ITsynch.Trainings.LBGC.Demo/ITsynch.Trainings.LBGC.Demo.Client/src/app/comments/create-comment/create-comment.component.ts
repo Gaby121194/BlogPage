@@ -15,39 +15,20 @@ import { createComment } from '../+state/comment.actions';
   styleUrls: ['./create-comment.component.css']
 })
 export class CreateCommentComponent implements OnInit {
-  constructor(private formBuilder: FormBuilder, private store: Store, private activatedRoute: ActivatedRoute) { }
+  constructor(private store: Store, ) { }
 
-  public currentUser$: Observable<User> = this.store.pipe(select(getCurrentUser));
-  commentForm = this.formBuilder.group({
-    content: ["", [Validators.required, Validators.minLength(5)]],
-    date: [new Date(), [Validators.required]]
-  });
-  currentUser: User;
-  comment: Comment;
+  currentUser$: Observable<User> = this.store.pipe(select(getCurrentUser));
   commentCreating$: Observable<boolean> = this.store.pipe(select(getCommentsApiLoading));
-  id: number;
+  
   
 
   ngOnInit(): void {
-    this.store.pipe(select(getCurrentUser)).subscribe(user => this.currentUser = user);
-    this.id = this.activatedRoute.snapshot.params.id as number;
+    //this.store.pipe(select(getCurrentUser)).subscribe(user => this.currentUser = user);
   }
 
-  submitComment() {
-    this.comment = this.commentForm.value;
-    this.comment.user = this.currentUser;
-    this.comment.IdArticle = this.id;
-    this.store.dispatch(createComment({ comment: this.comment }));
-    this.commentForm.reset({
-      content: "",
-      date: new Date()
-    });
+ 
+  createComment(comment: Comment){
+    this.store.dispatch(createComment({ comment: comment }));
   }
-
-  public inputValidator(event: any) {
-    const pattern = /^[a-zA-Z0-9-?.,:() ]*$/;   
-    if (!pattern.test(event.target.value)) {
-      event.target.value = event.target.value.replace(/[^a-zA-Z0-9-?.,:() ]/g, "");
-    }
-  }
+  
 }
