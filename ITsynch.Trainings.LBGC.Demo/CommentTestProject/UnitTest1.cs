@@ -123,9 +123,9 @@ namespace CommentControllerTests
             var resultList = result.ToList();
 
             //Assert
-            Assert.Equal(allComments[0].Content, resultList[0].Content);
-            Assert.Equal(allComments[1].Content, resultList[1].Content);
-            Assert.Equal(allComments[2].Content, resultList[2].Content);
+            Assert.Equal(allComments[0].Id, resultList[0].Id);
+            Assert.Equal(allComments[1].Id, resultList[1].Id);
+            Assert.Equal(allComments[2].Id, resultList[2].Id);
         }
     }
 }
