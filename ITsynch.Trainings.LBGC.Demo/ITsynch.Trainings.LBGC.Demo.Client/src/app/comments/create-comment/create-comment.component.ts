@@ -3,10 +3,8 @@ import { Observable } from 'rxjs';
 import { getCurrentUser } from '../../users/+state/users.selectors';
 import { User } from '../../users/users.model';
 import { select, Store } from '@ngrx/store';
-import { FormBuilder, Validators } from '@angular/forms';
 import { getCommentsApiLoading } from '../+state/comment.selectors';
 import { Comment } from '../comment.model';
-import { ActivatedRoute } from '@angular/router';
 import { createComment } from '../+state/comment.actions';
 
 @Component({
@@ -19,14 +17,10 @@ export class CreateCommentComponent implements OnInit {
 
   currentUser$: Observable<User> = this.store.pipe(select(getCurrentUser));
   commentCreating$: Observable<boolean> = this.store.pipe(select(getCommentsApiLoading));
-  
-  
 
   ngOnInit(): void {
-    //this.store.pipe(select(getCurrentUser)).subscribe(user => this.currentUser = user);
   }
 
- 
   createComment(comment: Comment){
     this.store.dispatch(createComment({ comment: comment }));
   }
